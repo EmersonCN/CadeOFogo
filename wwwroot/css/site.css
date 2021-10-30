@@ -1,0 +1,135 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=B612:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.navbar-brand {
+    padding-right: 10px;
+    padding-left: 5px;
+    font-family: 'B612', sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 50px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+footer h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.logo {
+    height: 80px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+footer p.copyright {
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+main {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+main h1,h2 {
+    font-family: 'B612', sans-serif;
+    font-weight: bold;
+}
+
+main h3,h4 {
+    font-family: 'B612', sans-serif;
+    font-weight: normal;
+}
+
+.titulo-pagina {
+    padding-bottom: 50px;
+}
+
+img .avatar {
+    width:40px;
+    height:40px;
+    object-fit:cover;
+    border-radius:30px;
+}
+
+.detalhe-foco {
+    padding-top: 80px;
+}
+
+.detalhe-foco mapa {
+    text-align: center;
+    align-content: center;
+}
+
+.detalhe-foco h2 {
+    font-weight: bold;
+    text-align: center;
+}
+
+.detalhe-foco h3 {
+    font-weight: lighter;
+    text-align: center;
+    font-size: xx-small;
+    margin-bottom: 40px;
+}
+
+.detalhe-foco .verde {
+    color: darkgreen;
+}
+
+.detalhe-foco .vermelho {
+    color: darkred;
+}
+
+#map {
+    height: 600px;
+    width: 100%;
+    padding-top: 80px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+#mapFront {
+    height: 800px;
+    width: 100%;
+}
+
+.foto-perfil-edicao {
+    width: 350px;
+    height: 350px;
+    object-fit: cover
+}
+
+.foto-perfil-edicao-placeholder {
+    border: 0 !important;
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-top: 10px;
+    padding-bottom: 30px
+}
+
+.user-badge {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 30px
+}

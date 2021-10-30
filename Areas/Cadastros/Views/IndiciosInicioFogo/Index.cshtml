@@ -1,0 +1,50 @@
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Common
+@model IEnumerable<CadeOFogo.Models.Inpe.IndicioInicioFoco>
+
+@{
+    ViewData["Title"] = "Lista";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Cadastro de indícios de início do foco</h1>
+<p>
+    <a asp-action="Create">Cadastrar novo</a>
+</p>
+<partial name="_SearchBox" />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IndicioInicioFocoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IndicioInicioFocoDescricao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IndicioInicioFocoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IndicioInicioFocoDescricao)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IndicioInicioFocoId"><i class="far fa-edit"></i></a> |
+                <a asp-action="Delete" asp-route-id="@item.IndicioInicioFocoId"><span style="color: #ff253a"><i class="fas fa-trash-alt"></i></span></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<p class="small">Mostrando registros de @ViewBag.primeiro até @ViewBag.ultimo de um total de @ViewBag.total</p>
+@Html.PagedListPager((IPagedList)Model, page =>
+    Url.Action("Index", new { page = page }), 
+    new PagedListRenderOptions {
+        LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link" }
+    })

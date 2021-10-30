@@ -1,0 +1,27 @@
+@model CadeOFogo.Models.Inpe.CausaFogo
+
+@{
+    ViewData["Title"] = "Remover";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Cadastro de causas prováveis do foco</h1>
+
+<h4>Remover</h4>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.CausaFogoDescricao)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.CausaFogoDescricao)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="CausaFogoId" />
+        <input type="submit" value="Remover" class="btn btn-danger" /> |
+        <a asp-action="Index">Retornar à lista</a>
+    </form>
+</div>

@@ -1,0 +1,35 @@
+﻿@using CadeOFogo.ViewModels
+@model IOrderedEnumerable<UsuariosPapeisViewModel>
+
+@{
+    ViewData["Title"] = "Gerenciador de papéis do usuário";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Gerenciando papéis de usuário</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.ToArray()[0].NomeCompleto)</th>
+            <th>@Html.DisplayNameFor(model => model.ToArray()[0].UserName)</th>
+            <th>@Html.DisplayNameFor(model => model.ToArray()[0].Email)</th>
+            <th>@Html.DisplayNameFor(model => model.ToArray()[0].Papeis)</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.NomeCompleto</td>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>@string.Join(",  ", user.Papeis.ToList())</td>
+                <td>
+                    <a class="btn btn-primary" asp-controller="UsuariosPapeis"
+                       asp-action="Gerenciar" asp-route-userId="@user.UserId">Gerenciar papéis</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

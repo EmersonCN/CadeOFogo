@@ -1,0 +1,48 @@
+﻿@model CadeOFogo.Areas.Cadastros.ViewsModels.Pelotao.PelotaoEditViewModel
+
+@{
+    ViewData["Title"] = "Cadastrar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Cadastro de Pelotões</h1>
+
+<h4>Cadastrar novo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BatalhaoInputSelect" class="control-label"></label>
+                <br />
+                <select asp-for="BatalhaoId" asp-items="@Model.BatalhaoInputSelect">
+                    <option value="0" disabled>-- Selecione uma batalhão --</option>
+                </select>
+                <span asp-validation-for="BatalhaoInputSelect" class="text-danger"></span>
+                <br />
+                <label asp-for="CompanhiaInputSelect" class="control-label"></label>
+                <br />
+                <select asp-for="CompanhiaId" asp-items="@Model.CompanhiaInputSelect">
+                    <option value="0" disabled>-- Selecione uma companhia --</option>
+                </select>
+                <span asp-validation-for="CompanhiaInputSelect" class="text-danger"></span>
+                <br />
+                <label asp-for="PelotaoNome" class="control-label"></label>
+                <input asp-for="PelotaoNome" class="form-control" />
+                <span asp-validation-for="PelotaoNome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                  <input type="submit" value="Cadastrar" class="btn btn-primary" />
+             </div>
+         </form>
+     </div>
+</div>
+
+<div>
+    <a asp-action="Index">Retornar à lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

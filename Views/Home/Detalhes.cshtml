@@ -1,0 +1,59 @@
+﻿@using System.Net.Mime
+@model CadeOFogo.ViewModels.DetalheFocoViewModel
+@{
+    ViewData["Title"] = "Detalhes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+<div class="row">
+    <div class="col">
+        <aside class="detalhe-foco">
+            <div class="container">
+                <h2>Foco @Model.FocoId</h2>  
+                <h3><label asp-for="FocoIdInpe" class="control-label"></label><br />@Model.FocoIdInpe</h3>
+                <dl class="row">
+                    <dt class="col-6"><label asp-for="Satelite" class="control-label"></label></dt>
+                    <dd class="col-6">@Model.Satelite</dd>
+                    <dt class="col-6"><label asp-for="FocoDataUtc" class="control-label"></label></dt>
+                    <dd class="col-6">@Model.FocoDataUtc.ToString("s")</dd>
+                    <dt class="col-6"><label asp-for="Coordenadas" class="control-label"></label></dt>
+                    <dd class="col-6">@Model.Coordenadas</dd>
+                    <dt class="col-6"><label asp-for="Localidade" class="control-label"></label></dt>
+                    <dd class="col-6">@Model.Localidade</dd>
+                    @if (ViewBag.TemReverseGeocode)
+                    {
+                        <dt class="col-6"><label asp-for="ReverseGeocode" class="control-label"></label></dt>
+                        <dd class="col-6">@Model.ReverseGeocode</dd>
+                    }
+                </dl>
+                <table width="100%">
+                    <thead>
+                    <th class="text-center"><label asp-for="FocoConfirmado" class="control-label"></label></th>
+                    <th class="text-center"><label asp-for="FocoAtendido" class="control-label"></label></th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="text-center">
+                            @if (Model.FocoConfirmado){<i class="fas fa-check verde"></i>}else{<i class="fas fa-times vermelho"></i>}
+                        </td>
+                        <td class="text-center">
+                            @if (Model.FocoAtendido){<i class="fas fa-check verde"></i>}else{<i class="fas fa-times vermelho"></i>}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                @if (ViewBag.TemReverseGeocode)
+                {
+                    <p class="small text-dark">@Model.Attribution</p>
+                }
+            </div>
+        </aside>
+    </div>
+    <div class="col-md-4">
+        <section class="detalhe-foco">
+            <div id="map" class="mapa"></div>
+        </section>
+    </div>
+</div>
+</div>
+@Html.Raw(ViewBag.mapa)

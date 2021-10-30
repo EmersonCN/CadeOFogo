@@ -1,0 +1,60 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Common
+@model IEnumerable<CadeOFogo.Areas.Cadastros.ViewsModels.Equipe.EquipeIndexViewModel>
+
+@{
+    ViewData["Title"] = "Lista";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Cadastro de Equipes</h1>
+<p>
+    <a asp-action="Create">Cadastrar novo</a>
+</p>
+<partial name="_SearchBox" />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.ToArray()[0].EquipeId)</th>
+            <th>@Html.DisplayNameFor(model => model.ToArray()[0].EquipeNome)</th>
+            <th>@Html.DisplayNameFor(model => model.ToArray()[0].NomeBatalhao)</th>
+            <th>@Html.DisplayNameFor(model => model.ToArray()[0].CompanhiaNome)</th>
+            <th>@Html.DisplayNameFor(model => model.ToArray()[0].PelotaoNome)</th>
+            <th>@Html.DisplayNameFor(model => model.ToArray()[0].Nome)</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ativa)
+            </th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.EquipeId</td>
+                <td>@user.EquipeNome</td>
+                <td>@user.NomeBatalhao</td>
+                <td>@user.CompanhiaNome</td>
+                <td>@user.PelotaoNome</td>
+                <td>@string.Join(",  ", user.Nome)</td>
+                <td>
+                    @Html.DisplayFor(modelItem => user.Ativa)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@user.EquipeId"><i class="far fa-edit"></i></a> |
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p class="small">Mostrando registros de @ViewBag.primeiro até @ViewBag.ultimo de um total de @ViewBag.total</p>
+@Html.PagedListPager((IPagedList)Model, page =>
+    Url.Action("Index", new { page = page }),
+    new PagedListRenderOptions
+    {
+        LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link" },
+
+    })

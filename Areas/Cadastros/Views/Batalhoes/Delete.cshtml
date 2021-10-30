@@ -1,0 +1,26 @@
+﻿@model CadeOFogo.Models.Inpe.Batalhao
+@{
+    ViewData["Title"] = "Remover";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Cadastro de Batalhões</h1>
+
+<h4>Remover</h4>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.NomeBatalhao)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.NomeBatalhao)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="BatalhaoId" />
+        <input type="submit" value="Remover" class="btn btn-danger" /> |
+        <a asp-action="Index">Retornar à lista</a>
+    </form>
+</div>

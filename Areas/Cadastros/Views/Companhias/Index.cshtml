@@ -1,0 +1,62 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Common
+@model IEnumerable<CadeOFogo.Areas.Cadastros.ViewsModels.CompanhiaIndexViewModel>
+
+@{
+    ViewData["Title"] = "Lista";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Cadastro de Companhias</h1>
+<p>
+    <a asp-action="Create">Cadastrar novo</a>
+</p>
+<partial name="_SearchBox" />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CompanhiaId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CompanhiaNome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.NomeBatalhao)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CompanhiaId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CompanhiaNome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomeBatalhao)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.CompanhiaId"><i class="far fa-edit"></i></a> |
+                        <a asp-action="Delete" asp-route-id="@item.CompanhiaId"><span style="color: #ff253a"><i class="fas fa-trash-alt"></i></span></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p class="small">Mostrando registros de @ViewBag.primeiro até @ViewBag.ultimo de um total de @ViewBag.total</p>
+    @Html.PagedListPager((IPagedList)Model, page =>
+        Url.Action("Index", new { page = page }),
+        new PagedListRenderOptions
+        {
+            LiElementClasses = new string[] { "page-item" },
+            PageClasses = new string[] { "page-link" },
+
+        })
+
+

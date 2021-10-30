@@ -1,0 +1,34 @@
+@model CadeOFogo.Models.Inpe.ResponsavelPropriedade
+
+@{
+    ViewData["Title"] = "Cadastrar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Cadastrar novo</h1>
+
+<h4>Cadastro de responsável pela propriedade</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ResponsavelPropriedadeDescricao" class="control-label"></label>
+                <input asp-for="ResponsavelPropriedadeDescricao" class="form-control" />
+                <span asp-validation-for="ResponsavelPropriedadeDescricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Retornar à lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,46 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Common
+@model IEnumerable<CadeOFogo.Areas.Cadastros.ViewsModels.Pelotao.PelotaoDetailsViewModel>
+
+@{
+    ViewData["Title"] = "Lista";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Cadastro de Pelotões</h1>
+<p>
+    <a asp-action="Create">Cadastrar novo</a>
+</p>
+<partial name="_SearchBox" />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ToArray()[0].PelotaoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ToArray()[0].PelotaoNome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ToArray()[0].Usuarios)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pelotao in Model)
+        {
+            <tr>
+                <td>@pelotao.PelotaoId</td>
+                <td>@pelotao.PelotaoNome</td>
+                <td>@string.Join(",  ", pelotao.Usuarios.ToList())</td>
+                <td>
+                    <a class="btn btn-primary" asp-controller="Pelotoes"
+                       asp-action="Gerenciar" asp-route-PelotaoId="@pelotao.PelotaoId">Gerenciar papéis</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

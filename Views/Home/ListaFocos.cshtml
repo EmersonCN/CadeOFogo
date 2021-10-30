@@ -1,0 +1,114 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Common
+@model IPagedList<Foco>
+@{
+    ViewData["Title"] = "Lista";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Lista de Focos</h1>
+<form asp-action="ListaFocos">
+    <div class="row align-items-center">
+        <div class="col-3">
+            <label class="sr-only" for="dataInicio">Data inicial</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Início (UTC)</div>
+                </div>
+                <input name="dataInicio" value="@ViewBag.dataInicio"
+                       pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
+                       type="datetime-local"
+                       max="@DateTime.UtcNow.ToString("s")"
+                       class="form-control mb-2" id="dataInicio">
+            </div>
+        </div>
+        <div class="col-3">
+            <label class="sr-only" for="dataFinal">Data final</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Final (UTC)</div>
+                </div>
+                <input name="dataFinal" value="@ViewBag.dataFinal"
+                       pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
+                       type="datetime-local"
+                       max="@DateTime.UtcNow.ToString("s")"
+                       class="form-control mb-2" id="dataFinal">
+            </div>
+        </div>
+        <div class="col-2">
+            <label class="sr-only" for="satelite">Filtro por satélite</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Satélite</div>
+                </div>
+                <select name="satelite" id="satelite" lass="form-control mb-2" asp-items="@ViewBag.SatelitesInputSelect">
+                    <option value="0">-- Todos --</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row align-items-center">
+        <div class="col-4">
+            <label class="sr-only" for="municipio">Filtro por cidade</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Município</div>
+                </div>
+                <input name="municipio" type="text" class="form-control mb-2" id="municipio" value="@ViewBag.municipio">
+            </div>
+        </div>
+        <div class="col-4">
+            <label class="sr-only" for="estado">Filtro por estado</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Estado</div>
+                </div>
+                <select name="estado" id="estado" lass="form-control mb-2" asp-items="@ViewBag.EstadosInputSelect">
+                    <option value="0">-- Todos --</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-row align-items-start">
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-2">Filtrar</button>
+        </div>
+    </div>
+</form>
+<table class="table table-striped">
+    <thead>
+    <tr><th>@Html.DisplayNameFor(model => model[0].FocoDataUtc)</th>
+        <th>@Html.DisplayNameFor(model => model[0].Satelite.SateliteNome)</th>
+        <th>@Html.DisplayNameFor(model => model[0].Coordenadas)</th>
+        <th>@Html.DisplayNameFor(model => model[0].Municipio.MunicipioNome)</th>
+        <th>@Html.DisplayNameFor(model => model[0].Estado.EstadoNome)</th>
+        <th class="text-center">@Html.DisplayNameFor(model => model[0].FocoAtendido)</th>
+        <th class="text-center">@Html.DisplayNameFor(model => model[0].FocoConfirmado)</th>
+        <th class="text-center">Detalhes</th></tr>
+    </thead>
+    <tbody>
+     @foreach (var item in Model) {
+         <tr><td>@Html.DisplayFor(modelItem => item.FocoDataUtc)</td>
+             <td>@Html.DisplayFor(modelItem => item.Satelite.SateliteNome)</td>
+             <td><span class="small">@Html.DisplayFor(modelItem => item.Coordenadas)</span></td>
+             <td>@Html.DisplayFor(modelItem => item.Municipio.MunicipioNome)</td>
+             <td>@Html.DisplayFor(modelItem => item.Estado.EstadoNome)</td>
+             <td class="text-center">@Html.DisplayFor(modelItem => item.FocoAtendido)</td>
+             <td class="text-center">@Html.DisplayFor(modelItem => item.FocoConfirmado)</td>
+             <td class="text-center"><a asp-action="Detalhes" asp-route-id="@item.FocoId" target="_blank"><i class="far fa-map"></i></a></td></tr>
+     }
+    </tbody>
+</table>
+<p class="small">Mostrando registros de @ViewBag.primeiro até @ViewBag.ultimo de um total de @ViewBag.total</p>
+@Html.PagedListPager((IPagedList)Model,
+    page => Url.Action("ListaFocos", new {
+        page,
+        dataInicio = ViewBag.dataInicio,
+        dataFinal = ViewBag.dataFinal,
+        municipio = ViewBag.municipio,
+        satelite = ViewBag.satelite,
+        estado = ViewBag.estado
+    }), new PagedListRenderOptions {
+        LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link" },
+    })

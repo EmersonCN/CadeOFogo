@@ -1,0 +1,27 @@
+@model CadeOFogo.Models.Inpe.ResponsavelPropriedade
+
+@{
+    ViewData["Title"] = "Remover";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Remover</h1>
+
+<h3>Certeza que deseja remover?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-4">
+            @Html.DisplayNameFor(model => model.ResponsavelPropriedadeDescricao)
+        </dt>
+        <dd class = "col-sm-8">
+            @Html.DisplayFor(model => model.ResponsavelPropriedadeDescricao)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ResponsavelPropriedadeId" />
+        <input type="submit" value="Remover" class="btn btn-danger" /> |
+        <a asp-action="Index">Retornar à lista</a>
+    </form>
+</div>
