@@ -50,8 +50,7 @@ namespace CadeOFogo.Models.Inpe
                 .HasForeignKey(b => b.PelotaoId);
 
             builder.HasMany(b => b.Usuarios)
-                .WithOne(b => b.Pelotao)
-                .HasForeignKey(b => b.PelotaoId);
+                .WithOne(b => b.Pelotao);
 
         }
     }
