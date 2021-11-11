@@ -49,7 +49,7 @@ namespace CadeOFogo.Models.Inpe
     public static List<ApiInpeSatelite> AtualizaSatelites()
     {
       var httpClient = new HttpClient();
-      var uri = new Uri("http://queimadas.dgi.inpe.br/api/focos/?pais_id=33&estado_id=35&satelite=");
+      var uri = new Uri("https://queimadas.dgi.inpe.br/queimadas/dados-abertos/api/auxiliar/satelites");
       try
       {
         var resposta = httpClient.GetStringAsync(uri).Result;
