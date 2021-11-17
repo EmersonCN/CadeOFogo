@@ -1,7 +1,7 @@
 ﻿@using X.PagedList
 @using X.PagedList.Mvc.Core
 @using X.PagedList.Mvc.Core.Common
-@model IEnumerable<CadeOFogo.Areas.Cadastros.ViewsModels.Pelotao.PelotaoDetailsViewModel>
+@model CadeOFogo.Areas.Cadastros.ViewsModels.Pelotao.PelotaoDetailsViewModel
 
 @{
     ViewData["Title"] = "Lista";
@@ -17,29 +17,27 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ToArray()[0].PelotaoId)
+                @Html.DisplayNameFor(model => model.PelotaoId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ToArray()[0].PelotaoNome)
+                @Html.DisplayNameFor(model => model.PelotaoNome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ToArray()[0].Usuarios)
+                @Html.DisplayNameFor(model => model.Usuarios)
             </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var pelotao in Model)
-        {
             <tr>
-                <td>@pelotao.PelotaoId</td>
-                <td>@pelotao.PelotaoNome</td>
-                <td>@string.Join(",  ", pelotao.Usuarios.ToList())</td>
+                <td> @Html.DisplayFor(modelItem => Model.PelotaoId)</td>
+                <td> @Html.DisplayFor(modelItem => Model.PelotaoNome)</td>
+                <td>@string.Join(",  ", Model.Usuarios.ToList())</td>
                 <td>
                     <a class="btn btn-primary" asp-controller="Pelotoes"
-                       asp-action="Gerenciar" asp-route-PelotaoId="@pelotao.PelotaoId">Gerenciar papéis</a>
+                       asp-action="Gerenciar" asp-route-PelotaoId="@Model.PelotaoId">Gerenciar papéis</a>
                 </td>
             </tr>
-        }
     </tbody>
 </table>
 

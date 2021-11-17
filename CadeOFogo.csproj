@@ -6,6 +6,13 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="Areas\Cadastros\Data\**" />
+      <Content Remove="Areas\Cadastros\Data\**" />
+      <EmbeddedResource Remove="Areas\Cadastros\Data\**" />
+      <None Remove="Areas\Cadastros\Data\**" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="jQuery" Version="3.6.0" />
         <PackageReference Include="jQuery.Validation" Version="1.19.3" />
         <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
@@ -92,7 +99,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Areas\Cadastros\Data" />
       <Folder Include="wwwroot\lib\font-awesome" />
     </ItemGroup>
 

@@ -24,7 +24,8 @@ namespace CadeOFogo.Data
                 Email = "emersoncn2015@gmail.com",
                 NomeCompleto = "Emerson Carlos Nogueira",
                 EmailConfirmed = true,
-                PhoneNumberConfirmed = true
+                PhoneNumberConfirmed = true,
+                PelotaoId = 1
             };
 
             if (userManager.Users.All(u => u.Id != primeiroUsuario.Id))
@@ -41,6 +42,38 @@ namespace CadeOFogo.Data
                     await userManager.AddToRoleAsync(primeiroUsuario, Enums.Roles.Usuario.ToString());
                 }
             }
+        }
+
+        public static async Task SeedBatalhaoAdminAsyn(Batalhao batalhao)
+        {
+            var primeiroBatalhao = new Batalhao
+            {
+                BatalhaoId = 1,
+                NomeBatalhao = "4º Batalhão de Polícia Ambiental"
+            };
+        }
+
+        public static async Task SeedCompanhiaAdminAsyn(Companhia companhia)
+        {
+            var primeiraCompanhia = new Companhia
+            {
+                CompanhiaId = 1,
+                CompanhiaNome = "4º Batalhão de Polícia Ambiental",
+                BatalhaoId = 1
+
+            };
+        }
+
+        public static async Task SeedBatalhaoAdminAsyn(Pelotao pelotao)
+        {
+            var primeiroPelotao = new Pelotao
+            {
+                PelotaoId = 1,
+                PelotaoNome = "4º Batalhão de Polícia Ambiental",
+                CompanhiaId = 1,
+                BatalhaoId = 1
+
+            };
         }
     }
 

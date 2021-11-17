@@ -35,7 +35,7 @@ namespace CadeOFogo.Areas.Cadastros.Controllers
         private async Task<List<ApplicationUser>> GetUser(Pelotao pelotao)
         {
 
-            return await _userManager.Users.Where(x => x.Pelotao != null ).ToListAsync();
+            return await _userManager.Users.ToListAsync();
         }
 
         public async Task<IActionResult> Index(string keyword, int? pagina)
@@ -288,25 +288,24 @@ namespace CadeOFogo.Areas.Cadastros.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> Detalhes()
+        public async Task<IActionResult> Detalhes(int? id)
         {
-            var pelotoes = await _context.Pelotoes.ToListAsync();
-            var pelotaoDetaisViewModel = new List<PelotaoDetailsViewModel>();
-            foreach (var pelotao in pelotoes)
-            {
-                var vm = new PelotaoDetailsViewModel
-                {
-                    PelotaoId = pelotao.PelotaoId,
-                    PelotaoNome = pelotao.PelotaoNome,
-                    Usuarios = await GetUser(pelotao)
-                    
+            if (id == null)
+                return NotFound();
 
-                };
-                pelotaoDetaisViewModel.Add(vm);
-            }
-            var pelotaoDetails = pelotaoDetaisViewModel
-                .OrderBy(up => up.PelotaoNome);
-            return View(pelotaoDetails);
+            var pelotao = await _context.Pelotoes
+              .FirstOrDefaultAsync(p => p.PelotaoId == id);
+
+            if (pelotao == null)
+                return NotFound();
+
+            var pelotaoViewModel = new PelotaoDetailsViewModel
+            {
+                PelotaoId = pelotao.PelotaoId,
+                PelotaoNome = pelotao.PelotaoNome,
+                Usuarios = await GetUser(pelotao)
+             };
+            return View(pelotaoViewModel);
         }
 
 
@@ -346,7 +345,7 @@ namespace CadeOFogo.Areas.Cadastros.Controllers
             var pelotao = await _context.Pelotoes.FindAsync(pelotaoId);
             if (pelotao == null)
             {
-                RedirectToAction("Detalhes");
+                return RedirectToAction(nameof(Detalhes));
             }
 
             foreach(var policial in model)
@@ -364,8 +363,8 @@ namespace CadeOFogo.Areas.Cadastros.Controllers
 
                 _context.SaveChanges();
             }
-            return RedirectToAction("Detalhes");
-            
-    }
+            return RedirectToAction(nameof(Detalhes));
+
+        }
     }
 }
