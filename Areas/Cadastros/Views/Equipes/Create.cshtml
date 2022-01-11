@@ -50,17 +50,8 @@
                 </select>
                 <span asp-validation-for="UsuarioInputSelect" class="text-danger"></span>
                 <div class="form-group form-check">
-                    @foreach (var i in Model.UsuarioInputSelect)
-                    {
-                    <label asp-for="UsuarioInputSelect" class="form-check-label">
-                        <input class="form-check-input" asp-for="UserId" asp-items="@Model.UsuarioInputSelect" />
-                    </label>
-                    }
-                </div>
-
-                <div class="form-group form-check">
                     <label class="form-check-label">
-                        <input class="form-check-input" asp-for="Ativa" /> @Html.DisplayNameFor(model => model.Ativa)
+                        <input class="form-check-input" asp-for="Ativa" multiple /> @Html.DisplayNameFor(model => model.Ativa)
                     </label>
                 </div>
             </div>

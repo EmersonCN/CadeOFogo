@@ -28,7 +28,7 @@ namespace CadeOFogo.Areas.Cadastros.ViewsModels.Equipe
         [Display(Name = "Ativa")]
         public bool Ativa { get; set; }
 
-        [Display(Name = "Nome Usuario")]
+        [Display(Name = "Nome Policiais")]
         public string Nome { get; set; }
 
     }

@@ -45,7 +45,7 @@ namespace CadeOFogo.Controllers
     public IActionResult Index()
     {
       ViewBag.TotalFocos = _context.Focos.Count(f => f.FocoDataUtc >= DateTime.UtcNow.AddDays(-2));
-      ViewBag.mapa = _mapProvider.DynamicSpotsMap("https://localhost:5001/Home/Focos48H");
+      ViewBag.mapa = _mapProvider.DynamicSpotsMap("/Home/Focos48H");
 
       return View();
     }
@@ -228,7 +228,53 @@ namespace CadeOFogo.Controllers
       return View(detalheFocoViewModel);
     }
 
-    public IActionResult Privacy()
+        public async Task<IActionResult> AdicionarDetalhes(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var foco = await _context.Focos
+              .Include(f => f.Estado)
+              .Include(f => f.Municipio)
+              .Include(f => f.Satelite)
+              .FirstOrDefaultAsync(f => f.FocoId == id);
+            if (foco == null) return NotFound();
+
+            var detalheFocoViewModel = new DetalheFocoViewModel
+            {
+                FocoId = foco.FocoId,
+                FocoDataUtc = foco.FocoDataUtc,
+                Coordenadas = foco.Coordenadas,
+                FocoAtendido = foco.FocoAtendido,
+                FocoConfirmado = foco.FocoConfirmado,
+                FocoIdInpe = foco.InpeFocoId,
+                //SnapshotSatelite = foco.SnapshotSatelite,
+                Satelite = foco.Satelite.SateliteNome,
+                Localidade = $"{foco.Municipio.MunicipioNome}, {foco.Estado.EstadoNome}"
+            };
+
+            ViewBag.TemReverseGeocode = false;
+            var reverseGeocode = _mapProvider.ReverseGeocode(foco.FocoLatitude, foco.FocoLongitude);
+            if (reverseGeocode.Status == ReverseGeocodeStatus.OK)
+            {
+                detalheFocoViewModel.Attribution = reverseGeocode.Attribution;
+                detalheFocoViewModel.ReverseGeocode = reverseGeocode.Endereco;
+                ViewBag.TemReverseGeocode = true;
+            }
+            else
+            {
+                var msg = $"Erro no reverse geocode / latlong: {foco.FocoLatitude.ToString(_nfi)}, {foco.FocoLongitude.ToString(_nfi)} / ";
+                msg += $"resposta: {reverseGeocode.Status} / {_mapProvider.providerName()}";
+                _logger.LogWarning(msg);
+            }
+
+            ViewBag.mapa = _mapProvider.DynamicSingleSpotMap(foco.FocoLatitude, foco.FocoLongitude, "map");
+
+            return View(detalheFocoViewModel);
+        }
+
+
+
+        public IActionResult Privacy()
     {
       return View();
     }

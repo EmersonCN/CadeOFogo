@@ -8,10 +8,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Cadastro de Pelotões</h1>
-<p>
-    <a asp-action="Create">Cadastrar novo</a>
-</p>
+<h1>Detalhes dos Pelotões</h1>
 <partial name="_SearchBox" />
 <table class="table">
     <thead>
@@ -35,7 +32,7 @@
                 <td>@string.Join(",  ", Model.Usuarios.ToList())</td>
                 <td>
                     <a class="btn btn-primary" asp-controller="Pelotoes"
-                       asp-action="Gerenciar" asp-route-PelotaoId="@Model.PelotaoId">Gerenciar papéis</a>
+                       asp-action="Gerenciar" asp-route-PelotaoId="@Model.PelotaoId">Gerenciar Policiais</a>
                 </td>
             </tr>
     </tbody>

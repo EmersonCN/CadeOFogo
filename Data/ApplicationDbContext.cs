@@ -64,6 +64,30 @@ namespace CadeOFogo.Data
       builder.ApplyConfiguration(new PelotaoConfiguration());
       builder.ApplyConfiguration(new EquipeConfiguration());
       builder.ApplyConfiguration(new ApplicationUserConfiguration());
-    }
+            builder.Entity<Batalhao>().HasData(
+                  new Batalhao
+                  {
+                      BatalhaoId = 1,
+                      NomeBatalhao = "4º Batalhão de Polícia Ambiental",
+                  }
+              );
+            builder.Entity<Companhia>().HasData(
+                  new Companhia
+                  {
+                      CompanhiaId = 1,
+                      BatalhaoId = 1,
+                      CompanhiaNome = "1º Companhia de São José do Rio Preto",
+                  }
+              );
+            builder.Entity<Pelotao>().HasData(
+                  new Pelotao
+                  {
+                      PelotaoId = 1,
+                      CompanhiaId = 1,
+                      BatalhaoId = 1,
+                      PelotaoNome = "1º Pelotão de São José do Rio Preto",
+                  }
+              );
+        }
   }
 }

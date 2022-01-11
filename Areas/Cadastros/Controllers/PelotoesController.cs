@@ -288,7 +288,7 @@ namespace CadeOFogo.Areas.Cadastros.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> Detalhes(int? id)
+        public async Task<IActionResult> Detalhes(int id)
         {
             if (id == null)
                 return NotFound();
@@ -314,7 +314,7 @@ namespace CadeOFogo.Areas.Cadastros.Controllers
         {
 
             if (pelotaoId == null)
-                return RedirectToAction(nameof(Detalhes));
+                return RedirectToAction(nameof(Index));
 
             var pelotao = await _context.Pelotoes
               .FirstOrDefaultAsync(p => p.PelotaoId == pelotaoId);
@@ -345,7 +345,7 @@ namespace CadeOFogo.Areas.Cadastros.Controllers
             var pelotao = await _context.Pelotoes.FindAsync(pelotaoId);
             if (pelotao == null)
             {
-                return RedirectToAction(nameof(Detalhes));
+                return RedirectToAction(nameof(Index));
             }
 
             foreach(var policial in model)
@@ -363,7 +363,7 @@ namespace CadeOFogo.Areas.Cadastros.Controllers
 
                 _context.SaveChanges();
             }
-            return RedirectToAction(nameof(Detalhes));
+            return RedirectToAction(nameof(Index));
 
         }
     }

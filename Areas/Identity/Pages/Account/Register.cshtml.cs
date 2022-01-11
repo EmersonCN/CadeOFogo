@@ -69,6 +69,10 @@ namespace CadeOFogo.Areas.Identity.Pages.Account
             [Display(Name = "Confirmar Senha")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Display(Name = "Pelotão Id:")]
+            public int PelotaoId { get; set; }
+
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -86,7 +90,8 @@ namespace CadeOFogo.Areas.Identity.Pages.Account
                 var user = new ApplicationUser
                 { UserName = Input.UserName,
                   Email = Input.Email,
-                  NomeCompleto = Input.Nome
+                  NomeCompleto = Input.Nome,
+                  PelotaoId = Input.PelotaoId
                 };
 
                 var result = await _userManager.CreateAsync(user, Input.Password);

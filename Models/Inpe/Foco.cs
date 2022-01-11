@@ -76,7 +76,6 @@ namespace CadeOFogo.Models.Inpe
         return $"{latitude}, {longitude}";
       }
     }
-
   }
   
   // https://json2csharp.com/
