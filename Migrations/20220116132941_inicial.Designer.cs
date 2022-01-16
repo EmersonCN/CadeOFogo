@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CadeOFogo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211205204926_inicial")]
+    [Migration("20220116132941_inicial")]
     partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -337,6 +337,63 @@ namespace CadeOFogo.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Altorizado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ArvoresIsoladas")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AutoDeInflacaoAmbiental")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AutoDeInflacaoAmbientalA")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AutoDeInflacaoAmbientalAPP")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AutoDeInflacaoAmbientalL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AutoDeInflacaoAmbientalRL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AutoDeInflacaoAmbientalUC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AutoDeInflacaoAmbientalV")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Avancado")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AvancadoAPPAreaEmHectares")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AvancadoRL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AvancadoUC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Bioma")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CanaDeAcucar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CausaProvavel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CausadorProvavel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Citrus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DataAtendimento")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("DataSnapshot")
                         .HasPrecision(0)
                         .HasColumnType("datetime2(0)");
@@ -366,13 +423,112 @@ namespace CadeOFogo.Migrations
                         .HasPrecision(13, 8)
                         .HasColumnType("decimal(13,8)");
 
+                    b.Property<string>("IndicioDeInicioDoFoco")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Inicial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InicialAPPAreaEmHectares")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InicialRL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InicialUC")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("InpeFocoId")
                         .IsRequired()
                         .HasMaxLength(80)
                         .HasColumnType("nvarchar(80)");
 
+                    b.Property<string>("Medio")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MedioAPPAreaEmHectares")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MedioRL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MedioUC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MultaA")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MultaAPP")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MultaL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MultaR")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MultaRL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MultaUC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MultaV")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Municipi")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("MunicipioId")
                         .HasColumnType("int");
+
+                    b.Property<string>("NºBOPAmb")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NºTVA")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OcorrênciaSIOPM")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Outras")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OutrasRL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OutrasUC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PalhaDeCana")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pasto")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pioneiro")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PioneiroRL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PioneiroUC")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PioneroAPPAreaEmHectares")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PolicialResponsavel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RSO")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Refiscalizacao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ResponsavelPelaPropriedade")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SateliteId")
                         .HasColumnType("int");
@@ -383,6 +539,9 @@ namespace CadeOFogo.Migrations
 
                     b.Property<byte[]>("SnapshotSatelite")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("StatusDoFoco")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("FocoId");
 

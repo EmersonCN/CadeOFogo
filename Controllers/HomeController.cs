@@ -242,14 +242,8 @@ namespace CadeOFogo.Controllers
             var detalheFocoViewModel = new DetalheFocoViewModel
             {
                 FocoId = foco.FocoId,
-                FocoDataUtc = foco.FocoDataUtc,
-                Coordenadas = foco.Coordenadas,
                 FocoAtendido = foco.FocoAtendido,
-                FocoConfirmado = foco.FocoConfirmado,
                 FocoIdInpe = foco.InpeFocoId,
-                //SnapshotSatelite = foco.SnapshotSatelite,
-                Satelite = foco.Satelite.SateliteNome,
-                Localidade = $"{foco.Municipio.MunicipioNome}, {foco.Estado.EstadoNome}"
             };
 
             ViewBag.TemReverseGeocode = false;
@@ -270,6 +264,51 @@ namespace CadeOFogo.Controllers
             ViewBag.mapa = _mapProvider.DynamicSingleSpotMap(foco.FocoLatitude, foco.FocoLongitude, "map");
 
             return View(detalheFocoViewModel);
+        }
+
+        [HttpPost, ActionName("AdicionarDetalhes")]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> AdicionarDetalhesConfirm(int? id, DetalheFocoViewModel foco)
+        {
+            if ((id == null) || (id != foco.FocoId))
+                return NotFound();
+
+            if (!ModelState.IsValid)
+            {
+                var newFocoEditViewModel = new DetalheFocoViewModel
+                {
+                    FocoId = foco.FocoId,
+                    FocoAtendido = foco.FocoAtendido,
+                    Bioma = foco.Bioma
+
+                };
+                return View(newFocoEditViewModel);
+            }
+
+            var focoOriginal = await _context.Focos
+              .Include(p => p.Estado)
+              .Include(p => p.Municipio)
+              .Include(p => p.Satelite)
+              .FirstOrDefaultAsync(p => p.FocoId == foco.FocoId);
+
+            if (focoOriginal.Bioma != foco.Bioma)
+                focoOriginal.Bioma = foco.Bioma;
+
+            if (_context.Entry(focoOriginal).State == EntityState.Modified)
+            {
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    if (!_context.Focos.Any(p => p.FocoId == focoOriginal.FocoId))
+                        return NotFound();
+                    Console.WriteLine(e);
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(ListaFocos));
         }
 
 

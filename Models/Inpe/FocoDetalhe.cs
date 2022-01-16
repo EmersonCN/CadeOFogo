@@ -62,9 +62,111 @@ namespace CadeOFogo.Models.Inpe
         public string AvancadoAPPAreaEmHectares { get; set; }
 
         [Display(Name = "Auto De Infração Ambiental (Quantidades)")]
-        public string AutoDeInflacaoAmbiental { get; set; }
+        public string AutoDeInflacaoAmbientalAPP { get; set; }
 
         [Display(Name = "Multa APP")]
         public string MultaAPP { get; set; }
+
+        [Display(Name = "Pioneiro")]
+        public string Pioneiro { get; set; }
+
+        [Display(Name = "Inicial")]
+        public string Inicial { get; set; }
+
+        [Display(Name = "Médio")]
+        public string Medio { get; set; }
+
+        [Display(Name = "Avançado")]
+        public string Avancado { get; set; }
+
+        [Display(Name = "Auto De Infração Ambiental (Quantidades)")]
+        public string AutoDeInflacaoAmbiental { get; set; }
+
+        [Display(Name = "Multa")]
+        public string MultaR { get; set; }
+
+        [Display(Name = "Pasto")]
+        public string Pasto { get; set; }
+
+        [Display(Name = "Citrus")]
+        public string Citrus { get; set; }
+
+        [Display(Name = "Outras (Eucalipto,Pinus,Etc)")]
+        public string Outras { get; set; }
+
+        [Display(Name = "Auto De Infração Ambiental (Quantidades)")]
+        public string AutoDeInflacaoAmbientalV { get; set; }
+
+        [Display(Name = "Multa")]
+        public string MultaV { get; set; }
+
+        [Display(Name = "Arvvores Isoladas")]
+        public string ArvoresIsoladas { get; set; }
+
+        [Display(Name = "Auto De Infração Ambiental (Quantidades)")]
+        public string AutoDeInflacaoAmbientalA { get; set; }
+
+        [Display(Name = "Multa")]
+        public string MultaA { get; set; }
+
+        [Display(Name = "Plaha de Cana")]
+        public string PalhaDeCana { get; set; }
+
+        [Display(Name = "Cana-de-Açucar")]
+        public string CanaDeAcucar { get; set; }
+
+        [Display(Name = "Atorizado (Sim/Não)")]
+        public string Altorizado { get; set; }
+
+        [Display(Name = "Auto De Infração Ambiental (Quantidades)")]
+        public string AutoDeInflacaoAmbientalL { get; set; }
+
+        [Display(Name = "Multa")]
+        public string MultaL { get; set; }
+
+        [Display(Name = "Pioneiro(UC)")]
+        public string PioneiroUC { get; set; }
+
+        [Display(Name = "Inicial(UC)")]
+        public string InicialUC { get; set; }
+
+        [Display(Name = "Médio(UC)")]
+        public string MedioUC { get; set; }
+
+        [Display(Name = "Avançado(UC)")]
+        public string AvancadoUC { get; set; }
+
+        [Display(Name = "Outras(UC) (Eucalipto,Pinus,Etc)")]
+        public string OutrasUC { get; set; }
+
+        [Display(Name = "Auto De Infração Ambiental (Quantidades)")]
+        public string AutoDeInflacaoAmbientalUC { get; set; }
+
+        [Display(Name = "Multa")]
+        public string MultaUC { get; set; }
+
+        [Display(Name = "Pioneiro(RL)")]
+        public string PioneiroRL { get; set; }
+
+        [Display(Name = "Inicial(RL)")]
+        public string InicialRL { get; set; }
+
+        [Display(Name = "Médio(RL)")]
+        public string MedioRL { get; set; }
+
+        [Display(Name = "Avançado(RL)")]
+        public string AvancadoRL { get; set; }
+
+        [Display(Name = "Outras(RL) (Eucalipto,Pinus,Etc)")]
+        public string OutrasRL { get; set; }
+
+        [Display(Name = "Auto De Infração Ambiental (Quantidades)")]
+        public string AutoDeInflacaoAmbientalRL { get; set; }
+
+        [Display(Name = "Multa")]
+        public string MultaRL { get; set; }
+
+        [Display(Name = "Refiscalização")]
+        public string Refiscalizacao { get; set; }
     }
 }
