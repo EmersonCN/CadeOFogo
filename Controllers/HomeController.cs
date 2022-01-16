@@ -279,8 +279,59 @@ namespace CadeOFogo.Controllers
                 {
                     FocoId = foco.FocoId,
                     FocoAtendido = foco.FocoAtendido,
-                    Bioma = foco.Bioma
-
+                    Bioma = foco.Bioma,
+                    Municipi = foco.Municipi,
+                    PolicialResponsavel = foco.PolicialResponsavel,
+                    OcorrênciaSIOPM = foco.OcorrênciaSIOPM,
+                    NºBOPAmb = foco.NºBOPAmb,
+                    NºTVA = foco.NºTVA,
+                    RSO = foco.RSO,
+                    DataAtendimento = foco.DataAtendimento,
+                    StatusDoFoco = foco.StatusDoFoco,
+                    IndicioDeInicioDoFoco = foco.IndicioDeInicioDoFoco,
+                    CausaProvavel = foco.CausaProvavel,
+                    CausadorProvavel = foco.CausadorProvavel,
+                    ResponsavelPelaPropriedade = foco.ResponsavelPelaPropriedade,
+                    PioneiroAPPAreaEmHectares = foco.PioneiroAPPAreaEmHectares,
+                    InicialAPPAreaEmHectares = foco.InicialAPPAreaEmHectares,
+                    MedioAPPAreaEmHectares = foco.MedioAPPAreaEmHectares,
+                    AvancadoAPPAreaEmHectares = foco.AvancadoAPPAreaEmHectares,
+                    AutoDeInflacaoAmbientalAPP = foco.AutoDeInflacaoAmbientalAPP,
+                    MultaAPP = foco.MultaAPP,
+                    Pioneiro = foco.Pioneiro,
+                    Inicial = foco.Inicial,
+                    Medio = foco.Medio,
+                    Avancado = foco.Avancado,
+                    AutoDeInflacaoAmbiental = foco.AutoDeInflacaoAmbiental,
+                    MultaR = foco.MultaR,
+                    Pasto = foco.Pasto,
+                    Citrus = foco.Citrus,
+                    Outras = foco.Outras,
+                    AutoDeInflacaoAmbientalV = foco.AutoDeInflacaoAmbientalV,
+                    MultaV = foco.MultaV,
+                    ArvoresIsoladas = foco.ArvoresIsoladas,
+                    AutoDeInflacaoAmbientalA = foco.AutoDeInflacaoAmbientalA,
+                    MultaA = foco.MultaA,
+                    PalhaDeCana = foco.PalhaDeCana,
+                    CanaDeAcucar = foco.CanaDeAcucar,
+                    Autorizado = foco.Autorizado,
+                    AutoDeInflacaoAmbientalL = foco.AutoDeInflacaoAmbientalL,
+                    MultaL = foco.MultaL,
+                    PioneiroUC = foco.PioneiroUC,
+                    InicialUC = foco.InicialUC,
+                    MedioUC = foco.MedioUC,
+                    AvancadoUC = foco.AvancadoUC,
+                    OutrasUC = foco.OutrasUC,
+                    AutoDeInflacaoAmbientalUC = foco.AutoDeInflacaoAmbientalUC,
+                    MultaUC = foco.MultaUC,
+                    PioneiroRL = foco.PioneiroRL,
+                    InicialRL = foco.InicialRL,
+                    MedioRL = foco.MedioRL,
+                    AvancadoRL = foco.AvancadoRL,
+                    OutrasRL = foco.OutrasRL,
+                    AutoDeInflacaoAmbientalRL = foco.AutoDeInflacaoAmbientalRL,
+                    MultaRL = foco.MultaRL,
+                    Refiscalizacao = foco.Refiscalizacao
                 };
                 return View(newFocoEditViewModel);
             }
@@ -293,6 +344,162 @@ namespace CadeOFogo.Controllers
 
             if (focoOriginal.Bioma != foco.Bioma)
                 focoOriginal.Bioma = foco.Bioma;
+
+            if (focoOriginal.Municipi != foco.Municipi)
+                focoOriginal.Municipi = foco.Municipi;
+
+            if (focoOriginal.PolicialResponsavel != foco.PolicialResponsavel)
+                focoOriginal.PolicialResponsavel = foco.PolicialResponsavel;
+
+            if (focoOriginal.OcorrênciaSIOPM != foco.OcorrênciaSIOPM)
+                focoOriginal.OcorrênciaSIOPM = foco.OcorrênciaSIOPM;
+
+            if (focoOriginal.NºBOPAmb != foco.NºBOPAmb)
+                focoOriginal.NºBOPAmb = foco.NºBOPAmb;
+
+            if (focoOriginal.NºTVA != foco.NºTVA)
+                focoOriginal.NºTVA = foco.NºTVA;
+
+            if (focoOriginal.RSO != foco.RSO)
+                focoOriginal.RSO = foco.RSO;
+
+            if (focoOriginal.DataAtendimento != foco.DataAtendimento)
+                focoOriginal.DataAtendimento = foco.DataAtendimento;
+
+            if (focoOriginal.StatusDoFoco != foco.StatusDoFoco)
+                focoOriginal.StatusDoFoco = foco.StatusDoFoco;
+
+            if (focoOriginal.IndicioDeInicioDoFoco != foco.IndicioDeInicioDoFoco)
+                focoOriginal.IndicioDeInicioDoFoco = foco.IndicioDeInicioDoFoco;
+
+            if (focoOriginal.CausaProvavel != foco.CausaProvavel)
+                focoOriginal.CausaProvavel = foco.CausaProvavel;
+
+            if (focoOriginal.CausadorProvavel != foco.CausadorProvavel)
+                focoOriginal.CausadorProvavel = foco.CausadorProvavel;
+
+            if (focoOriginal.ResponsavelPelaPropriedade != foco.ResponsavelPelaPropriedade)
+                focoOriginal.ResponsavelPelaPropriedade = foco.ResponsavelPelaPropriedade;
+
+            if (focoOriginal.PioneiroAPPAreaEmHectares != foco.PioneiroAPPAreaEmHectares)
+                focoOriginal.PioneiroAPPAreaEmHectares = foco.PioneiroAPPAreaEmHectares;
+
+            if (focoOriginal.InicialAPPAreaEmHectares != foco.InicialAPPAreaEmHectares)
+                focoOriginal.InicialAPPAreaEmHectares = foco.InicialAPPAreaEmHectares;
+
+            if (focoOriginal.MedioAPPAreaEmHectares != foco.MedioAPPAreaEmHectares)
+                focoOriginal.MedioAPPAreaEmHectares = foco.MedioAPPAreaEmHectares;
+
+            if (focoOriginal.AvancadoAPPAreaEmHectares != foco.AvancadoAPPAreaEmHectares)
+                focoOriginal.AvancadoAPPAreaEmHectares = foco.AvancadoAPPAreaEmHectares;
+
+            if (focoOriginal.AutoDeInflacaoAmbientalAPP != foco.AutoDeInflacaoAmbientalAPP)
+                focoOriginal.AutoDeInflacaoAmbientalAPP = foco.AutoDeInflacaoAmbientalAPP;
+
+            if (focoOriginal.MultaAPP != foco.MultaAPP)
+                focoOriginal.MultaAPP = foco.MultaAPP;
+
+            if (focoOriginal.Pioneiro != foco.Pioneiro)
+                focoOriginal.Pioneiro = foco.Pioneiro;
+
+            if (focoOriginal.Inicial != foco.Inicial)
+                focoOriginal.Inicial = foco.Inicial;
+
+            if (focoOriginal.Medio != foco.Medio)
+                focoOriginal.Medio = foco.Medio;
+
+            if (focoOriginal.Avancado != foco.Avancado)
+                focoOriginal.Avancado = foco.Avancado;
+
+            if (focoOriginal.AutoDeInflacaoAmbiental != foco.AutoDeInflacaoAmbiental)
+                focoOriginal.AutoDeInflacaoAmbiental = foco.AutoDeInflacaoAmbiental;
+
+            if (focoOriginal.MultaR != foco.MultaR)
+                focoOriginal.MultaR = foco.MultaR;
+
+            if (focoOriginal.Pasto != foco.Pasto)
+                focoOriginal.Pasto = foco.Pasto;
+
+            if (focoOriginal.Citrus != foco.Citrus)
+                focoOriginal.Citrus = foco.Citrus;
+
+            if (focoOriginal.Outras != foco.Outras)
+                focoOriginal.Outras = foco.Outras;
+
+            if (focoOriginal.AutoDeInflacaoAmbientalV != foco.AutoDeInflacaoAmbientalV)
+                focoOriginal.AutoDeInflacaoAmbientalV = foco.AutoDeInflacaoAmbientalV;
+
+            if (focoOriginal.MultaV != foco.MultaV)
+                focoOriginal.MultaV = foco.MultaV;
+
+            if (focoOriginal.ArvoresIsoladas != foco.ArvoresIsoladas)
+                focoOriginal.ArvoresIsoladas = foco.ArvoresIsoladas;
+
+            if (focoOriginal.AutoDeInflacaoAmbientalA != foco.AutoDeInflacaoAmbientalA)
+                focoOriginal.AutoDeInflacaoAmbientalA = foco.AutoDeInflacaoAmbientalA;
+
+            if (focoOriginal.MultaA != foco.MultaA)
+                focoOriginal.MultaA = foco.MultaA;
+
+            if (focoOriginal.PalhaDeCana != foco.PalhaDeCana)
+                focoOriginal.PalhaDeCana = foco.PalhaDeCana;
+
+            if (focoOriginal.CanaDeAcucar != foco.CanaDeAcucar)
+                focoOriginal.CanaDeAcucar = foco.CanaDeAcucar;
+
+            if (focoOriginal.Autorizado != foco.Autorizado)
+                focoOriginal.Autorizado = foco.Autorizado;
+
+            if (focoOriginal.AutoDeInflacaoAmbientalL != foco.AutoDeInflacaoAmbientalL)
+                focoOriginal.AutoDeInflacaoAmbientalL = foco.AutoDeInflacaoAmbientalL;
+
+            if (focoOriginal.MultaL != foco.MultaL)
+                focoOriginal.MultaL = foco.MultaL;
+
+            if (focoOriginal.PioneiroUC != foco.PioneiroUC)
+                focoOriginal.PioneiroUC = foco.PioneiroUC;
+
+            if (focoOriginal.InicialUC != foco.InicialUC)
+                focoOriginal.InicialUC = foco.InicialUC;
+
+            if (focoOriginal.MedioUC != foco.MedioUC)
+                focoOriginal.MedioUC = foco.MedioUC;
+
+            if (focoOriginal.AvancadoUC != foco.AvancadoUC)
+                focoOriginal.AvancadoUC = foco.AvancadoUC;
+
+            if (focoOriginal.OutrasUC != foco.OutrasUC)
+                focoOriginal.OutrasUC = foco.OutrasUC;
+
+            if (focoOriginal.AutoDeInflacaoAmbientalUC != foco.AutoDeInflacaoAmbientalUC)
+                focoOriginal.AutoDeInflacaoAmbientalUC = foco.AutoDeInflacaoAmbientalUC;
+
+            if (focoOriginal.MultaUC != foco.MultaUC)
+                focoOriginal.MultaUC = foco.MultaUC;
+
+            if (focoOriginal.PioneiroRL != foco.PioneiroRL)
+                focoOriginal.PioneiroRL = foco.PioneiroRL;
+
+            if (focoOriginal.InicialRL != foco.InicialRL)
+                focoOriginal.InicialRL = foco.InicialRL;
+
+            if (focoOriginal.MedioRL != foco.MedioRL)
+                focoOriginal.MedioRL = foco.MedioRL;
+
+            if (focoOriginal.AvancadoRL != foco.AvancadoRL)
+                focoOriginal.AvancadoRL = foco.AvancadoRL;
+
+            if (focoOriginal.OutrasRL != foco.OutrasRL)
+                focoOriginal.OutrasRL = foco.OutrasRL;
+
+            if (focoOriginal.AutoDeInflacaoAmbientalRL != foco.AutoDeInflacaoAmbientalRL)
+                focoOriginal.AutoDeInflacaoAmbientalRL = foco.AutoDeInflacaoAmbientalRL;
+
+            if (focoOriginal.MultaRL != foco.MultaRL)
+                focoOriginal.MultaRL = foco.MultaRL;
+
+            if (focoOriginal.Refiscalizacao != foco.Refiscalizacao)
+                focoOriginal.Refiscalizacao = foco.Refiscalizacao;
 
             if (_context.Entry(focoOriginal).State == EntityState.Modified)
             {

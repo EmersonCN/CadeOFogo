@@ -115,8 +115,8 @@ namespace CadeOFogo.Models.Inpe
         [Display(Name = "Cana-de-Açucar")]
         public string CanaDeAcucar { get; set; }
 
-        [Display(Name = "Atorizado (Sim/Não)")]
-        public string Altorizado { get; set; }
+        [Display(Name = "Autorizado (Sim/Não)")]
+        public string Autorizado { get; set; }
 
         [Display(Name = "Auto De Infração Ambiental (Quantidades)")]
         public string AutoDeInflacaoAmbientalL { get; set; }

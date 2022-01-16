@@ -335,9 +335,6 @@ namespace CadeOFogo.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Altorizado")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ArvoresIsoladas")
                         .HasColumnType("nvarchar(max)");
 
@@ -360,6 +357,9 @@ namespace CadeOFogo.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AutoDeInflacaoAmbientalV")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Autorizado")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Avancado")
@@ -507,13 +507,13 @@ namespace CadeOFogo.Migrations
                     b.Property<string>("Pioneiro")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PioneiroAPPAreaEmHectares")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PioneiroRL")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PioneiroUC")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PioneroAPPAreaEmHectares")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PolicialResponsavel")

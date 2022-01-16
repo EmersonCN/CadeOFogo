@@ -6,28 +6,356 @@
 }
 <div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col-8">
             <aside class="detalhe-foco">
                 <div class="container">
                     <h2>Foco @Model.FocoId</h2>
                     <h3><label asp-for="FocoIdInpe" class="control-label"></label><br />@Model.FocoIdInpe</h3>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <form asp-action="AdicionarDetalhes">
+                    <div class="form-group">
+                        <form asp-action="AdicionarDetalhes">
+                            <div class="row">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <input type="hidden" asp-for="FocoId" />
-                                <div class="form-group">
+                                <div class="col-md-6">
                                     <label asp-for="Bioma" class="control-label"></label>
                                     <input asp-for="Bioma" class="form-control" />
                                     <span asp-validation-for="Bioma" class="text-danger"></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="col-md-6">
+                                    <label asp-for="Municipi" class="control-label"></label>
+                                    <input asp-for="Municipi" class="form-control" />
+                                    <span asp-validation-for="Municipi" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="PolicialResponsavel" class="control-label"></label>
+                                    <input asp-for="PolicialResponsavel" class="form-control" />
+                                    <span asp-validation-for="PolicialResponsavel" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="OcorrênciaSIOPM" class="control-label"></label>
+                                    <input asp-for="OcorrênciaSIOPM" class="form-control" />
+                                    <span asp-validation-for="OcorrênciaSIOPM" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="NºBOPAmb" class="control-label"></label>
+                                    <input asp-for="NºBOPAmb" class="form-control" />
+                                    <span asp-validation-for="NºBOPAmb" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="NºTVA" class="control-label"></label>
+                                    <input asp-for="NºTVA" class="form-control" />
+                                    <span asp-validation-for="NºTVA" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="RSO" class="control-label"></label>
+                                    <input asp-for="RSO" class="form-control" />
+                                    <span asp-validation-for="RSO" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="DataAtendimento" class="control-label"></label>
+                                    <input type="date" asp-for="DataAtendimento" class="form-control" />
+                                    <span asp-validation-for="DataAtendimento" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="StatusDoFoco" class="control-label"></label>
+                                    <input asp-for="StatusDoFoco" class="form-control" />
+                                    <span asp-validation-for="StatusDoFoco" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="IndicioDeInicioDoFoco" class="control-label"></label>
+                                    <input asp-for="IndicioDeInicioDoFoco" class="form-control" />
+                                    <span asp-validation-for="IndicioDeInicioDoFoco" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="CausaProvavel" class="control-label"></label>
+                                    <input asp-for="CausaProvavel" class="form-control" />
+                                    <span asp-validation-for="CausaProvavel" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="CausadorProvavel" class="control-label"></label>
+                                    <input asp-for="CausadorProvavel" class="form-control" />
+                                    <span asp-validation-for="CausadorProvavel" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="ResponsavelPelaPropriedade" class="control-label"></label>
+                                    <input asp-for="ResponsavelPelaPropriedade" class="form-control" />
+                                    <span asp-validation-for="ResponsavelPelaPropriedade" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <hr size="10">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="PioneiroAPPAreaEmHectares" class="control-label"></label>
+                                    <input asp-for="PioneiroAPPAreaEmHectares" class="form-control" />
+                                    <span asp-validation-for="PioneiroAPPAreaEmHectares" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="InicialAPPAreaEmHectares" class="control-label"></label>
+                                    <input asp-for="InicialAPPAreaEmHectares" class="form-control" />
+                                    <span asp-validation-for="InicialAPPAreaEmHectares" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="MedioAPPAreaEmHectares" class="control-label"></label>
+                                    <input asp-for="MedioAPPAreaEmHectares" class="form-control" />
+                                    <span asp-validation-for="MedioAPPAreaEmHectares" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="AvancadoAPPAreaEmHectares" class="control-label"></label>
+                                    <input asp-for="AvancadoAPPAreaEmHectares" class="form-control" />
+                                    <span asp-validation-for="AvancadoAPPAreaEmHectares" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="AutoDeInflacaoAmbientalAPP" class="control-label"></label>
+                                    <input asp-for="AutoDeInflacaoAmbientalAPP" class="form-control" />
+                                    <span asp-validation-for="AutoDeInflacaoAmbientalAPP" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="MultaAPP" class="control-label"></label>
+                                    <input asp-for="MultaAPP" class="form-control" />
+                                    <span asp-validation-for="MultaAPP" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <hr size="10">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="Pioneiro" class="control-label"></label>
+                                    <input asp-for="Pioneiro" class="form-control" />
+                                    <span asp-validation-for="Pioneiro" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="Inicial" class="control-label"></label>
+                                    <input asp-for="Inicial" class="form-control" />
+                                    <span asp-validation-for="Inicial" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="Medio" class="control-label"></label>
+                                    <input asp-for="Medio" class="form-control" />
+                                    <span asp-validation-for="Medio" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="Avancado" class="control-label"></label>
+                                    <input asp-for="Avancado" class="form-control" />
+                                    <span asp-validation-for="Avancado" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="AutoDeInflacaoAmbiental" class="control-label"></label>
+                                    <input asp-for="AutoDeInflacaoAmbiental" class="form-control" />
+                                    <span asp-validation-for="AutoDeInflacaoAmbiental" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="MultaR" class="control-label"></label>
+                                    <input asp-for="MultaR" class="form-control" />
+                                    <span asp-validation-for="MultaR" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <hr size="10">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="Pasto" class="control-label"></label>
+                                    <input asp-for="Pasto" class="form-control" />
+                                    <span asp-validation-for="Pasto" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="Citrus" class="control-label"></label>
+                                    <input asp-for="Citrus" class="form-control" />
+                                    <span asp-validation-for="Citrus" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="Outras" class="control-label"></label>
+                                    <input asp-for="Outras" class="form-control" />
+                                    <span asp-validation-for="Outras" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="AutoDeInflacaoAmbientalV" class="control-label"></label>
+                                    <input asp-for="AutoDeInflacaoAmbientalV" class="form-control" />
+                                    <span asp-validation-for="AutoDeInflacaoAmbientalV" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="MultaV" class="control-label"></label>
+                                    <input asp-for="MultaV" class="form-control" />
+                                    <span asp-validation-for="MultaV" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <hr size="10">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="ArvoresIsoladas" class="control-label"></label>
+                                    <input asp-for="ArvoresIsoladas" class="form-control" />
+                                    <span asp-validation-for="ArvoresIsoladas" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="AutoDeInflacaoAmbientalA" class="control-label"></label>
+                                    <input asp-for="AutoDeInflacaoAmbientalA" class="form-control" />
+                                    <span asp-validation-for="AutoDeInflacaoAmbientalA" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="MultaA" class="control-label"></label>
+                                    <input asp-for="MultaA" class="form-control" />
+                                    <span asp-validation-for="MultaA" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <hr size="10">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="PalhaDeCana" class="control-label"></label>
+                                    <input asp-for="PalhaDeCana" class="form-control" />
+                                    <span asp-validation-for="PalhaDeCana" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="CanaDeAcucar" class="control-label"></label>
+                                    <input asp-for="CanaDeAcucar" class="form-control" />
+                                    <span asp-validation-for="CanaDeAcucar" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="Autorizado" class="control-label"></label>
+                                    <input asp-for="Autorizado" class="form-control" />
+                                    <span asp-validation-for="Autorizado" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="AutoDeInflacaoAmbientalL" class="control-label"></label>
+                                    <input asp-for="AutoDeInflacaoAmbientalL" class="form-control" />
+                                    <span asp-validation-for="AutoDeInflacaoAmbientalL" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="MultaL" class="control-label"></label>
+                                    <input asp-for="MultaL" class="form-control" />
+                                    <span asp-validation-for="MultaL" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <hr size="10">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="PioneiroUC" class="control-label"></label>
+                                    <input asp-for="PioneiroUC" class="form-control" />
+                                    <span asp-validation-for="PioneiroUC" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="InicialUC" class="control-label"></label>
+                                    <input asp-for="InicialUC" class="form-control" />
+                                    <span asp-validation-for="InicialUC" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="MedioUC" class="control-label"></label>
+                                    <input asp-for="MedioUC" class="form-control" />
+                                    <span asp-validation-for="MedioUC" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="AvancadoUC" class="control-label"></label>
+                                    <input asp-for="AvancadoUC" class="form-control" />
+                                    <span asp-validation-for="AvancadoUC" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="OutrasUC" class="control-label"></label>
+                                    <input asp-for="OutrasUC" class="form-control" />
+                                    <span asp-validation-for="OutrasUC" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="AutoDeInflacaoAmbientalUC" class="control-label"></label>
+                                    <input asp-for="AutoDeInflacaoAmbientalUC" class="form-control" />
+                                    <span asp-validation-for="AutoDeInflacaoAmbientalUC" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="MultaUC" class="control-label"></label>
+                                    <input asp-for="MultaUC" class="form-control" />
+                                    <span asp-validation-for="MultaUC" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <hr size="10">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="PioneiroRL" class="control-label"></label>
+                                    <input asp-for="PioneiroRL" class="form-control" />
+                                    <span asp-validation-for="PioneiroRL" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="InicialRL" class="control-label"></label>
+                                    <input asp-for="InicialRL" class="form-control" />
+                                    <span asp-validation-for="InicialRL" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="MedioRL" class="control-label"></label>
+                                    <input asp-for="MedioRL" class="form-control" />
+                                    <span asp-validation-for="MedioRL" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="AvancadoRL" class="control-label"></label>
+                                    <input asp-for="AvancadoRL" class="form-control" />
+                                    <span asp-validation-for="AvancadoRL" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="OutrasRL" class="control-label"></label>
+                                    <input asp-for="OutrasRL" class="form-control" />
+                                    <span asp-validation-for="OutrasRL" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="AutoDeInflacaoAmbientalRL" class="control-label"></label>
+                                    <input asp-for="AutoDeInflacaoAmbientalRL" class="form-control" />
+                                    <span asp-validation-for="AutoDeInflacaoAmbientalRL" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="MultaRL" class="control-label"></label>
+                                    <input asp-for="MultaRL" class="form-control" />
+                                    <span asp-validation-for="MultaRL" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <hr size="10">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="Refiscalizacao" class="control-label"></label>
+                                    <input asp-for="Refiscalizacao" class="form-control" />
+                                    <span asp-validation-for="Refiscalizacao" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <hr size="10">
+                            <div class="row">
+                                <div class="col-md-6">
                                     <input type="submit" value="Alterar" class="btn btn-primary" />
                                 </div>
-                            </form>
-                        </div>
+                            </div>
+                        </form>
                     </div>
-
                 </div>
             </aside>
         </div>

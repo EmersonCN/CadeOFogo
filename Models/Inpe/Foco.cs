@@ -119,7 +119,7 @@ namespace CadeOFogo.Models.Inpe
         public string ResponsavelPelaPropriedade { get; set; }
 
         [Display(Name = "Pioneiro (APP) - ÁREA EM HECTARES")]
-        public string PioneroAPPAreaEmHectares { get; set; }
+        public string PioneiroAPPAreaEmHectares { get; set; }
 
         [Display(Name = "Inicial (APP) - ÁREA EM HECTARES")]
         public string InicialAPPAreaEmHectares { get; set; }
@@ -169,7 +169,7 @@ namespace CadeOFogo.Models.Inpe
         [Display(Name = "Multa")]
         public string MultaV { get; set; }
 
-        [Display(Name = "Arvvores Isoladas")]
+        [Display(Name = "Arvores Isoladas")]
         public string ArvoresIsoladas { get; set; }
 
         [Display(Name = "Auto De Infração Ambiental (Quantidades)")]
@@ -184,8 +184,8 @@ namespace CadeOFogo.Models.Inpe
         [Display(Name = "Cana-de-Açucar")]
         public string CanaDeAcucar { get; set; }
 
-        [Display(Name = "Atorizado (Sim/Não)")]
-        public string Altorizado { get; set; }
+        [Display(Name = "Autorizado (Sim/Não)")]
+        public string Autorizado { get; set; }
 
         [Display(Name = "Auto De Infração Ambiental (Quantidades)")]
         public string AutoDeInflacaoAmbientalL { get; set; }
