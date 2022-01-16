@@ -44,7 +44,7 @@ namespace CadeOFogo.ViewModels
         [Display(Name = "Bioma :")]
         public string Bioma { get; set; }
 
-        [Display(Name = "Municipi :")]
+        [Display(Name = "Municipe :")]
         public string Municipi { get; set; }
 
         [Display(Name = "Policial Responsavel Pelo Atendimento :")]
