@@ -501,6 +501,9 @@ namespace CadeOFogo.Controllers
             if (focoOriginal.Refiscalizacao != foco.Refiscalizacao)
                 focoOriginal.Refiscalizacao = foco.Refiscalizacao;
 
+            if (focoOriginal.FocoAtendido != foco.FocoAtendido)
+                focoOriginal.FocoAtendido = foco.FocoAtendido;
+
             if (_context.Entry(focoOriginal).State == EntityState.Modified)
             {
                 try
