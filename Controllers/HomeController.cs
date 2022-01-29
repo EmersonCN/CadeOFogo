@@ -219,26 +219,11 @@ namespace CadeOFogo.Controllers
                 NºTVA = foco.NºTVA,
                 RSO = foco.RSO,
                 DataAtendimento = foco.DataAtendimento,
-                StatusDoFoco = new SelectList(await _context.StatusFocos
-                  .OrderBy(c => c.StatusFocoDescricao).ToListAsync(),
-                      dataValueField: "StatusFocoId",
-                     dataTextField: "StatusFocoDescricao"),
-                IndicioDeInicioDoFoco = new SelectList(await _context.IndiciosInicioFoco
-                    .OrderBy(c => c.IndicioInicioFocoDescricao).ToListAsync(),
-                      dataValueField: "IndicioInicioFocoId",
-                     dataTextField: "IndicioInicioFocoDescricao"),
-                CausaFogo = new SelectList(await _context.CausasFogo
-                    .OrderBy(c => c.CausaFogoDescricao).ToListAsync(),
-                      dataValueField: "CausaFogoId",
-                     dataTextField: "CausaFogoDescricao"),
-                CausadorProvavel = new SelectList(await _context.CausadoresProvaveis
-                    .OrderBy(c => c.CausadorProvavelDescricacao).ToListAsync(),
-                      dataValueField: "CausadorProvavelId",
-                     dataTextField: "CausadorProvavelDescricacao"),
-                ResponsavelPelaPropriedade = new SelectList(await _context.ResponsaveisPropriedade
-                    .OrderBy(c => c.ResponsavelPropriedadeDescricao).ToListAsync(),
-                      dataValueField: "ResponsavelPropriedadeId",
-                     dataTextField: "ResponsavelPropriedadeDescricao"),
+                StatusFocoDescricao = foco.StatusDoFoco.StatusFocoDescricao,
+                IndicioInicioFocoDescricao = foco.IndicioInicioFoco.IndicioInicioFocoDescricao,
+                CausaFogoDescricao = foco.CausaFogo.CausaFogoDescricao,
+                CausadorProvavelDescricacao = foco.CausadorProvavel.CausadorProvavelDescricacao,
+                ResponsavelPropriedadeDescricao = foco.ResponsavelPropriedade.ResponsavelPropriedadeDescricao,
                 PioneiroAPPAreaEmHectares = foco.PioneiroAPPAreaEmHectares,
                 InicialAPPAreaEmHectares = foco.InicialAPPAreaEmHectares,
                 MedioAPPAreaEmHectares = foco.MedioAPPAreaEmHectares,
@@ -318,7 +303,7 @@ namespace CadeOFogo.Controllers
               .FirstOrDefaultAsync(f => f.FocoId == id);
             if (foco == null) return NotFound();
 
-            var detalheFocoViewModel = new DetalheFocoViewModel
+            var detalheFocoViewModel = new EditFocoViewModel
             {
                 FocoId = foco.FocoId,
                 FocoAtendido = foco.FocoAtendido,
@@ -415,14 +400,14 @@ namespace CadeOFogo.Controllers
 
         [HttpPost, ActionName("AdicionarDetalhes")]
         [AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> AdicionarDetalhesConfirm(int? id, DetalheFocoViewModel foco)
+        public async Task<IActionResult> AdicionarDetalhesConfirm(int? id, EditFocoViewModel foco)
         {
             if ((id == null) || (id != foco.FocoId))
                 return NotFound();
 
             if (!ModelState.IsValid)
             {
-                var newFocoEditViewModel = new DetalheFocoViewModel
+                var newFocoEditViewModel = new EditFocoViewModel
                 {
                     FocoId = foco.FocoId,
                     FocoAtendido = foco.FocoAtendido,

@@ -1,47 +1,24 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CadeOFogo.ViewModels
 {
-  public class DetalheFocoViewModel
-  {
-    public int FocoId { get; set; }
+    public class EditFocoViewModel
+    {
+        public int FocoId { get; set; }
 
-    [Display(Name = "Coordenadas do foco")]
-    public string Coordenadas { get; set; }
+        [Display(Name = "Foco já atendido")]
+        public bool FocoAtendido { get; set; }
 
-    public string Latitude { get; set; }
-    public string Longitude { get; set; }
+        [Display(Name = "Identificação do foco no INPE")]
+        public string FocoIdInpe { get; set; }
 
-    [Display(Name = "Data e hora UTC do foco")]
-    [DataType(DataType.DateTime)]
-    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
-    public DateTime FocoDataUtc { get; set; }
+        [Display(Name = "Endereço aproximado")]
+        public string ReverseGeocode { get; set; }
 
-    [Display(Name = "Localidade")]
-    public string Localidade { get; set; }
-    
-    [Display(Name = "Foco já atendido")]
-    public bool FocoAtendido { get; set; }
-
-    [Display(Name = "Foco confirmado")]
-    public bool FocoConfirmado { get; set; }
-    
-    [Display(Name = "Mapa de localização do foco")]
-    public byte[] SnapshotSatelite { get; set; }
-    
-    [Display(Name = "Satélite")]
-    public string Satelite { get; set; }
-    
-    [Display(Name = "Identificação do foco no INPE")]
-    public string FocoIdInpe { get; set; }
-    
-    [Display(Name = "Endereço aproximado")]
-    public string ReverseGeocode { get; set; }
-    
-    [Display(Name = "Attribution")]
-    public string Attribution { get; set; }
+        [Display(Name = "Attribution")]
+        public string Attribution { get; set; }
 
         [Display(Name = "Bioma :")]
         public string Bioma { get; set; }
@@ -71,23 +48,23 @@ namespace CadeOFogo.ViewModels
 
         public int StatusFocoId { get; set; }
         [Display(Name = "Status Do Foco :")]
-        public string StatusFocoDescricao { get; set; }
+        public SelectList StatusDoFoco { get; set; }
 
         public int IndicioInicioFocoId { get; set; }
         [Display(Name = "Indicios De Início Do Foco :")]
-        public string IndicioInicioFocoDescricao { get; set; }
+        public SelectList IndicioDeInicioDoFoco { get; set; }
 
         public int CausaFogoId { get; set; }
         [Display(Name = "Causa Provável :")]
-        public string CausaFogoDescricao { get; set; }
+        public SelectList CausaFogo { get; set; }
 
         public int CausadorProvavelId { get; set; }
         [Display(Name = "Causador Provável : ")]
-        public string CausadorProvavelDescricacao { get; set; }
+        public SelectList CausadorProvavel { get; set; }
 
         public int ResponsavelPropriedadeId { get; set; }
         [Display(Name = "Responsavel Pela Propriedade :")]
-        public string ResponsavelPropriedadeDescricao { get; set; }
+        public SelectList ResponsavelPelaPropriedade { get; set; }
 
         [Display(Name = "Pioneiro (APP) - ÁREA EM HECTARES :")]
         public string PioneiroAPPAreaEmHectares { get; set; }
@@ -208,6 +185,5 @@ namespace CadeOFogo.ViewModels
 
         [Display(Name = "Refiscalização :")]
         public string Refiscalizacao { get; set; }
-
     }
 }
