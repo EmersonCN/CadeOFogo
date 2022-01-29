@@ -88,6 +88,31 @@ namespace CadeOFogo.Data
                       PelotaoNome = "1º Pelotão de São José do Rio Preto",
                   }
               );
+
+            builder.Entity<Foco>().HasData(
+                 new Foco
+                 {
+                     FocoId = 1,
+                     FocoLongitude = (decimal)-21.109444964800694,
+                     FocoLatitude = (decimal)-49.0146791260056,
+                     FocoDataUtc = new DateTime(2022, 1, 1, 8, 30, 52),
+                     FocoAtendido = false,
+                     FocoConfirmado = true,
+                     SateliteId = 1,
+                     MunicipioId = 1,
+                     EstadoId = 1,
+                     SnapshotSatelite = null,
+                     DataSnapshot = new DateTime(2022, 1, 1, 8, 30, 52),
+                     SnapshotProvider = "2184dsadas",
+                     InpeFocoId = "15",
+                     StatusFocoId = 1,
+                     IndicioInicioFocoId = 1,
+                     CausadorProvavelId = 1,
+                     CausaFogoId = 1,
+                     ResponsavelPropriedadeId = 1
+
+                 }
+             ) ;
         }
   }
 }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CadeOFogo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220116182522_inicial")]
-    partial class inicial
+    [Migration("20220129154123_inicial3")]
+    partial class inicial3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -382,11 +382,11 @@ namespace CadeOFogo.Migrations
                     b.Property<string>("CanaDeAcucar")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CausaProvavel")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CausaFogoId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("CausadorProvavel")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CausadorProvavelId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Citrus")
                         .HasColumnType("nvarchar(max)");
@@ -423,8 +423,8 @@ namespace CadeOFogo.Migrations
                         .HasPrecision(13, 8)
                         .HasColumnType("decimal(13,8)");
 
-                    b.Property<string>("IndicioDeInicioDoFoco")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("IndicioInicioFocoId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Inicial")
                         .HasColumnType("nvarchar(max)");
@@ -527,8 +527,8 @@ namespace CadeOFogo.Migrations
                     b.Property<string>("Refiscalizacao")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ResponsavelPelaPropriedade")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ResponsavelPropriedadeId")
+                        .HasColumnType("int");
 
                     b.Property<int>("SateliteId")
                         .HasColumnType("int");
@@ -540,20 +540,53 @@ namespace CadeOFogo.Migrations
                     b.Property<byte[]>("SnapshotSatelite")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("StatusDoFoco")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("StatusFocoId")
+                        .HasColumnType("int");
 
                     b.HasKey("FocoId");
 
                     b.HasAlternateKey("FocoLatitude", "FocoLongitude", "FocoDataUtc", "SateliteId");
 
+                    b.HasIndex("CausaFogoId");
+
+                    b.HasIndex("CausadorProvavelId");
+
                     b.HasIndex("EstadoId");
+
+                    b.HasIndex("IndicioInicioFocoId");
 
                     b.HasIndex("MunicipioId");
 
+                    b.HasIndex("ResponsavelPropriedadeId");
+
                     b.HasIndex("SateliteId");
 
+                    b.HasIndex("StatusFocoId");
+
                     b.ToTable("Focos");
+
+                    b.HasData(
+                        new
+                        {
+                            FocoId = 1,
+                            CausaFogoId = 1,
+                            CausadorProvavelId = 1,
+                            DataAtendimento = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataSnapshot = new DateTime(2022, 1, 1, 8, 30, 52, 0, DateTimeKind.Unspecified),
+                            EstadoId = 1,
+                            FocoAtendido = false,
+                            FocoConfirmado = true,
+                            FocoDataUtc = new DateTime(2022, 1, 1, 8, 30, 52, 0, DateTimeKind.Unspecified),
+                            FocoLatitude = -49.0146791260056m,
+                            FocoLongitude = -21.1094449648007m,
+                            IndicioInicioFocoId = 1,
+                            InpeFocoId = "15",
+                            MunicipioId = 1,
+                            ResponsavelPropriedadeId = 1,
+                            SateliteId = 1,
+                            SnapshotProvider = "2184dsadas",
+                            StatusFocoId = 1
+                        });
                 });
 
             modelBuilder.Entity("CadeOFogo.Models.Inpe.IndicioInicioFoco", b =>
@@ -1025,9 +1058,27 @@ namespace CadeOFogo.Migrations
 
             modelBuilder.Entity("CadeOFogo.Models.Inpe.Foco", b =>
                 {
+                    b.HasOne("CadeOFogo.Models.Inpe.CausaFogo", "CausaFogo")
+                        .WithMany("FocoCollection")
+                        .HasForeignKey("CausaFogoId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("CadeOFogo.Models.Inpe.CausadorProvavel", "CausadorProvavel")
+                        .WithMany("FocoCollection")
+                        .HasForeignKey("CausadorProvavelId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("CadeOFogo.Models.Inpe.Estado", "Estado")
                         .WithMany("ListaDeFocos")
                         .HasForeignKey("EstadoId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("CadeOFogo.Models.Inpe.IndicioInicioFoco", "IndicioInicioFoco")
+                        .WithMany("FocoCollection")
+                        .HasForeignKey("IndicioInicioFocoId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -1037,17 +1088,39 @@ namespace CadeOFogo.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("CadeOFogo.Models.Inpe.ResponsavelPropriedade", "ResponsavelPropriedade")
+                        .WithMany("FocoCollection")
+                        .HasForeignKey("ResponsavelPropriedadeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("CadeOFogo.Models.Inpe.Satelite", "Satelite")
                         .WithMany("FocosCollection")
                         .HasForeignKey("SateliteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("CadeOFogo.Models.Inpe.StatusFoco", "StatusDoFoco")
+                        .WithMany("FocoCollection")
+                        .HasForeignKey("StatusFocoId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("CausadorProvavel");
+
+                    b.Navigation("CausaFogo");
+
                     b.Navigation("Estado");
+
+                    b.Navigation("IndicioInicioFoco");
 
                     b.Navigation("Municipio");
 
+                    b.Navigation("ResponsavelPropriedade");
+
                     b.Navigation("Satelite");
+
+                    b.Navigation("StatusDoFoco");
                 });
 
             modelBuilder.Entity("CadeOFogo.Models.Inpe.Municipio", b =>
@@ -1140,6 +1213,16 @@ namespace CadeOFogo.Migrations
                     b.Navigation("PelotaoCollection");
                 });
 
+            modelBuilder.Entity("CadeOFogo.Models.Inpe.CausaFogo", b =>
+                {
+                    b.Navigation("FocoCollection");
+                });
+
+            modelBuilder.Entity("CadeOFogo.Models.Inpe.CausadorProvavel", b =>
+                {
+                    b.Navigation("FocoCollection");
+                });
+
             modelBuilder.Entity("CadeOFogo.Models.Inpe.Companhia", b =>
                 {
                     b.Navigation("EquipeCollection");
@@ -1154,6 +1237,11 @@ namespace CadeOFogo.Migrations
                     b.Navigation("MunicipiosCollection");
                 });
 
+            modelBuilder.Entity("CadeOFogo.Models.Inpe.IndicioInicioFoco", b =>
+                {
+                    b.Navigation("FocoCollection");
+                });
+
             modelBuilder.Entity("CadeOFogo.Models.Inpe.Municipio", b =>
                 {
                     b.Navigation("ListaDeFocos");
@@ -1166,9 +1254,19 @@ namespace CadeOFogo.Migrations
                     b.Navigation("Usuarios");
                 });
 
+            modelBuilder.Entity("CadeOFogo.Models.Inpe.ResponsavelPropriedade", b =>
+                {
+                    b.Navigation("FocoCollection");
+                });
+
             modelBuilder.Entity("CadeOFogo.Models.Inpe.Satelite", b =>
                 {
                     b.Navigation("FocosCollection");
+                });
+
+            modelBuilder.Entity("CadeOFogo.Models.Inpe.StatusFoco", b =>
+                {
+                    b.Navigation("FocoCollection");
                 });
 #pragma warning restore 612, 618
         }

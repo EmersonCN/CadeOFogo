@@ -192,21 +192,95 @@ namespace CadeOFogo.Controllers
         .Include(f => f.Estado)
         .Include(f => f.Municipio)
         .Include(f => f.Satelite)
+        .Include(f => f.StatusDoFoco)
+        .Include(f => f.CausadorProvavel)
+        .Include(f => f.IndicioInicioFoco)
+        .Include(f => f.CausaFogo)
+        .Include(f => f.ResponsavelPropriedade)
         .FirstOrDefaultAsync(f => f.FocoId == id);
       if (foco == null) return NotFound();
 
-      var detalheFocoViewModel = new DetalheFocoViewModel
-      {
-        FocoId = foco.FocoId,
-        FocoDataUtc = foco.FocoDataUtc,
-        Coordenadas = foco.Coordenadas,
-        FocoAtendido = foco.FocoAtendido,
-        FocoConfirmado = foco.FocoConfirmado,
-        FocoIdInpe = foco.InpeFocoId,
-        //SnapshotSatelite = foco.SnapshotSatelite,
-        Satelite = foco.Satelite.SateliteNome,
-        Localidade = $"{foco.Municipio.MunicipioNome}, {foco.Estado.EstadoNome}"
-      };
+            var detalheFocoViewModel = new DetalheFocoViewModel
+            {
+                FocoId = foco.FocoId,
+                FocoDataUtc = foco.FocoDataUtc,
+                Coordenadas = foco.Coordenadas,
+                FocoAtendido = foco.FocoAtendido,
+                FocoConfirmado = foco.FocoConfirmado,
+                FocoIdInpe = foco.InpeFocoId,
+                //SnapshotSatelite = foco.SnapshotSatelite,
+                Satelite = foco.Satelite.SateliteNome,
+                Localidade = $"{foco.Municipio.MunicipioNome}, {foco.Estado.EstadoNome}",
+                Bioma = foco.Bioma,
+                Municipi = foco.Municipi,
+                PolicialResponsavel = foco.PolicialResponsavel,
+                OcorrênciaSIOPM = foco.OcorrênciaSIOPM,
+                NºBOPAmb = foco.NºBOPAmb,
+                NºTVA = foco.NºTVA,
+                RSO = foco.RSO,
+                DataAtendimento = foco.DataAtendimento,
+                StatusDoFoco = new SelectList(await _context.StatusFocos
+                  .OrderBy(c => c.StatusFocoDescricao).ToListAsync(),
+                      dataValueField: "StatusFocoId",
+                     dataTextField: "StatusFocoDescricao"),
+                IndicioDeInicioDoFoco = new SelectList(await _context.IndiciosInicioFoco
+                    .OrderBy(c => c.IndicioInicioFocoDescricao).ToListAsync(),
+                      dataValueField: "IndicioInicioFocoId",
+                     dataTextField: "IndicioInicioFocoDescricao"),
+                CausaFogo = new SelectList(await _context.CausasFogo
+                    .OrderBy(c => c.CausaFogoDescricao).ToListAsync(),
+                      dataValueField: "CausaFogoId",
+                     dataTextField: "CausaFogoDescricao"),
+                CausadorProvavel = new SelectList(await _context.CausadoresProvaveis
+                    .OrderBy(c => c.CausadorProvavelDescricacao).ToListAsync(),
+                      dataValueField: "CausadorProvavelId",
+                     dataTextField: "CausadorProvavelDescricacao"),
+                ResponsavelPelaPropriedade = new SelectList(await _context.ResponsaveisPropriedade
+                    .OrderBy(c => c.ResponsavelPropriedadeDescricao).ToListAsync(),
+                      dataValueField: "ResponsavelPropriedadeId",
+                     dataTextField: "ResponsavelPropriedadeDescricao"),
+                PioneiroAPPAreaEmHectares = foco.PioneiroAPPAreaEmHectares,
+                InicialAPPAreaEmHectares = foco.InicialAPPAreaEmHectares,
+                MedioAPPAreaEmHectares = foco.MedioAPPAreaEmHectares,
+                AvancadoAPPAreaEmHectares = foco.AvancadoAPPAreaEmHectares,
+                AutoDeInflacaoAmbientalAPP = foco.AutoDeInflacaoAmbientalAPP,
+                MultaAPP = foco.MultaAPP,
+                Pioneiro = foco.Pioneiro,
+                Inicial = foco.Inicial,
+                Medio = foco.Medio,
+                Avancado = foco.Avancado,
+                AutoDeInflacaoAmbiental = foco.AutoDeInflacaoAmbiental,
+                MultaR = foco.MultaR,
+                Pasto = foco.Pasto,
+                Citrus = foco.Citrus,
+                Outras = foco.Outras,
+                AutoDeInflacaoAmbientalV = foco.AutoDeInflacaoAmbientalV,
+                MultaV = foco.MultaV,
+                ArvoresIsoladas = foco.ArvoresIsoladas,
+                AutoDeInflacaoAmbientalA = foco.AutoDeInflacaoAmbientalA,
+                MultaA = foco.MultaA,
+                PalhaDeCana = foco.PalhaDeCana,
+                CanaDeAcucar = foco.CanaDeAcucar,
+                Autorizado = foco.Autorizado,
+                AutoDeInflacaoAmbientalL = foco.AutoDeInflacaoAmbientalL,
+                MultaL = foco.MultaL,
+                PioneiroUC = foco.PioneiroUC,
+                InicialUC = foco.InicialUC,
+                MedioUC = foco.MedioUC,
+                AvancadoUC = foco.AvancadoUC,
+                OutrasUC = foco.OutrasUC,
+                AutoDeInflacaoAmbientalUC = foco.AutoDeInflacaoAmbientalUC,
+                MultaUC = foco.MultaUC,
+                PioneiroRL = foco.PioneiroRL,
+                InicialRL = foco.InicialRL,
+                MedioRL = foco.MedioRL,
+                AvancadoRL = foco.AvancadoRL,
+                OutrasRL = foco.OutrasRL,
+                AutoDeInflacaoAmbientalRL = foco.AutoDeInflacaoAmbientalRL,
+                MultaRL = foco.MultaRL,
+                Refiscalizacao = foco.Refiscalizacao
+
+            };
 
       ViewBag.TemReverseGeocode = false;
       var reverseGeocode = _mapProvider.ReverseGeocode(foco.FocoLatitude, foco.FocoLongitude);
@@ -236,6 +310,11 @@ namespace CadeOFogo.Controllers
               .Include(f => f.Estado)
               .Include(f => f.Municipio)
               .Include(f => f.Satelite)
+              .Include(f => f.StatusDoFoco)
+              .Include(f => f.CausadorProvavel)
+              .Include(f => f.IndicioInicioFoco)
+              .Include(f => f.CausaFogo)
+              .Include(f => f.ResponsavelPropriedade)
               .FirstOrDefaultAsync(f => f.FocoId == id);
             if (foco == null) return NotFound();
 
@@ -244,6 +323,74 @@ namespace CadeOFogo.Controllers
                 FocoId = foco.FocoId,
                 FocoAtendido = foco.FocoAtendido,
                 FocoIdInpe = foco.InpeFocoId,
+                Bioma = foco.Bioma,
+                Municipi = foco.Municipi,
+                PolicialResponsavel = foco.PolicialResponsavel,
+                OcorrênciaSIOPM = foco.OcorrênciaSIOPM,
+                NºBOPAmb = foco.NºBOPAmb,
+                NºTVA = foco.NºTVA,
+                RSO = foco.RSO,
+                DataAtendimento = foco.DataAtendimento,
+                StatusDoFoco = new SelectList(await _context.StatusFocos
+                  .OrderBy(c => c.StatusFocoDescricao).ToListAsync(),
+                      dataValueField: "StatusFocoId",
+                     dataTextField: "StatusFocoDescricao"),
+                IndicioDeInicioDoFoco = new SelectList(await _context.IndiciosInicioFoco
+                    .OrderBy(c => c.IndicioInicioFocoDescricao).ToListAsync(),
+                      dataValueField: "IndicioInicioFocoId",
+                     dataTextField: "IndicioInicioFocoDescricao"),
+                CausaFogo = new SelectList(await _context.CausasFogo
+                    .OrderBy(c => c.CausaFogoDescricao).ToListAsync(),
+                      dataValueField: "CausaFogoId",
+                     dataTextField: "CausaFogoDescricao"),
+                CausadorProvavel = new SelectList(await _context.CausadoresProvaveis
+                    .OrderBy(c => c.CausadorProvavelDescricacao).ToListAsync(),
+                      dataValueField: "CausadorProvavelId",
+                     dataTextField: "CausadorProvavelDescricacao"),
+                ResponsavelPelaPropriedade = new SelectList(await _context.ResponsaveisPropriedade
+                    .OrderBy(c => c.ResponsavelPropriedadeDescricao).ToListAsync(),
+                      dataValueField: "ResponsavelPropriedadeId",
+                     dataTextField: "ResponsavelPropriedadeDescricao"),
+                PioneiroAPPAreaEmHectares = foco.PioneiroAPPAreaEmHectares,
+                InicialAPPAreaEmHectares = foco.InicialAPPAreaEmHectares,
+                MedioAPPAreaEmHectares = foco.MedioAPPAreaEmHectares,
+                AvancadoAPPAreaEmHectares = foco.AvancadoAPPAreaEmHectares,
+                AutoDeInflacaoAmbientalAPP = foco.AutoDeInflacaoAmbientalAPP,
+                MultaAPP = foco.MultaAPP,
+                Pioneiro = foco.Pioneiro,
+                Inicial = foco.Inicial,
+                Medio = foco.Medio,
+                Avancado = foco.Avancado,
+                AutoDeInflacaoAmbiental = foco.AutoDeInflacaoAmbiental,
+                MultaR = foco.MultaR,
+                Pasto = foco.Pasto,
+                Citrus = foco.Citrus,
+                Outras = foco.Outras,
+                AutoDeInflacaoAmbientalV = foco.AutoDeInflacaoAmbientalV,
+                MultaV = foco.MultaV,
+                ArvoresIsoladas = foco.ArvoresIsoladas,
+                AutoDeInflacaoAmbientalA = foco.AutoDeInflacaoAmbientalA,
+                MultaA = foco.MultaA,
+                PalhaDeCana = foco.PalhaDeCana,
+                CanaDeAcucar = foco.CanaDeAcucar,
+                Autorizado = foco.Autorizado,
+                AutoDeInflacaoAmbientalL = foco.AutoDeInflacaoAmbientalL,
+                MultaL = foco.MultaL,
+                PioneiroUC = foco.PioneiroUC,
+                InicialUC = foco.InicialUC,
+                MedioUC = foco.MedioUC,
+                AvancadoUC = foco.AvancadoUC,
+                OutrasUC = foco.OutrasUC,
+                AutoDeInflacaoAmbientalUC = foco.AutoDeInflacaoAmbientalUC,
+                MultaUC = foco.MultaUC,
+                PioneiroRL = foco.PioneiroRL,
+                InicialRL = foco.InicialRL,
+                MedioRL = foco.MedioRL,
+                AvancadoRL = foco.AvancadoRL,
+                OutrasRL = foco.OutrasRL,
+                AutoDeInflacaoAmbientalRL = foco.AutoDeInflacaoAmbientalRL,
+                MultaRL = foco.MultaRL,
+                Refiscalizacao = foco.Refiscalizacao
             };
 
             ViewBag.TemReverseGeocode = false;
@@ -287,11 +434,26 @@ namespace CadeOFogo.Controllers
                     NºTVA = foco.NºTVA,
                     RSO = foco.RSO,
                     DataAtendimento = foco.DataAtendimento,
-                    StatusDoFoco = foco.StatusDoFoco,
-                    IndicioDeInicioDoFoco = foco.IndicioDeInicioDoFoco,
-                    CausaProvavel = foco.CausaProvavel,
-                    CausadorProvavel = foco.CausadorProvavel,
-                    ResponsavelPelaPropriedade = foco.ResponsavelPelaPropriedade,
+                    StatusDoFoco = new SelectList(await _context.StatusFocos
+                    .OrderBy(c => c.StatusFocoDescricao).ToListAsync(),
+                      dataValueField: "StatusFocoId",
+                     dataTextField: "StatusFocoDescricao"),
+                    IndicioDeInicioDoFoco = new SelectList(await _context.IndiciosInicioFoco
+                    .OrderBy(c => c.IndicioInicioFocoDescricao).ToListAsync(),
+                      dataValueField: "IndicioInicioFocoId",
+                     dataTextField: "IndicioInicioFocoDescricao"),
+                    CausaFogo = new SelectList(await _context.CausasFogo
+                    .OrderBy(c => c.CausaFogoDescricao).ToListAsync(),
+                      dataValueField: "CausaFogoId",
+                     dataTextField: "CausaFogoDescricao"),
+                    CausadorProvavel = new SelectList(await _context.CausadoresProvaveis
+                    .OrderBy(c => c.CausadorProvavelDescricacao).ToListAsync(),
+                      dataValueField: "CausadorProvavelId",
+                     dataTextField: "CausadorProvavelDescricacao"),
+                    ResponsavelPelaPropriedade = new SelectList(await _context.ResponsaveisPropriedade
+                    .OrderBy(c => c.ResponsavelPropriedadeDescricao).ToListAsync(),
+                      dataValueField: "ResponsavelPropriedadeId",
+                     dataTextField: "ResponsavelPropriedadeDescricao"),
                     PioneiroAPPAreaEmHectares = foco.PioneiroAPPAreaEmHectares,
                     InicialAPPAreaEmHectares = foco.InicialAPPAreaEmHectares,
                     MedioAPPAreaEmHectares = foco.MedioAPPAreaEmHectares,
@@ -340,6 +502,11 @@ namespace CadeOFogo.Controllers
               .Include(p => p.Estado)
               .Include(p => p.Municipio)
               .Include(p => p.Satelite)
+              .Include(f => f.StatusDoFoco)
+              .Include(f => f.CausadorProvavel)
+              .Include(f => f.IndicioInicioFoco)
+              .Include(f => f.CausaFogo)
+              .Include(f => f.ResponsavelPropriedade)
               .FirstOrDefaultAsync(p => p.FocoId == foco.FocoId);
 
             if (focoOriginal.Bioma != foco.Bioma)
@@ -366,20 +533,55 @@ namespace CadeOFogo.Controllers
             if (focoOriginal.DataAtendimento != foco.DataAtendimento)
                 focoOriginal.DataAtendimento = foco.DataAtendimento;
 
-            if (focoOriginal.StatusDoFoco != foco.StatusDoFoco)
-                focoOriginal.StatusDoFoco = foco.StatusDoFoco;
+            if (focoOriginal.StatusFocoId != foco.StatusFocoId)
+            {
+                var statufoco = await _context.StatusFocos.FindAsync(foco.StatusFocoId);
 
-            if (focoOriginal.IndicioDeInicioDoFoco != foco.IndicioDeInicioDoFoco)
-                focoOriginal.IndicioDeInicioDoFoco = foco.IndicioDeInicioDoFoco;
+                if (statufoco == null)
+                    return NotFound();
 
-            if (focoOriginal.CausaProvavel != foco.CausaProvavel)
-                focoOriginal.CausaProvavel = foco.CausaProvavel;
+                focoOriginal.StatusDoFoco = statufoco;
+            }
 
-            if (focoOriginal.CausadorProvavel != foco.CausadorProvavel)
-                focoOriginal.CausadorProvavel = foco.CausadorProvavel;
+            if (focoOriginal.IndicioInicioFocoId != foco.IndicioInicioFocoId)
+            {
+                var iniciofoco = await _context.IndiciosInicioFoco.FindAsync(foco.IndicioInicioFocoId);
 
-            if (focoOriginal.ResponsavelPelaPropriedade != foco.ResponsavelPelaPropriedade)
-                focoOriginal.ResponsavelPelaPropriedade = foco.ResponsavelPelaPropriedade;
+                if (iniciofoco == null)
+                    return NotFound();
+
+                focoOriginal.IndicioInicioFoco = iniciofoco;
+            }
+
+            if (focoOriginal.CausaFogoId != foco.CausaFogoId)
+            {
+                var causafogo = await _context.CausasFogo.FindAsync(foco.CausaFogoId);
+
+                if (causafogo == null)
+                    return NotFound();
+
+                focoOriginal.CausaFogo = causafogo;
+            }
+
+            if (focoOriginal.CausadorProvavelId != foco.CausadorProvavelId)
+            {
+                var causaprovavel = await _context.CausadoresProvaveis.FindAsync(foco.CausadorProvavelId);
+
+                if (causaprovavel == null)
+                    return NotFound();
+
+                focoOriginal.CausadorProvavel = causaprovavel;
+            }
+
+            if (focoOriginal.ResponsavelPropriedadeId != foco.ResponsavelPropriedadeId)
+            {
+                var responsavel = await _context.ResponsaveisPropriedade.FindAsync(foco.ResponsavelPropriedadeId);
+
+                if (responsavel == null)
+                    return NotFound();
+
+                focoOriginal.ResponsavelPropriedade = responsavel;
+            }
 
             if (focoOriginal.PioneiroAPPAreaEmHectares != foco.PioneiroAPPAreaEmHectares)
                 focoOriginal.PioneiroAPPAreaEmHectares = foco.PioneiroAPPAreaEmHectares;

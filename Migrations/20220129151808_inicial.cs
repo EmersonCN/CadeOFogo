@@ -261,11 +261,11 @@ namespace CadeOFogo.Migrations
                     NºTVA = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RSO = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DataAtendimento = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    StatusDoFoco = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IndicioDeInicioDoFoco = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CausaProvavel = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CausadorProvavel = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ResponsavelPelaPropriedade = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StatusFocoId = table.Column<int>(type: "int", nullable: false),
+                    IndicioInicioFocoId = table.Column<int>(type: "int", nullable: false),
+                    CausaFogoId = table.Column<int>(type: "int", nullable: false),
+                    CausadorProvavelId = table.Column<int>(type: "int", nullable: false),
+                    ResponsavelPropriedadeId = table.Column<int>(type: "int", nullable: false),
                     PioneiroAPPAreaEmHectares = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     InicialAPPAreaEmHectares = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MedioAPPAreaEmHectares = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -312,21 +312,46 @@ namespace CadeOFogo.Migrations
                     table.PrimaryKey("PK_Focos", x => x.FocoId);
                     table.UniqueConstraint("AK_Focos_FocoLatitude_FocoLongitude_FocoDataUtc_SateliteId", x => new { x.FocoLatitude, x.FocoLongitude, x.FocoDataUtc, x.SateliteId });
                     table.ForeignKey(
+                        name: "FK_Focos_CausadoresProvaveis_CausadorProvavelId",
+                        column: x => x.CausadorProvavelId,
+                        principalTable: "CausadoresProvaveis",
+                        principalColumn: "CausadorProvavelId");
+                    table.ForeignKey(
+                        name: "FK_Focos_CausasFogo_CausaFogoId",
+                        column: x => x.CausaFogoId,
+                        principalTable: "CausasFogo",
+                        principalColumn: "CausaFogoId");
+                    table.ForeignKey(
                         name: "FK_Focos_Estados_EstadoId",
                         column: x => x.EstadoId,
                         principalTable: "Estados",
                         principalColumn: "EstadoId");
+                    table.ForeignKey(
+                        name: "FK_Focos_IndiciosInicioFoco_IndicioInicioFocoId",
+                        column: x => x.IndicioInicioFocoId,
+                        principalTable: "IndiciosInicioFoco",
+                        principalColumn: "IndicioInicioFocoId");
                     table.ForeignKey(
                         name: "FK_Focos_Municipios_MunicipioId",
                         column: x => x.MunicipioId,
                         principalTable: "Municipios",
                         principalColumn: "MunicipioId");
                     table.ForeignKey(
+                        name: "FK_Focos_ResponsaveisPropriedade_ResponsavelPropriedadeId",
+                        column: x => x.ResponsavelPropriedadeId,
+                        principalTable: "ResponsaveisPropriedade",
+                        principalColumn: "ResponsavelPropriedadeId");
+                    table.ForeignKey(
                         name: "FK_Focos_Satelites_SateliteId",
                         column: x => x.SateliteId,
                         principalTable: "Satelites",
                         principalColumn: "SateliteId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Focos_StatusFocos_StatusFocoId",
+                        column: x => x.StatusFocoId,
+                        principalTable: "StatusFocos",
+                        principalColumn: "StatusFocoId");
                 });
 
             migrationBuilder.CreateTable(
@@ -649,9 +674,24 @@ namespace CadeOFogo.Migrations
                 column: "PelotaoId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Focos_CausadorProvavelId",
+                table: "Focos",
+                column: "CausadorProvavelId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Focos_CausaFogoId",
+                table: "Focos",
+                column: "CausaFogoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Focos_EstadoId",
                 table: "Focos",
                 column: "EstadoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Focos_IndicioInicioFocoId",
+                table: "Focos",
+                column: "IndicioInicioFocoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Focos_MunicipioId",
@@ -659,9 +699,19 @@ namespace CadeOFogo.Migrations
                 column: "MunicipioId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Focos_ResponsavelPropriedadeId",
+                table: "Focos",
+                column: "ResponsavelPropriedadeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Focos_SateliteId",
                 table: "Focos",
                 column: "SateliteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Focos_StatusFocoId",
+                table: "Focos",
+                column: "StatusFocoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Municipios_EstadoId",
@@ -702,25 +752,10 @@ namespace CadeOFogo.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "CausadoresProvaveis");
-
-            migrationBuilder.DropTable(
-                name: "CausasFogo");
-
-            migrationBuilder.DropTable(
                 name: "Equipes");
 
             migrationBuilder.DropTable(
                 name: "Focos");
-
-            migrationBuilder.DropTable(
-                name: "IndiciosInicioFoco");
-
-            migrationBuilder.DropTable(
-                name: "ResponsaveisPropriedade");
-
-            migrationBuilder.DropTable(
-                name: "StatusFocos");
 
             migrationBuilder.DropTable(
                 name: "TiposVegetacao");
@@ -732,10 +767,25 @@ namespace CadeOFogo.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
+                name: "CausadoresProvaveis");
+
+            migrationBuilder.DropTable(
+                name: "CausasFogo");
+
+            migrationBuilder.DropTable(
+                name: "IndiciosInicioFoco");
+
+            migrationBuilder.DropTable(
                 name: "Municipios");
 
             migrationBuilder.DropTable(
+                name: "ResponsaveisPropriedade");
+
+            migrationBuilder.DropTable(
                 name: "Satelites");
+
+            migrationBuilder.DropTable(
+                name: "StatusFocos");
 
             migrationBuilder.DropTable(
                 name: "Pelotoes");

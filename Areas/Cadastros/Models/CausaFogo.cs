@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -18,7 +19,9 @@ namespace CadeOFogo.Models.Inpe
              ShortName = "Causa",
              Prompt = "Descrição...")]
     public string CausaFogoDescricao { get; set; }
-  }
+
+     public ICollection<Foco> FocoCollection { get; set; }
+    }
   
   public class CausaFogoConfiguration : IEntityTypeConfiguration<CausaFogo>
   {
@@ -30,7 +33,11 @@ namespace CadeOFogo.Models.Inpe
         .IsRequired()
         .HasMaxLength(80);
 
-      builder.HasData(
+            builder.HasMany(p => p.FocoCollection)
+                        .WithOne(p => p.CausaFogo)
+                        .HasForeignKey(p => p.CausaFogoId);
+
+            builder.HasData(
         new CausaFogo { CausaFogoId = 1, CausaFogoDescricao = "Desconhecida" },
         new CausaFogo { CausaFogoId = 2, CausaFogoDescricao = "Queima de Cana" },
         new CausaFogo { CausaFogoId = 3, CausaFogoDescricao = "Queima para Limpeza" },

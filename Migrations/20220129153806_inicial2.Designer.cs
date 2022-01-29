@@ -4,14 +4,16 @@ using CadeOFogo.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CadeOFogo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220129153806_inicial2")]
+    partial class inicial2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -570,7 +572,7 @@ namespace CadeOFogo.Migrations
                             CausaFogoId = 1,
                             CausadorProvavelId = 1,
                             DataAtendimento = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataSnapshot = new DateTime(2022, 1, 1, 8, 30, 52, 0, DateTimeKind.Unspecified),
+                            DataSnapshot = new DateTime(2022, 1, 28, 8, 30, 52, 0, DateTimeKind.Unspecified),
                             EstadoId = 1,
                             FocoAtendido = false,
                             FocoConfirmado = true,

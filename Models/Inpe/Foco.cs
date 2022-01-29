@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 using CadeOFogo.Utilities;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Newtonsoft.Json;
 
 namespace CadeOFogo.Models.Inpe
 {
-  public class Foco
+    public class Foco
   {
     public int FocoId { get; set; }
 
@@ -103,20 +101,20 @@ namespace CadeOFogo.Models.Inpe
         [Display(Name = "Data Atend.")]
         public DateTime DataAtendimento { get; set; }
 
-        [Display(Name = "Status Do Foco")]
-        public string StatusDoFoco { get; set; }
+        public int StatusFocoId { get; set; }
+        public StatusFoco StatusDoFoco { get; set; }
 
-        [Display(Name = "Indicios De Início Do Foco")]
-        public string IndicioDeInicioDoFoco { get; set; }
+        public int IndicioInicioFocoId { get; set; }
+        public IndicioInicioFoco IndicioInicioFoco { get; set; }
 
-        [Display(Name = "Causa Provável")]
-        public string CausaProvavel { get; set; }
+        public int CausaFogoId { get; set; }
+        public CausaFogo CausaFogo { get; set; }
 
-        [Display(Name = "Causador Provável")]
-        public string CausadorProvavel { get; set; }
+        public int CausadorProvavelId { get; set; }
+        public CausadorProvavel CausadorProvavel { get; set; }
 
-        [Display(Name = "Responsavel Pela Propriedade")]
-        public string ResponsavelPelaPropriedade { get; set; }
+        public int ResponsavelPropriedadeId { get; set; }
+        public ResponsavelPropriedade ResponsavelPropriedade { get; set; }
 
         [Display(Name = "Pioneiro (APP) - ÁREA EM HECTARES")]
         public string PioneiroAPPAreaEmHectares { get; set; }
@@ -279,6 +277,8 @@ namespace CadeOFogo.Models.Inpe
 
       builder.HasAlternateKey(f => new {f.FocoLatitude, f.FocoLongitude, f.FocoDataUtc, f.SateliteId});
 
+            
+
       builder.Property(f => f.FocoLongitude)
         .IsRequired()
         .HasPrecision(13, 8)
@@ -314,6 +314,7 @@ namespace CadeOFogo.Models.Inpe
         .IsRequired()
         .HasDefaultValue(true);
 
+
       builder.HasOne(f => f.Satelite)
         .WithMany(s => s.FocosCollection)
         .HasForeignKey(f => f.SateliteId);
@@ -325,6 +326,31 @@ namespace CadeOFogo.Models.Inpe
       builder.HasOne(f => f.Estado)
         .WithMany(e => e.ListaDeFocos)
         .OnDelete(DeleteBehavior.NoAction);
-    }
+
+            builder.HasOne(b => b.StatusDoFoco)
+                .WithMany(b => b.FocoCollection)
+                .HasForeignKey(b => b.StatusFocoId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne(b => b.IndicioInicioFoco)
+                .WithMany(b => b.FocoCollection)
+                .HasForeignKey(b => b.IndicioInicioFocoId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne(b => b.CausaFogo)
+                .WithMany(b => b.FocoCollection)
+                .HasForeignKey(b => b.CausaFogoId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne(b => b.CausadorProvavel)
+                .WithMany(b => b.FocoCollection)
+                .HasForeignKey(b => b.CausadorProvavelId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne(b => b.ResponsavelPropriedade)
+               .WithMany(b => b.FocoCollection)
+               .HasForeignKey(b => b.ResponsavelPropriedadeId)
+               .OnDelete(DeleteBehavior.NoAction);
+        }
   }
 }

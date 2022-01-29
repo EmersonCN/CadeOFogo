@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -18,7 +19,9 @@ namespace CadeOFogo.Models.Inpe
              ShortName = "Causador",
              Prompt = "Descrição...")]
     public string CausadorProvavelDescricacao { get; set; }
-  }
+
+        public ICollection<Foco> FocoCollection { get; set; }
+    }
   
   public class CausadorProvavelConfiguration : IEntityTypeConfiguration<CausadorProvavel>
   {
@@ -30,7 +33,11 @@ namespace CadeOFogo.Models.Inpe
         .IsRequired()
         .HasMaxLength(80);
 
-      builder.HasData(
+            builder.HasMany(p => p.FocoCollection)
+                        .WithOne(p => p.CausadorProvavel)
+                        .HasForeignKey(p => p.CausadorProvavelId);
+
+            builder.HasData(
         new CausadorProvavel {CausadorProvavelId = 1, CausadorProvavelDescricacao = "Funcionário"},
         new CausadorProvavel {CausadorProvavelId = 2, CausadorProvavelDescricacao = "Proprietário"},
         new CausadorProvavel {CausadorProvavelId = 3, CausadorProvavelDescricacao = "Outro Identificado"},

@@ -33,7 +33,7 @@ namespace CadeOFogo.Models.Inpe
     {
       var httpClient = new HttpClient();
       var uri = new Uri(
-        $"https://queimadas.dgi.inpe.br/queimadas/dados-abertos/api/auxiliar/municipios?pais_id=33&estado_id={estado.EstadoIdInpe}");
+        $"http://queimadas.dgi.inpe.br/api/auxiliar/municipios?pais_id=33&estado_id={estado.EstadoIdInpe}");
       try
       {
         var resposta = httpClient.GetStringAsync(uri).Result;

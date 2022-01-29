@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -18,7 +19,9 @@ namespace CadeOFogo.Models.Inpe
       ShortName = "Responsável",
       Prompt = "Responsável...")]
     public string ResponsavelPropriedadeDescricao { get; set; }
-  }
+
+        public ICollection<Foco> FocoCollection { get; set; }
+    }
   
   public class ResponsavelPropriedadeConfiguration : IEntityTypeConfiguration<ResponsavelPropriedade>
   {
@@ -30,7 +33,11 @@ namespace CadeOFogo.Models.Inpe
         .IsRequired()
         .HasMaxLength(80);
 
-      builder.HasData(
+            builder.HasMany(p => p.FocoCollection)
+                        .WithOne(p => p.ResponsavelPropriedade)
+                        .HasForeignKey(p => p.ResponsavelPropriedadeId);
+
+            builder.HasData(
         new ResponsavelPropriedade {ResponsavelPropriedadeId = 1, ResponsavelPropriedadeDescricao = "Não Informado no TVA/BO"},
         new ResponsavelPropriedade {ResponsavelPropriedadeId = 2, ResponsavelPropriedadeDescricao = "Proprietário Fornecedor"},
         new ResponsavelPropriedade {ResponsavelPropriedadeId = 3, ResponsavelPropriedadeDescricao = "Usina Arrendatário/Proprietária"},

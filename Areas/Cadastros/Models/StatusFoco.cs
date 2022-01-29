@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.Design.Serialization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -19,7 +20,9 @@ namespace CadeOFogo.Models.Inpe
       ShortName = "Situação",
       Prompt = "Situação do foco...")]
     public string StatusFocoDescricao { get; set; }
-  }
+
+        public ICollection<Foco> FocoCollection { get; set; }
+    }
   
   public class StatusFocoConfiguration : IEntityTypeConfiguration<StatusFoco>
   {
@@ -31,7 +34,11 @@ namespace CadeOFogo.Models.Inpe
         .IsRequired()
         .HasMaxLength(80);
 
-      builder.HasData(
+            builder.HasMany(p => p.FocoCollection)
+                        .WithOne(p => p.StatusDoFoco)
+                        .HasForeignKey(p => p.StatusFocoId);
+
+            builder.HasData(
         new StatusFoco {StatusFocoId = 1, StatusFocoDescricao = "Não encontrado"},
         new StatusFoco {StatusFocoId = 2, StatusFocoDescricao = "Sem nexo causalidade"},
         new StatusFoco {StatusFocoId = 3, StatusFocoDescricao = "Não autorizado"},

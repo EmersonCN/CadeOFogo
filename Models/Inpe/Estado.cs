@@ -29,7 +29,7 @@ namespace CadeOFogo.Models.Inpe
     public static List<ApiInpeEstados> AtualizaEstados()
     {
       var httpClient = new HttpClient();
-      var uri = new Uri("https://queimadas.dgi.inpe.br/queimadas/dados-abertos/api/auxiliar/estados?pais_id=33");
+      var uri = new Uri("http://queimadas.dgi.inpe.br/api/auxiliar/estados?pais_id=33");
       try
       {
         var resposta = httpClient.GetStringAsync(uri).Result;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CadeOFogo.ViewModels
 {
@@ -30,7 +31,8 @@ namespace CadeOFogo.ViewModels
     [Display(Name = "Mapa de localização do foco")]
     public byte[] SnapshotSatelite { get; set; }
     
-    [Display(Name = "Satélite")] public string Satelite { get; set; }
+    [Display(Name = "Satélite")]
+    public string Satelite { get; set; }
     
     [Display(Name = "Identificação do foco no INPE")]
     public string FocoIdInpe { get; set; }
@@ -67,20 +69,25 @@ namespace CadeOFogo.ViewModels
         [Display(Name = "Data Atendendimento :")]
         public DateTime DataAtendimento { get; set; }
 
+        public int StatusFocoId { get; set; }
         [Display(Name = "Status Do Foco :")]
-        public string StatusDoFoco { get; set; }
+        public SelectList StatusDoFoco { get; set; }
 
+        public int IndicioInicioFocoId { get; set; }
         [Display(Name = "Indicios De Início Do Foco :")]
-        public string IndicioDeInicioDoFoco { get; set; }
+        public SelectList IndicioDeInicioDoFoco { get; set; }
 
+        public int CausaFogoId { get; set; }
         [Display(Name = "Causa Provável :")]
-        public string CausaProvavel { get; set; }
+        public SelectList CausaFogo { get; set; }
 
+        public int CausadorProvavelId { get; set; }
         [Display(Name = "Causador Provável : ")]
-        public string CausadorProvavel { get; set; }
+        public SelectList CausadorProvavel { get; set; }
 
+        public int ResponsavelPropriedadeId { get; set; }
         [Display(Name = "Responsavel Pela Propriedade :")]
-        public string ResponsavelPelaPropriedade { get; set; }
+        public SelectList ResponsavelPelaPropriedade { get; set; }
 
         [Display(Name = "Pioneiro (APP) - ÁREA EM HECTARES :")]
         public string PioneiroAPPAreaEmHectares { get; set; }

@@ -78,7 +78,7 @@ namespace CadeOFogo.Services
         msg = $"Recuperando os focos de {estado.EstadoNome}";
         _logger.LogInformation(msg);
 
-        var uri = new Uri($"https://queimadas.dgi.inpe.br/queimadas/dados-abertos/api/focos/?pais_id=33&estado_id={estado.EstadoIdInpe}");
+        var uri = new Uri($"http://queimadas.dgi.inpe.br/api/focos/?pais_id=33&estado_id={estado.EstadoIdInpe}");
         List<ApiInpeFocos> focosFromInpe;
         try
         {

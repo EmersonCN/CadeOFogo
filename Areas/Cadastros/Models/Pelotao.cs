@@ -1,12 +1,8 @@
 ﻿using CadeOFogo.Areas.Cadastros.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using X.PagedList;
 
 namespace CadeOFogo.Models.Inpe
 {
