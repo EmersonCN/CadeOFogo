@@ -329,17 +329,14 @@ namespace CadeOFogo.Models.Inpe
 
             builder.HasOne(b => b.StatusDoFoco)
                 .WithMany(b => b.FocoCollection)
-                .HasForeignKey(b => b.StatusFocoId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(b => b.IndicioInicioFoco)
-                .WithMany(b => b.FocoCollection)
-                .HasForeignKey(b => b.IndicioInicioFocoId)
+                .WithMany(b => b.FocoCollection)               
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(b => b.CausaFogo)
                 .WithMany(b => b.FocoCollection)
-                .HasForeignKey(b => b.CausaFogoId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(b => b.CausadorProvavel)
@@ -349,7 +346,6 @@ namespace CadeOFogo.Models.Inpe
 
             builder.HasOne(b => b.ResponsavelPropriedade)
                .WithMany(b => b.FocoCollection)
-               .HasForeignKey(b => b.ResponsavelPropriedadeId)
                .OnDelete(DeleteBehavior.NoAction);
         }
   }

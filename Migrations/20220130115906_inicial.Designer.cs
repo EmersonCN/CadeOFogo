@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CadeOFogo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220129154123_inicial3")]
-    partial class inicial3
+    [Migration("20220130115906_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -564,29 +564,6 @@ namespace CadeOFogo.Migrations
                     b.HasIndex("StatusFocoId");
 
                     b.ToTable("Focos");
-
-                    b.HasData(
-                        new
-                        {
-                            FocoId = 1,
-                            CausaFogoId = 1,
-                            CausadorProvavelId = 1,
-                            DataAtendimento = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataSnapshot = new DateTime(2022, 1, 1, 8, 30, 52, 0, DateTimeKind.Unspecified),
-                            EstadoId = 1,
-                            FocoAtendido = false,
-                            FocoConfirmado = true,
-                            FocoDataUtc = new DateTime(2022, 1, 1, 8, 30, 52, 0, DateTimeKind.Unspecified),
-                            FocoLatitude = -49.0146791260056m,
-                            FocoLongitude = -21.1094449648007m,
-                            IndicioInicioFocoId = 1,
-                            InpeFocoId = "15",
-                            MunicipioId = 1,
-                            ResponsavelPropriedadeId = 1,
-                            SateliteId = 1,
-                            SnapshotProvider = "2184dsadas",
-                            StatusFocoId = 1
-                        });
                 });
 
             modelBuilder.Entity("CadeOFogo.Models.Inpe.IndicioInicioFoco", b =>

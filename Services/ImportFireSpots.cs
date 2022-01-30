@@ -71,6 +71,7 @@ namespace CadeOFogo.Services
       var estados = dbContext.Estados.Where(e => e.Monitorado).ToList();
       var satelites = dbContext.Satelites.Where(s => s.Monitorado).ToList();
 
+
       // Para cada estado
       string msg;
       foreach (var estado in estados)
@@ -78,7 +79,7 @@ namespace CadeOFogo.Services
         msg = $"Recuperando os focos de {estado.EstadoNome}";
         _logger.LogInformation(msg);
 
-        var uri = new Uri($"http://queimadas.dgi.inpe.br/api/focos/?pais_id=33&estado_id={estado.EstadoIdInpe}");
+        var uri = new Uri($"http://queimadas.dgi.inpe.br/api/focos/?pais_id=33");
         List<ApiInpeFocos> focosFromInpe;
         try
         {
@@ -147,6 +148,11 @@ namespace CadeOFogo.Services
               SnapshotSatelite = null,
               DataSnapshot = DateTime.MinValue,
               SnapshotProvider = null,
+              CausadorProvavelId = 4,
+              CausaFogoId = 1,
+              ResponsavelPropriedadeId = 1,
+              StatusFocoId = 1,
+              IndicioInicioFocoId = 3
             };
             
             if (_configuration.GetValue<bool>("PrefetchImages"))
