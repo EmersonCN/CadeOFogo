@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CadeOFogo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220129154123_inicial3")]
-    partial class inicial3
+    [Migration("20220130174330_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,6 +57,17 @@ namespace CadeOFogo.Migrations
                     b.HasIndex("PelotaoId");
 
                     b.ToTable("Equipes");
+
+                    b.HasData(
+                        new
+                        {
+                            EquipeId = 1,
+                            Ativa = false,
+                            BatalhaoId = 1,
+                            CompanhiaId = 1,
+                            EquipeNome = "Norte ",
+                            PelotaoId = 1
+                        });
                 });
 
             modelBuilder.Entity("CadeOFogo.Models.Inpe.ApplicationUser", b =>
@@ -398,6 +409,9 @@ namespace CadeOFogo.Migrations
                         .HasPrecision(0)
                         .HasColumnType("datetime2(0)");
 
+                    b.Property<int>("EquipeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("EstadoId")
                         .HasColumnType("int");
 
@@ -551,6 +565,8 @@ namespace CadeOFogo.Migrations
 
                     b.HasIndex("CausadorProvavelId");
 
+                    b.HasIndex("EquipeId");
+
                     b.HasIndex("EstadoId");
 
                     b.HasIndex("IndicioInicioFocoId");
@@ -564,29 +580,6 @@ namespace CadeOFogo.Migrations
                     b.HasIndex("StatusFocoId");
 
                     b.ToTable("Focos");
-
-                    b.HasData(
-                        new
-                        {
-                            FocoId = 1,
-                            CausaFogoId = 1,
-                            CausadorProvavelId = 1,
-                            DataAtendimento = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DataSnapshot = new DateTime(2022, 1, 1, 8, 30, 52, 0, DateTimeKind.Unspecified),
-                            EstadoId = 1,
-                            FocoAtendido = false,
-                            FocoConfirmado = true,
-                            FocoDataUtc = new DateTime(2022, 1, 1, 8, 30, 52, 0, DateTimeKind.Unspecified),
-                            FocoLatitude = -49.0146791260056m,
-                            FocoLongitude = -21.1094449648007m,
-                            IndicioInicioFocoId = 1,
-                            InpeFocoId = "15",
-                            MunicipioId = 1,
-                            ResponsavelPropriedadeId = 1,
-                            SateliteId = 1,
-                            SnapshotProvider = "2184dsadas",
-                            StatusFocoId = 1
-                        });
                 });
 
             modelBuilder.Entity("CadeOFogo.Models.Inpe.IndicioInicioFoco", b =>
@@ -1070,6 +1063,12 @@ namespace CadeOFogo.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("CadeOFogo.Areas.Cadastros.Models.Equipe", "Equipe")
+                        .WithMany("FocoCollection")
+                        .HasForeignKey("EquipeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("CadeOFogo.Models.Inpe.Estado", "Estado")
                         .WithMany("ListaDeFocos")
                         .HasForeignKey("EstadoId")
@@ -1109,6 +1108,8 @@ namespace CadeOFogo.Migrations
                     b.Navigation("CausadorProvavel");
 
                     b.Navigation("CausaFogo");
+
+                    b.Navigation("Equipe");
 
                     b.Navigation("Estado");
 
@@ -1202,6 +1203,11 @@ namespace CadeOFogo.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CadeOFogo.Areas.Cadastros.Models.Equipe", b =>
+                {
+                    b.Navigation("FocoCollection");
                 });
 
             modelBuilder.Entity("CadeOFogo.Models.Inpe.Batalhao", b =>

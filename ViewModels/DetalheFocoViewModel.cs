@@ -69,6 +69,10 @@ namespace CadeOFogo.ViewModels
         [Display(Name = "Data Atendendimento :")]
         public DateTime DataAtendimento { get; set; }
 
+        public int EquipeId { get; set; }
+        [Display(Name = "Equipe :")]
+        public string EquipeNome { get; set; }
+
         public int StatusFocoId { get; set; }
         [Display(Name = "Status Do Foco :")]
         public string StatusFocoDescricao { get; set; }

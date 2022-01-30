@@ -30,6 +30,7 @@ namespace CadeOFogo.Areas.Cadastros.Models
 
         public ApplicationUser ApplicationUser { get; set; }
 
+        public ICollection<Foco> FocoCollection { get; set; }
     }
 
    
@@ -55,7 +56,20 @@ namespace CadeOFogo.Areas.Cadastros.Models
                 .HasForeignKey(c => c.PelotaoId)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            builder.HasMany(p => p.FocoCollection)
+                        .WithOne(p => p.Equipe)
+                        .HasForeignKey(p => p.EquipeId);
 
+            builder.HasData(
+                new Equipe
+                {
+                    EquipeId = 1,
+                    EquipeNome = "Norte ",
+                    PelotaoId = 1,
+                    CompanhiaId = 1,
+                    BatalhaoId = 1
+                }
+             );
         }
     }
 }

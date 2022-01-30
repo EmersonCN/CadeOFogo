@@ -236,125 +236,6 @@ namespace CadeOFogo.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Focos",
-                columns: table => new
-                {
-                    FocoId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FocoLongitude = table.Column<decimal>(type: "decimal(13,8)", precision: 13, scale: 8, nullable: false),
-                    FocoLatitude = table.Column<decimal>(type: "decimal(13,8)", precision: 13, scale: 8, nullable: false),
-                    FocoDataUtc = table.Column<DateTime>(type: "datetime2(0)", precision: 0, nullable: false),
-                    FocoAtendido = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    FocoConfirmado = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
-                    SateliteId = table.Column<int>(type: "int", nullable: false),
-                    MunicipioId = table.Column<int>(type: "int", nullable: false),
-                    EstadoId = table.Column<int>(type: "int", nullable: false),
-                    SnapshotSatelite = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    DataSnapshot = table.Column<DateTime>(type: "datetime2(0)", precision: 0, nullable: false),
-                    SnapshotProvider = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
-                    InpeFocoId = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
-                    Bioma = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Municipi = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PolicialResponsavel = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OcorrênciaSIOPM = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NºBOPAmb = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NºTVA = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RSO = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DataAtendimento = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    StatusFocoId = table.Column<int>(type: "int", nullable: false),
-                    IndicioInicioFocoId = table.Column<int>(type: "int", nullable: false),
-                    CausaFogoId = table.Column<int>(type: "int", nullable: false),
-                    CausadorProvavelId = table.Column<int>(type: "int", nullable: false),
-                    ResponsavelPropriedadeId = table.Column<int>(type: "int", nullable: false),
-                    PioneiroAPPAreaEmHectares = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    InicialAPPAreaEmHectares = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MedioAPPAreaEmHectares = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AvancadoAPPAreaEmHectares = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AutoDeInflacaoAmbientalAPP = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MultaAPP = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Pioneiro = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Inicial = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Medio = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Avancado = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AutoDeInflacaoAmbiental = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MultaR = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Pasto = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Citrus = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Outras = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AutoDeInflacaoAmbientalV = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MultaV = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ArvoresIsoladas = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AutoDeInflacaoAmbientalA = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MultaA = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PalhaDeCana = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CanaDeAcucar = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Autorizado = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AutoDeInflacaoAmbientalL = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MultaL = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PioneiroUC = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    InicialUC = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MedioUC = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AvancadoUC = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OutrasUC = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AutoDeInflacaoAmbientalUC = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MultaUC = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PioneiroRL = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    InicialRL = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MedioRL = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AvancadoRL = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OutrasRL = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AutoDeInflacaoAmbientalRL = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MultaRL = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Refiscalizacao = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Focos", x => x.FocoId);
-                    table.UniqueConstraint("AK_Focos_FocoLatitude_FocoLongitude_FocoDataUtc_SateliteId", x => new { x.FocoLatitude, x.FocoLongitude, x.FocoDataUtc, x.SateliteId });
-                    table.ForeignKey(
-                        name: "FK_Focos_CausadoresProvaveis_CausadorProvavelId",
-                        column: x => x.CausadorProvavelId,
-                        principalTable: "CausadoresProvaveis",
-                        principalColumn: "CausadorProvavelId");
-                    table.ForeignKey(
-                        name: "FK_Focos_CausasFogo_CausaFogoId",
-                        column: x => x.CausaFogoId,
-                        principalTable: "CausasFogo",
-                        principalColumn: "CausaFogoId");
-                    table.ForeignKey(
-                        name: "FK_Focos_Estados_EstadoId",
-                        column: x => x.EstadoId,
-                        principalTable: "Estados",
-                        principalColumn: "EstadoId");
-                    table.ForeignKey(
-                        name: "FK_Focos_IndiciosInicioFoco_IndicioInicioFocoId",
-                        column: x => x.IndicioInicioFocoId,
-                        principalTable: "IndiciosInicioFoco",
-                        principalColumn: "IndicioInicioFocoId");
-                    table.ForeignKey(
-                        name: "FK_Focos_Municipios_MunicipioId",
-                        column: x => x.MunicipioId,
-                        principalTable: "Municipios",
-                        principalColumn: "MunicipioId");
-                    table.ForeignKey(
-                        name: "FK_Focos_ResponsaveisPropriedade_ResponsavelPropriedadeId",
-                        column: x => x.ResponsavelPropriedadeId,
-                        principalTable: "ResponsaveisPropriedade",
-                        principalColumn: "ResponsavelPropriedadeId");
-                    table.ForeignKey(
-                        name: "FK_Focos_Satelites_SateliteId",
-                        column: x => x.SateliteId,
-                        principalTable: "Satelites",
-                        principalColumn: "SateliteId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Focos_StatusFocos_StatusFocoId",
-                        column: x => x.StatusFocoId,
-                        principalTable: "StatusFocos",
-                        principalColumn: "StatusFocoId");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
@@ -512,6 +393,131 @@ namespace CadeOFogo.Migrations
                         principalColumn: "PelotaoId");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Focos",
+                columns: table => new
+                {
+                    FocoId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FocoLongitude = table.Column<decimal>(type: "decimal(13,8)", precision: 13, scale: 8, nullable: false),
+                    FocoLatitude = table.Column<decimal>(type: "decimal(13,8)", precision: 13, scale: 8, nullable: false),
+                    FocoDataUtc = table.Column<DateTime>(type: "datetime2(0)", precision: 0, nullable: false),
+                    FocoAtendido = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    FocoConfirmado = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
+                    SateliteId = table.Column<int>(type: "int", nullable: false),
+                    MunicipioId = table.Column<int>(type: "int", nullable: false),
+                    EstadoId = table.Column<int>(type: "int", nullable: false),
+                    SnapshotSatelite = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    DataSnapshot = table.Column<DateTime>(type: "datetime2(0)", precision: 0, nullable: false),
+                    SnapshotProvider = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
+                    InpeFocoId = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    Bioma = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Municipi = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PolicialResponsavel = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OcorrênciaSIOPM = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NºBOPAmb = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NºTVA = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RSO = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DataAtendimento = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EquipeId = table.Column<int>(type: "int", nullable: false),
+                    StatusFocoId = table.Column<int>(type: "int", nullable: false),
+                    IndicioInicioFocoId = table.Column<int>(type: "int", nullable: false),
+                    CausaFogoId = table.Column<int>(type: "int", nullable: false),
+                    CausadorProvavelId = table.Column<int>(type: "int", nullable: false),
+                    ResponsavelPropriedadeId = table.Column<int>(type: "int", nullable: false),
+                    PioneiroAPPAreaEmHectares = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    InicialAPPAreaEmHectares = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MedioAPPAreaEmHectares = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AvancadoAPPAreaEmHectares = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AutoDeInflacaoAmbientalAPP = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MultaAPP = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Pioneiro = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Inicial = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Medio = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Avancado = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AutoDeInflacaoAmbiental = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MultaR = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Pasto = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Citrus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Outras = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AutoDeInflacaoAmbientalV = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MultaV = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ArvoresIsoladas = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AutoDeInflacaoAmbientalA = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MultaA = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PalhaDeCana = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CanaDeAcucar = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Autorizado = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AutoDeInflacaoAmbientalL = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MultaL = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PioneiroUC = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    InicialUC = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MedioUC = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AvancadoUC = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OutrasUC = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AutoDeInflacaoAmbientalUC = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MultaUC = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PioneiroRL = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    InicialRL = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MedioRL = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AvancadoRL = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OutrasRL = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AutoDeInflacaoAmbientalRL = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MultaRL = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Refiscalizacao = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Focos", x => x.FocoId);
+                    table.UniqueConstraint("AK_Focos_FocoLatitude_FocoLongitude_FocoDataUtc_SateliteId", x => new { x.FocoLatitude, x.FocoLongitude, x.FocoDataUtc, x.SateliteId });
+                    table.ForeignKey(
+                        name: "FK_Focos_CausadoresProvaveis_CausadorProvavelId",
+                        column: x => x.CausadorProvavelId,
+                        principalTable: "CausadoresProvaveis",
+                        principalColumn: "CausadorProvavelId");
+                    table.ForeignKey(
+                        name: "FK_Focos_CausasFogo_CausaFogoId",
+                        column: x => x.CausaFogoId,
+                        principalTable: "CausasFogo",
+                        principalColumn: "CausaFogoId");
+                    table.ForeignKey(
+                        name: "FK_Focos_Equipes_EquipeId",
+                        column: x => x.EquipeId,
+                        principalTable: "Equipes",
+                        principalColumn: "EquipeId");
+                    table.ForeignKey(
+                        name: "FK_Focos_Estados_EstadoId",
+                        column: x => x.EstadoId,
+                        principalTable: "Estados",
+                        principalColumn: "EstadoId");
+                    table.ForeignKey(
+                        name: "FK_Focos_IndiciosInicioFoco_IndicioInicioFocoId",
+                        column: x => x.IndicioInicioFocoId,
+                        principalTable: "IndiciosInicioFoco",
+                        principalColumn: "IndicioInicioFocoId");
+                    table.ForeignKey(
+                        name: "FK_Focos_Municipios_MunicipioId",
+                        column: x => x.MunicipioId,
+                        principalTable: "Municipios",
+                        principalColumn: "MunicipioId");
+                    table.ForeignKey(
+                        name: "FK_Focos_ResponsaveisPropriedade_ResponsavelPropriedadeId",
+                        column: x => x.ResponsavelPropriedadeId,
+                        principalTable: "ResponsaveisPropriedade",
+                        principalColumn: "ResponsavelPropriedadeId");
+                    table.ForeignKey(
+                        name: "FK_Focos_Satelites_SateliteId",
+                        column: x => x.SateliteId,
+                        principalTable: "Satelites",
+                        principalColumn: "SateliteId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Focos_StatusFocos_StatusFocoId",
+                        column: x => x.StatusFocoId,
+                        principalTable: "StatusFocos",
+                        principalColumn: "StatusFocoId");
+                });
+
             migrationBuilder.InsertData(
                 table: "Batalhoes",
                 columns: new[] { "BatalhaoId", "NomeBatalhao" },
@@ -604,6 +610,11 @@ namespace CadeOFogo.Migrations
                 columns: new[] { "PelotaoId", "BatalhaoId", "CompanhiaId", "PelotaoNome" },
                 values: new object[] { 1, 1, 1, "1º Pelotão de São José do Rio Preto" });
 
+            migrationBuilder.InsertData(
+                table: "Equipes",
+                columns: new[] { "EquipeId", "ApplicationUserId", "Ativa", "BatalhaoId", "CompanhiaId", "EquipeNome", "PelotaoId" },
+                values: new object[] { 1, null, false, 1, 1, "Norte ", 1 });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -684,6 +695,11 @@ namespace CadeOFogo.Migrations
                 column: "CausaFogoId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Focos_EquipeId",
+                table: "Focos",
+                column: "EquipeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Focos_EstadoId",
                 table: "Focos",
                 column: "EstadoId");
@@ -752,9 +768,6 @@ namespace CadeOFogo.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Equipes");
-
-            migrationBuilder.DropTable(
                 name: "Focos");
 
             migrationBuilder.DropTable(
@@ -764,13 +777,13 @@ namespace CadeOFogo.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "CausadoresProvaveis");
 
             migrationBuilder.DropTable(
                 name: "CausasFogo");
+
+            migrationBuilder.DropTable(
+                name: "Equipes");
 
             migrationBuilder.DropTable(
                 name: "IndiciosInicioFoco");
@@ -788,10 +801,13 @@ namespace CadeOFogo.Migrations
                 name: "StatusFocos");
 
             migrationBuilder.DropTable(
-                name: "Pelotoes");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Estados");
+
+            migrationBuilder.DropTable(
+                name: "Pelotoes");
 
             migrationBuilder.DropTable(
                 name: "Companhias");

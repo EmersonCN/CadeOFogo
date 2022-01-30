@@ -197,6 +197,7 @@ namespace CadeOFogo.Controllers
         .Include(f => f.IndicioInicioFoco)
         .Include(f => f.CausaFogo)
         .Include(f => f.ResponsavelPropriedade)
+        .Include(f => f.Equipe)
         .FirstOrDefaultAsync(f => f.FocoId == id);
       if (foco == null) return NotFound();
 
@@ -219,6 +220,7 @@ namespace CadeOFogo.Controllers
                 NºTVA = foco.NºTVA,
                 RSO = foco.RSO,
                 DataAtendimento = foco.DataAtendimento,
+                EquipeNome = foco.Equipe.EquipeNome,
                 StatusFocoDescricao = foco.StatusDoFoco.StatusFocoDescricao,
                 IndicioInicioFocoDescricao = foco.IndicioInicioFoco.IndicioInicioFocoDescricao,
                 CausaFogoDescricao = foco.CausaFogo.CausaFogoDescricao,
@@ -300,6 +302,7 @@ namespace CadeOFogo.Controllers
               .Include(f => f.IndicioInicioFoco)
               .Include(f => f.CausaFogo)
               .Include(f => f.ResponsavelPropriedade)
+              .Include(f => f.Equipe)
               .FirstOrDefaultAsync(f => f.FocoId == id);
             if (foco == null) return NotFound();
 
@@ -316,6 +319,10 @@ namespace CadeOFogo.Controllers
                 NºTVA = foco.NºTVA,
                 RSO = foco.RSO,
                 DataAtendimento = foco.DataAtendimento,
+                Equipe = new SelectList(await _context.Equipes
+                  .OrderBy(c => c.EquipeNome).ToListAsync(),
+                      dataValueField: "EquipeId",
+                     dataTextField: "EquipeNome"),
                 StatusDoFoco = new SelectList(await _context.StatusFocos
                   .OrderBy(c => c.StatusFocoDescricao).ToListAsync(),
                       dataValueField: "StatusFocoId",
@@ -419,6 +426,10 @@ namespace CadeOFogo.Controllers
                     NºTVA = foco.NºTVA,
                     RSO = foco.RSO,
                     DataAtendimento = foco.DataAtendimento,
+                    Equipe = new SelectList(await _context.Equipes
+                    .OrderBy(c => c.EquipeNome).ToListAsync(),
+                      dataValueField: "EquipeId",
+                     dataTextField: "EquipeNome"),
                     StatusDoFoco = new SelectList(await _context.StatusFocos
                     .OrderBy(c => c.StatusFocoDescricao).ToListAsync(),
                       dataValueField: "StatusFocoId",
@@ -492,6 +503,7 @@ namespace CadeOFogo.Controllers
               .Include(f => f.IndicioInicioFoco)
               .Include(f => f.CausaFogo)
               .Include(f => f.ResponsavelPropriedade)
+              .Include(f => f.Equipe)
               .FirstOrDefaultAsync(p => p.FocoId == foco.FocoId);
 
             if (focoOriginal.Bioma != foco.Bioma)
@@ -517,6 +529,16 @@ namespace CadeOFogo.Controllers
 
             if (focoOriginal.DataAtendimento != foco.DataAtendimento)
                 focoOriginal.DataAtendimento = foco.DataAtendimento;
+
+            if (focoOriginal.EquipeId != foco.EquipeId)
+            {
+                var equipe = await _context.Equipes.FindAsync(foco.EquipeId);
+
+                if (equipe == null)
+                    return NotFound();
+
+                focoOriginal.Equipe = equipe;
+            }
 
             if (focoOriginal.StatusFocoId != foco.StatusFocoId)
             {

@@ -29,6 +29,8 @@
 
                     @if (Model.FocoAtendido)
                     {
+                        <dt class="col-6"><label asp-for="EquipeNome" class="control-label"></label></dt>
+                        <dd class="col-6">@Model.EquipeNome</dd>
                         <dt class="col-6"><label asp-for="Bioma" class="control-label"></label></dt>
                         <dd class="col-6">@Model.Bioma</dd>
                         <dt class="col-6"><label asp-for="Municipi" class="control-label"></label></dt>

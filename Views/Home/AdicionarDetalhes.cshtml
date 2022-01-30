@@ -17,6 +17,15 @@
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <input type="hidden" asp-for="FocoId" />
                                 <div class="col-md-6">
+                                    <label asp-for="Equipe" class="control-label"></label>
+                                    <select asp-for="EquipeId" asp-items="@Model.Equipe" class="form-control">
+                                        <option value="0" disabled>-- Selecione a Equipe --</option>
+                                    </select>
+                                    <span asp-validation-for="StatusDoFoco" class="text-danger"></span>
+                                </div>
+                            </div><br />
+                            <div class="row">
+                                <div class="col-md-6">
                                     <label asp-for="Bioma" class="control-label"></label>
                                     <input asp-for="Bioma" class="form-control" />
                                     <span asp-validation-for="Bioma" class="text-danger"></span>
