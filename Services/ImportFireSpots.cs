@@ -148,12 +148,6 @@ namespace CadeOFogo.Services
               SnapshotSatelite = null,
               DataSnapshot = DateTime.MinValue,
               SnapshotProvider = null,
-              CausadorProvavelId = 4,
-              CausaFogoId = 1,
-              ResponsavelPropriedadeId = 1,
-              StatusFocoId = 1,
-              IndicioInicioFocoId = 3,
-              EquipeId = 1
             };
             
             if (_configuration.GetValue<bool>("PrefetchImages"))
