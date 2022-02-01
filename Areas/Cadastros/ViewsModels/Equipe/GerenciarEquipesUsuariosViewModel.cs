@@ -8,7 +8,7 @@ namespace CadeOFogo.Areas.Cadastros.ViewsModels.Equipe
 {
     public class GerenciarEquipesUsuariosViewModel
     {
-        public string UserId {get; set; }
+        public string ApplicationUserUserId { get; set; }
         [Display(Name = "Usuario")]
         public string UserNome { get; set; }
 

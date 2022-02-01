@@ -41,7 +41,7 @@
                 <br />
                 <label asp-for="UsuarioInputSelect" class="control-label"></label>
                 <br />
-                <select asp-for="UserId" asp-items="@Model.UsuarioInputSelect">
+                <select asp-for="ApplicationUserUserId" asp-items="@Model.UsuarioInputSelect">
                     <option value="0" disabled>-- Selecione uma usuario --</option>
                 </select>
                 <span asp-validation-for="UsuarioInputSelect" class="text-danger"></span>

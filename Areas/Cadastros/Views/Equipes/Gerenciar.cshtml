@@ -14,7 +14,7 @@
             @for (var i = 0; i < Model.Count; i++)
             {
                 <div class="form-check">
-                    <input type="hidden" asp-for="@Model[i].UserId" />
+                    <input type="hidden" asp-for="@Model[i].ApplicationUserUserId" />
                     <input type="hidden" asp-for="@Model[i].UserNome" />
                     <input asp-for="@Model[i].Selecionado" class="form-check-input" />
                     <label class="form-check-label" asp-for="@Model[i].Selecionado">@Model[i].UserNome</label>

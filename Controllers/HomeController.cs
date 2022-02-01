@@ -85,6 +85,97 @@ namespace CadeOFogo.Controllers
       return Json(resposta);
     }
 
+        public async Task<IActionResult> Relatorio(string dataInicio, string dataFinal, 
+          int? equipe, int? page)
+        {
+            var provider = CultureInfo.InvariantCulture;
+
+            IQueryable<Foco> dataset = _context.Focos
+              .Include(f => f.Municipio)
+              .ThenInclude(m => m.Estado)
+              .Include(x => x.Equipe)
+               .Include(s => s.Satelite)
+              .OrderByDescending(f => f.FocoDataUtc)
+              .ThenBy(f => f.Municipio.MunicipioNome)
+               .Where(x => x.FocoAtendido == true);
+
+            var inicio = DateTime.UtcNow.AddDays(-2);
+            var final = DateTime.UtcNow;
+
+            if (equipe.HasValue && // ha um estado selecionado
+                equipe != 0 && // nao eh zero
+                await _context.Equipes.AnyAsync(e => e.EquipeId == equipe)) // existe na base de estados
+            {
+                dataset = dataset.Where(e => e.EquipeId == equipe); // aplica o filtro
+                ViewBag.equipe = equipe;
+            }
+            else
+            {
+                ViewBag.estado = 0;
+            }
+
+            if (!string.IsNullOrEmpty(dataInicio))
+                try
+                {
+                    inicio = DateTime.ParseExact(dataInicio, "yyyy-MM-ddTHH:mm:ss", provider);
+                }
+                catch (FormatException)
+                {
+                    inicio = DateTime.UtcNow.AddDays(-2);
+                }
+
+            if (!string.IsNullOrEmpty(dataFinal))
+                try
+                {
+                    final = DateTime.ParseExact(dataFinal, "yyyy-MM-ddTHH:mm:ss", provider);
+                }
+                catch (FormatException)
+                {
+                    final = DateTime.UtcNow;
+                }
+
+            dataset = dataset.Where(f => (f.FocoDataUtc >= inicio) & (f.FocoDataUtc <= final));
+
+
+            var data = await dataset.ToPagedListAsync(page ?? 1, _pagesize);
+
+            ViewBag.primeiro = data.FirstItemOnPage;
+            ViewBag.ultimo = data.LastItemOnPage;
+            ViewBag.total = data.TotalItemCount;
+
+            ViewBag.dataInicio = inicio.ToString("s");
+            ViewBag.dataFinal = final.ToString("s");
+            ViewBag.equipeInputSelect = new SelectList(await _context.Equipes
+                .OrderBy(s => s.EquipeNome)
+                .ToListAsync(),
+              dataValueField: "EquipeId",
+              dataTextField: "EquipeNome",
+              selectedValue: ViewBag.equipeInputSelect);
+            if(equipe != 0)
+            {
+                ViewBag.focoInputSelect = new SelectList(await _context.Focos
+               .OrderBy(s => s.FocoId)
+               .Where(x => x.FocoAtendido == true)
+               .Where(x => x.EquipeId == equipe)
+               .ToListAsync(),
+             dataValueField: "FocoId",
+             dataTextField: "Coordenadas",
+             selectedValue: ViewBag.focoInputSelect);
+            }
+            else {
+                ViewBag.focoInputSelect = new SelectList(await _context.Focos
+               .OrderBy(s => s.FocoId)
+               .Where(x => x.FocoAtendido == true)
+               .ToListAsync(),
+             dataValueField: "FocoId",
+             dataTextField: "Coordenadas",
+             selectedValue: ViewBag.focoInputSelect);
+            }
+           
+
+            return View(data);
+        }
+
 
     public async Task<IActionResult> ListaFocos(string dataInicio, string dataFinal, string municipio, int? satelite,
       int? estado, int? page)

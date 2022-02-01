@@ -38,7 +38,7 @@ namespace CadeOFogo.Areas.Cadastros.ViewsModels.Equipe
         [Display(Name = "Nome Usuarios")]
         public SelectList UsuarioInputSelect { get; set; }
 
-        public string UserId { get; set; }
+        public string ApplicationUserUserId { get; set; }
 
     }
 }

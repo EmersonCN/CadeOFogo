@@ -7,6 +7,7 @@ using CadeOFogo.Models.Inpe;
 using Microsoft.AspNetCore.Identity;
 using CadeOFogo.Areas.Cadastros;
 using CadeOFogo.Areas.Cadastros.Models;
+using CadeOFogo.Areas.Cadastros.ViewsModels.Equipe;
 
 namespace CadeOFogo.Data
 {
@@ -89,7 +90,19 @@ namespace CadeOFogo.Data
                   }
               );
 
-            
+            builder.Entity<Equipe>().HasData(
+                 new EquipeEditViewModel
+                 {
+                     EquipeId = 1,
+                     EquipeNome = "Norte ",
+                     PelotaoId = 1,
+                     CompanhiaId = 1,
+                     BatalhaoId = 1,
+                     Ativa = true,
+                     ApplicationUserUserId = "1"
+                 }
+             );
+
         }
   }
 }

@@ -113,7 +113,7 @@ namespace CadeOFogo.Areas.Cadastros.Controllers
                 dataValueField: "PelotaoId",
                 dataTextField: "PelotaoNome"),
 
-                UserId = "0",
+                ApplicationUserUserId = "0",
                 UsuarioInputSelect = new SelectList(await _context.ApplicationUsers
                 .OrderBy(c => c.NomeCompleto).ToListAsync(),
                 dataValueField: "Id",
@@ -152,7 +152,7 @@ namespace CadeOFogo.Areas.Cadastros.Controllers
                          dataTextField: "PelotaoNome");
                         ModelState.AddModelError("PelotaoInputSelect", "Selecione uma pelotão");
 
-                        if (equipe.UserId == "0")
+                        if (equipe.ApplicationUserUserId == "0")
                         {
                             equipe.UsuarioInputSelect = new SelectList(await _context.ApplicationUsers
                             .OrderBy(c => c.NomeCompleto).ToListAsync(),
@@ -177,7 +177,7 @@ namespace CadeOFogo.Areas.Cadastros.Controllers
             if (pelotao == null)
                 return NotFound();
 
-            var user = await _context.ApplicationUsers.FindAsync(equipe.UserId);
+            var user = await _context.ApplicationUsers.FindAsync(equipe.ApplicationUserUserId);
             if (user == null)
                 return NotFound();
 
@@ -229,7 +229,7 @@ namespace CadeOFogo.Areas.Cadastros.Controllers
                 .OrderBy(c => c.PelotaoNome).ToListAsync(),
                 dataValueField: "PelotaoId",
                  dataTextField: "PelotaoNome"),
-                UserId = equipe.ApplicationUser.Id,
+                ApplicationUserUserId = equipe.ApplicationUser.Id,
                 UsuarioInputSelect = new SelectList(await _context.ApplicationUsers
                 .OrderBy(c => c.NomeCompleto).ToListAsync(),
                 dataValueField: "Id",
@@ -266,7 +266,7 @@ namespace CadeOFogo.Areas.Cadastros.Controllers
                     PelotaoInputSelect = new SelectList(await _context.Pelotoes.ToListAsync(),
                 dataValueField: "PelotaoId",
                  dataTextField: "PelotaoNome"),
-                    UserId = equipe.UserId,
+                    ApplicationUserUserId = equipe.ApplicationUserUserId,
                     UsuarioInputSelect = new SelectList(await _context.ApplicationUsers.ToListAsync(),
                 dataValueField: "Id",
                  dataTextField: "NomeCompleto"),
@@ -316,9 +316,9 @@ namespace CadeOFogo.Areas.Cadastros.Controllers
                 equipeOriginal.Pelotao = pelotao;
             }
 
-            if (equipeOriginal.ApplicationUser.Id != equipe.UserId)
+            if (equipeOriginal.ApplicationUser.Id != equipe.ApplicationUserUserId)
             {
-                var user = await _context.ApplicationUsers.FindAsync(equipe.UserId);
+                var user = await _context.ApplicationUsers.FindAsync(equipe.ApplicationUserUserId);
 
                 if (user == null)
                     return NotFound();

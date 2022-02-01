@@ -22,6 +22,7 @@ namespace CadeOFogo.Data
         {
             var primeiroUsuario = new ApplicationUser
             {
+                Id = "1",
                 UserName = "EmersonCN",
                 Email = "emersoncn2015@gmail.com",
                 NomeCompleto = "Emerson Carlos Nogueira",

@@ -1,4 +1,5 @@
-﻿using CadeOFogo.Models.Inpe;
+﻿using CadeOFogo.Areas.Cadastros.Models;
+using CadeOFogo.Models.Inpe;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -16,6 +17,8 @@ namespace CadeOFogo.Models.Inpe
     public Pelotao Pelotao { get; set; }
 
     public int PelotaoId { get; set; }
+
+        public ICollection<Equipe> EquipeCollection { get; set; }
 
 
     }

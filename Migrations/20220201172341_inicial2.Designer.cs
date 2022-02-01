@@ -4,14 +4,16 @@ using CadeOFogo.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CadeOFogo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220201172341_inicial2")]
+    partial class inicial2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,6 +46,9 @@ namespace CadeOFogo.Migrations
                     b.Property<int>("PelotaoId")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("EquipeId");
 
                     b.HasIndex("ApplicationUserId");
@@ -60,11 +65,12 @@ namespace CadeOFogo.Migrations
                         new
                         {
                             EquipeId = 1,
-                            Ativa = true,
+                            Ativa = false,
                             BatalhaoId = 1,
                             CompanhiaId = 1,
                             EquipeNome = "Norte ",
-                            PelotaoId = 1
+                            PelotaoId = 1,
+                            UserId = "1"
                         });
                 });
 
@@ -995,7 +1001,7 @@ namespace CadeOFogo.Migrations
             modelBuilder.Entity("CadeOFogo.Areas.Cadastros.Models.Equipe", b =>
                 {
                     b.HasOne("CadeOFogo.Models.Inpe.ApplicationUser", "ApplicationUser")
-                        .WithMany("EquipeCollection")
+                        .WithMany()
                         .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("CadeOFogo.Models.Inpe.Batalhao", "Batalhao")
@@ -1206,11 +1212,6 @@ namespace CadeOFogo.Migrations
             modelBuilder.Entity("CadeOFogo.Areas.Cadastros.Models.Equipe", b =>
                 {
                     b.Navigation("FocoCollection");
-                });
-
-            modelBuilder.Entity("CadeOFogo.Models.Inpe.ApplicationUser", b =>
-                {
-                    b.Navigation("EquipeCollection");
                 });
 
             modelBuilder.Entity("CadeOFogo.Models.Inpe.Batalhao", b =>
