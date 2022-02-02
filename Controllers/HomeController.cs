@@ -84,7 +84,7 @@ namespace CadeOFogo.Controllers
       };
       return Json(resposta);
     }
-
+        
         public async Task<IActionResult> Relatorio(string dataInicio, string dataFinal, 
           int? equipe, int? page)
         {
@@ -111,7 +111,7 @@ namespace CadeOFogo.Controllers
             }
             else
             {
-                ViewBag.estado = 0;
+                ViewBag.equipe = "";
             }
 
             if (!string.IsNullOrEmpty(dataInicio))
@@ -151,12 +151,11 @@ namespace CadeOFogo.Controllers
               dataValueField: "EquipeId",
               dataTextField: "EquipeNome",
               selectedValue: ViewBag.equipeInputSelect);
-            if(equipe != 0)
+            if(equipe == null)
             {
                 ViewBag.focoInputSelect = new SelectList(await _context.Focos
                .OrderBy(s => s.FocoId)
                .Where(x => x.FocoAtendido == true)
-               .Where(x => x.EquipeId == equipe)
                .ToListAsync(),
              dataValueField: "FocoId",
              dataTextField: "Coordenadas",
@@ -166,6 +165,7 @@ namespace CadeOFogo.Controllers
                 ViewBag.focoInputSelect = new SelectList(await _context.Focos
                .OrderBy(s => s.FocoId)
                .Where(x => x.FocoAtendido == true)
+               .Where(x => x.EquipeId == equipe)
                .ToListAsync(),
              dataValueField: "FocoId",
              dataTextField: "Coordenadas",
@@ -274,8 +274,116 @@ namespace CadeOFogo.Controllers
       return View(data);
     }
 
+       
+        public async Task<IActionResult> GerarRelatorio(int? id , bool ocorrencia)
+        {
+            if (id == null) return NotFound();
 
-    public async Task<IActionResult> Detalhes(int? id)
+            var foco = await _context.Focos
+              .Include(f => f.Estado)
+              .Include(f => f.Municipio)
+              .Include(f => f.Satelite)
+              .Include(f => f.StatusDoFoco)
+              .Include(f => f.CausadorProvavel)
+              .Include(f => f.IndicioInicioFoco)
+              .Include(f => f.CausaFogo)
+              .Include(f => f.ResponsavelPropriedade)
+              .Include(f => f.Equipe)
+              .FirstOrDefaultAsync(f => f.FocoId == id);
+            if (foco == null) return NotFound();
+
+            ViewBag.ocorrencia = ocorrencia;
+
+            var detalheFocoViewModel = new DetalheFocoViewModel
+            {
+                FocoId = foco.FocoId,
+                FocoDataUtc = foco.FocoDataUtc,
+                Coordenadas = foco.Coordenadas,
+                FocoAtendido = foco.FocoAtendido,
+                FocoConfirmado = foco.FocoConfirmado,
+                FocoIdInpe = foco.InpeFocoId,
+                //SnapshotSatelite = foco.SnapshotSatelite,
+                Satelite = foco.Satelite.SateliteNome,
+                Localidade = $"{foco.Municipio.MunicipioNome}, {foco.Estado.EstadoNome}",
+                Bioma = foco.Bioma,
+                Municipi = foco.Municipi,
+                PolicialResponsavel = foco.PolicialResponsavel,
+                OcorrênciaSIOPM = foco.OcorrênciaSIOPM,
+                NºBOPAmb = foco.NºBOPAmb,
+                NºTVA = foco.NºTVA,
+                RSO = foco.RSO,
+                DataAtendimento = foco.DataAtendimento,
+                EquipeNome = foco.Equipe.EquipeNome,
+                StatusFocoDescricao = foco.StatusDoFoco.StatusFocoDescricao,
+                IndicioInicioFocoDescricao = foco.IndicioInicioFoco.IndicioInicioFocoDescricao,
+                CausaFogoDescricao = foco.CausaFogo.CausaFogoDescricao,
+                CausadorProvavelDescricacao = foco.CausadorProvavel.CausadorProvavelDescricacao,
+                ResponsavelPropriedadeDescricao = foco.ResponsavelPropriedade.ResponsavelPropriedadeDescricao,
+                PioneiroAPPAreaEmHectares = foco.PioneiroAPPAreaEmHectares,
+                InicialAPPAreaEmHectares = foco.InicialAPPAreaEmHectares,
+                MedioAPPAreaEmHectares = foco.MedioAPPAreaEmHectares,
+                AvancadoAPPAreaEmHectares = foco.AvancadoAPPAreaEmHectares,
+                AutoDeInflacaoAmbientalAPP = foco.AutoDeInflacaoAmbientalAPP,
+                MultaAPP = foco.MultaAPP,
+                Pioneiro = foco.Pioneiro,
+                Inicial = foco.Inicial,
+                Medio = foco.Medio,
+                Avancado = foco.Avancado,
+                AutoDeInflacaoAmbiental = foco.AutoDeInflacaoAmbiental,
+                MultaR = foco.MultaR,
+                Pasto = foco.Pasto,
+                Citrus = foco.Citrus,
+                Outras = foco.Outras,
+                AutoDeInflacaoAmbientalV = foco.AutoDeInflacaoAmbientalV,
+                MultaV = foco.MultaV,
+                ArvoresIsoladas = foco.ArvoresIsoladas,
+                AutoDeInflacaoAmbientalA = foco.AutoDeInflacaoAmbientalA,
+                MultaA = foco.MultaA,
+                PalhaDeCana = foco.PalhaDeCana,
+                CanaDeAcucar = foco.CanaDeAcucar,
+                Autorizado = foco.Autorizado,
+                AutoDeInflacaoAmbientalL = foco.AutoDeInflacaoAmbientalL,
+                MultaL = foco.MultaL,
+                PioneiroUC = foco.PioneiroUC,
+                InicialUC = foco.InicialUC,
+                MedioUC = foco.MedioUC,
+                AvancadoUC = foco.AvancadoUC,
+                OutrasUC = foco.OutrasUC,
+                AutoDeInflacaoAmbientalUC = foco.AutoDeInflacaoAmbientalUC,
+                MultaUC = foco.MultaUC,
+                PioneiroRL = foco.PioneiroRL,
+                InicialRL = foco.InicialRL,
+                MedioRL = foco.MedioRL,
+                AvancadoRL = foco.AvancadoRL,
+                OutrasRL = foco.OutrasRL,
+                AutoDeInflacaoAmbientalRL = foco.AutoDeInflacaoAmbientalRL,
+                MultaRL = foco.MultaRL,
+                Refiscalizacao = foco.Refiscalizacao
+
+            };
+
+            ViewBag.TemReverseGeocode = false;
+            var reverseGeocode = _mapProvider.ReverseGeocode(foco.FocoLatitude, foco.FocoLongitude);
+            if (reverseGeocode.Status == ReverseGeocodeStatus.OK)
+            {
+                detalheFocoViewModel.Attribution = reverseGeocode.Attribution;
+                detalheFocoViewModel.ReverseGeocode = reverseGeocode.Endereco;
+                ViewBag.TemReverseGeocode = true;
+            }
+            else
+            {
+                var msg = $"Erro no reverse geocode / latlong: {foco.FocoLatitude.ToString(_nfi)}, {foco.FocoLongitude.ToString(_nfi)} / ";
+                msg += $"resposta: {reverseGeocode.Status} / {_mapProvider.providerName()}";
+                _logger.LogWarning(msg);
+            }
+
+            ViewBag.mapa = _mapProvider.DynamicSingleSpotMap(foco.FocoLatitude, foco.FocoLongitude, "map");
+
+            return View(detalheFocoViewModel);
+        }
+
+
+        public async Task<IActionResult> Detalhes(int? id)
     {
       if (id == null) return NotFound();
 

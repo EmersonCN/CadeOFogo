@@ -1,0 +1,203 @@
+﻿@using System.Net.Mime
+@model CadeOFogo.ViewModels.DetalheFocoViewModel
+@{
+    ViewData["Title"] = "GerarRelatorio";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <aside class="detalhe-foco">
+                <div class="container">
+                    <h2>Foco @Model.FocoId</h2>
+                    <h3><label asp-for="FocoIdInpe" class="control-label"></label><br />@Model.FocoIdInpe</h3>
+                    <dl class="row">
+                        <dt class="col-6"><label asp-for="Satelite" class="control-label"></label></dt>
+                        <dd class="col-6">@Model.Satelite</dd>
+                        <dt class="col-6"><label asp-for="FocoDataUtc" class="control-label"></label></dt>
+                        <dd class="col-6">@Model.FocoDataUtc.ToString("s")</dd>
+                        <dt class="col-6"><label asp-for="Coordenadas" class="control-label"></label></dt>
+                        <dd class="col-6">@Model.Coordenadas</dd>
+                        <dt class="col-6"><label asp-for="Localidade" class="control-label"></label></dt>
+                        <dd class="col-6">@Model.Localidade</dd>
+                        @if (ViewBag.TemReverseGeocode)
+                        {
+                            <dt class="col-6"><label asp-for="ReverseGeocode" class="control-label"></label></dt>
+                            <dd class="col-6">@Model.ReverseGeocode</dd>
+                        }
+
+
+                        @if (Model.FocoAtendido)
+                        {
+                            <dt class="col-6"><label asp-for="EquipeNome" class="control-label"></label></dt>
+                            <dd class="col-6">@Model.EquipeNome</dd>
+                            <dt class="col-6"><label asp-for="Bioma" class="control-label"></label></dt>
+                            <dd class="col-6">@Model.Bioma</dd>
+                            <dt class="col-6"><label asp-for="Municipi" class="control-label"></label></dt>
+                            <dd class="col-6">@Model.Municipi</dd>
+                            <dt class="col-6"><label asp-for="PolicialResponsavel" class="control-label"></label></dt>
+                            <dd class="col-6">@Model.PolicialResponsavel</dd>
+                            <dt class="col-6"><label asp-for="OcorrênciaSIOPM" class="control-label"></label></dt>
+                            <dd class="col-6">@Model.OcorrênciaSIOPM</dd>
+                            <dt class="col-6"><label asp-for="NºBOPAmb" class="control-label"></label></dt>
+                            <dd class="col-6">@Model.NºBOPAmb</dd>
+                            <dt class="col-6"><label asp-for="NºTVA" class="control-label"></label></dt>
+                            <dd class="col-6">@Model.NºTVA</dd>
+                            <dt class="col-6"><label asp-for="RSO" class="control-label"></label></dt>
+                            <dd class="col-6">@Model.RSO</dd>
+                            <dt class="col-6"><label asp-for="DataAtendimento" class="control-label"></label></dt>
+                            <dd class="col-6">@Model.DataAtendimento</dd>
+                            <dt class="col-6"><label asp-for="StatusFocoDescricao" class="control-label"></label></dt>
+                            <dd class="col-6">@Model.StatusFocoDescricao</dd>
+                            <dt class="col-6"><label asp-for="IndicioInicioFocoDescricao" class="control-label"></label></dt>
+                            <dd class="col-6">@Model.IndicioInicioFocoDescricao</dd>
+                            <dt class="col-6"><label asp-for="CausaFogoDescricao" class="control-label"></label></dt>
+                            <dd class="col-6">@Model.CausaFogoDescricao</dd>
+                            <dt class="col-6"><label asp-for="CausadorProvavelDescricacao" class="control-label"></label></dt>
+                            <dd class="col-6">@Model.CausadorProvavelDescricacao</dd>
+                            <dt class="col-6"><label asp-for="ResponsavelPropriedadeDescricao" class="control-label"></label></dt>
+                            <dd class="col-6">@Model.ResponsavelPropriedadeDescricao</dd>
+                            @if (Model.PioneiroAPPAreaEmHectares != null)
+                            {
+                                <dt class="col-6"><label asp-for="PioneiroAPPAreaEmHectares" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.PioneiroAPPAreaEmHectares</dd>
+                                <dt class="col-6"><label asp-for="InicialAPPAreaEmHectares" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.InicialAPPAreaEmHectares</dd>
+                                <dt class="col-6"><label asp-for="MedioAPPAreaEmHectares" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.MedioAPPAreaEmHectares</dd>
+                                <dt class="col-6"><label asp-for="AvancadoAPPAreaEmHectares" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.AvancadoAPPAreaEmHectares</dd>
+                                <dt class="col-6"><label asp-for="AutoDeInflacaoAmbientalAPP" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.AutoDeInflacaoAmbientalAPP</dd>
+                                <dt class="col-6"><label asp-for="MultaAPP" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.MultaAPP</dd>
+                            }
+                            @if (Model.Pioneiro != null)
+                            {
+                                <dt class="col-6"><label asp-for="Pioneiro" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.Pioneiro</dd>
+                                <dt class="col-6"><label asp-for="Inicial" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.Inicial</dd>
+                                <dt class="col-6"><label asp-for="Medio" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.Medio</dd>
+                                <dt class="col-6"><label asp-for="Avancado" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.Avancado</dd>
+                                <dt class="col-6"><label asp-for="AutoDeInflacaoAmbiental" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.AutoDeInflacaoAmbiental</dd>
+                                <dt class="col-6"><label asp-for="MultaR" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.MultaR</dd>
+                                <dt class="col-6"><label asp-for="Pasto" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.Pasto</dd>
+                                <dt class="col-6"><label asp-for="Citrus" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.Citrus</dd>
+                                <dt class="col-6"><label asp-for="Outras" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.Outras</dd>
+                                <dt class="col-6"><label asp-for="AutoDeInflacaoAmbientalV" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.AutoDeInflacaoAmbientalV</dd>
+                                <dt class="col-6"><label asp-for="MultaV" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.MultaV</dd>
+                            }
+                            @if (Model.ArvoresIsoladas != null)
+                            {
+                                <dt class="col-6"><label asp-for="ArvoresIsoladas" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.ArvoresIsoladas</dd>
+                                <dt class="col-6"><label asp-for="AutoDeInflacaoAmbientalA" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.AutoDeInflacaoAmbientalA</dd>
+                                <dt class="col-6"><label asp-for="MultaA" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.MultaA</dd>
+                            }
+                            @if (Model.PalhaDeCana != null)
+                            {
+                                <dt class="col-6"><label asp-for="PalhaDeCana" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.PalhaDeCana</dd>
+                                <dt class="col-6"><label asp-for="CanaDeAcucar" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.CanaDeAcucar</dd>
+                                <dt class="col-6"><label asp-for="Autorizado" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.Autorizado</dd>
+                                <dt class="col-6"><label asp-for="AutoDeInflacaoAmbientalL" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.AutoDeInflacaoAmbientalL</dd>
+                                <dt class="col-6"><label asp-for="MultaL" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.MultaL</dd>
+                            }
+                            @if (Model.PioneiroUC != null)
+                            {
+                                <dt class="col-6"><label asp-for="PioneiroUC" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.PioneiroUC</dd>
+                                <dt class="col-6"><label asp-for="InicialUC" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.InicialUC</dd>
+                                <dt class="col-6"><label asp-for="MedioUC" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.MedioUC</dd>
+                                <dt class="col-6"><label asp-for="AvancadoUC" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.AvancadoUC</dd>
+                                <dt class="col-6"><label asp-for="OutrasUC" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.OutrasUC</dd>
+                                <dt class="col-6"><label asp-for="AutoDeInflacaoAmbientalUC" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.AutoDeInflacaoAmbientalUC</dd>
+                                <dt class="col-6"><label asp-for="MultaUC" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.MultaUC</dd>
+                            }
+                            @if (Model.PioneiroRL != null)
+                            {
+                                <dt class="col-6"><label asp-for="PioneiroRL" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.PioneiroRL</dd>
+                                <dt class="col-6"><label asp-for="InicialRL" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.InicialRL</dd>
+                                <dt class="col-6"><label asp-for="MedioRL" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.MedioRL</dd>
+                                <dt class="col-6"><label asp-for="AvancadoRL" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.AvancadoRL</dd>
+                                <dt class="col-6"><label asp-for="OutrasRL" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.OutrasRL</dd>
+                                <dt class="col-6"><label asp-for="AutoDeInflacaoAmbientalRL" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.AutoDeInflacaoAmbientalRL</dd>
+                                <dt class="col-6"><label asp-for="MultaRL" class="control-label"></label></dt>
+                                <dd class="col-6">@Model.MultaRL</dd>
+                            }
+                            <dt class="col-6"><label asp-for="Refiscalizacao" class="control-label"></label></dt>
+                            <dd class="col-6">@Model.Refiscalizacao</dd>
+
+                        }
+                    </dl>
+                    <table width="100%">
+                        <thead>
+                        <th class="text-center"><label asp-for="FocoConfirmado" class="control-label"></label></th>
+                        <th class="text-center"><label asp-for="FocoAtendido" class="control-label"></label></th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">
+                                    @if (Model.FocoConfirmado)
+                                    {<i class="fas fa-check verde"></i>}
+                                    else
+                                    {<i class="fas fa-times vermelho"></i>}
+                                </td>
+                                <td class="text-center">
+                                    @if (Model.FocoAtendido)
+                                    {<i class="fas fa-check verde"></i>}
+                                    else
+                                    {<i class="fas fa-times vermelho"></i>}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    @if (ViewBag.TemReverseGeocode)
+                    {
+                        <p class="small text-dark">@Model.Attribution</p>
+                    }
+                    <dl class="row">
+                    </dl>
+                    <div>
+                        <a class="btn btn-primary"
+                           asp-action="AdicionarDetalhes" asp-route-id="@Model.FocoId">Adicionar Detalhes</a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        <div class="col-md-4">
+            <section class="detalhe-foco">
+                <div id="map" class="mapa"></div>
+            </section>
+        </div>
+    </div>
+</div>
+@Html.Raw(ViewBag.mapa)

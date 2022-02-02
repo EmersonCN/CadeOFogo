@@ -37,7 +37,7 @@ namespace CadeOFogo.Data
 
                 if (user == null)
                 {
-                    await userManager.CreateAsync(primeiroUsuario, "Awesome2021*!");
+                    await userManager.CreateAsync(primeiroUsuario, "Ambiental2021*!");
                     await userManager.AddToRoleAsync(primeiroUsuario, Enums.Roles.AdminBatalhao.ToString());
                     await userManager.AddToRoleAsync(primeiroUsuario, Enums.Roles.AdminCompanhia.ToString());
                     await userManager.AddToRoleAsync(primeiroUsuario, Enums.Roles.AdminPelotao.ToString());

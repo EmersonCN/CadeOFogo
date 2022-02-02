@@ -69,7 +69,7 @@ namespace CadeOFogo.Data
                   new Batalhao
                   {
                       BatalhaoId = 1,
-                      NomeBatalhao = "4º Batalhão de Polícia Ambiental",
+                      NomeBatalhao = "4º Batalhão da Polícia Ambiental",
                   }
               );
             builder.Entity<Companhia>().HasData(
@@ -77,7 +77,7 @@ namespace CadeOFogo.Data
                   {
                       CompanhiaId = 1,
                       BatalhaoId = 1,
-                      CompanhiaNome = "1º Companhia de São José do Rio Preto",
+                      CompanhiaNome = "1º Companhia da Polícia Ambiental",
                   }
               );
             builder.Entity<Pelotao>().HasData(
@@ -86,7 +86,7 @@ namespace CadeOFogo.Data
                       PelotaoId = 1,
                       CompanhiaId = 1,
                       BatalhaoId = 1,
-                      PelotaoNome = "1º Pelotão de São José do Rio Preto",
+                      PelotaoNome = "1º Pelotão da Polícia Ambiental",
                   }
               );
 
@@ -94,7 +94,7 @@ namespace CadeOFogo.Data
                  new EquipeEditViewModel
                  {
                      EquipeId = 1,
-                     EquipeNome = "Norte ",
+                     EquipeNome = "Sem Equipe",
                      PelotaoId = 1,
                      CompanhiaId = 1,
                      BatalhaoId = 1,
