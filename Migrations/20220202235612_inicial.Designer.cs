@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CadeOFogo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220130174330_inicial")]
+    [Migration("20220202235612_inicial")]
     partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,10 +62,10 @@ namespace CadeOFogo.Migrations
                         new
                         {
                             EquipeId = 1,
-                            Ativa = false,
+                            Ativa = true,
                             BatalhaoId = 1,
                             CompanhiaId = 1,
-                            EquipeNome = "Norte ",
+                            EquipeNome = "Sem Equipe",
                             PelotaoId = 1
                         });
                 });
@@ -166,7 +166,7 @@ namespace CadeOFogo.Migrations
                         new
                         {
                             BatalhaoId = 1,
-                            NomeBatalhao = "4º Batalhão de Polícia Ambiental"
+                            NomeBatalhao = "4º Batalhão da Polícia Ambiental"
                         });
                 });
 
@@ -309,7 +309,7 @@ namespace CadeOFogo.Migrations
                         {
                             CompanhiaId = 1,
                             BatalhaoId = 1,
-                            CompanhiaNome = "1º Companhia de São José do Rio Preto"
+                            CompanhiaNome = "1º Companhia da Polícia Ambiental"
                         });
                 });
 
@@ -685,7 +685,7 @@ namespace CadeOFogo.Migrations
                             PelotaoId = 1,
                             BatalhaoId = 1,
                             CompanhiaId = 1,
-                            PelotaoNome = "1º Pelotão de São José do Rio Preto"
+                            PelotaoNome = "1º Pelotão da Polícia Ambiental"
                         });
                 });
 
@@ -997,7 +997,7 @@ namespace CadeOFogo.Migrations
             modelBuilder.Entity("CadeOFogo.Areas.Cadastros.Models.Equipe", b =>
                 {
                     b.HasOne("CadeOFogo.Models.Inpe.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                        .WithMany("EquipeCollection")
                         .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("CadeOFogo.Models.Inpe.Batalhao", "Batalhao")
@@ -1208,6 +1208,11 @@ namespace CadeOFogo.Migrations
             modelBuilder.Entity("CadeOFogo.Areas.Cadastros.Models.Equipe", b =>
                 {
                     b.Navigation("FocoCollection");
+                });
+
+            modelBuilder.Entity("CadeOFogo.Models.Inpe.ApplicationUser", b =>
+                {
+                    b.Navigation("EquipeCollection");
                 });
 
             modelBuilder.Entity("CadeOFogo.Models.Inpe.Batalhao", b =>

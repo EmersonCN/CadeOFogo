@@ -41,8 +41,8 @@ public static IHostBuilder CreateHostBuilder(string[] args)
     {
             return Host.CreateDefaultBuilder(args)
               .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); })
-           //.ConfigureServices(services => { services.AddHostedService<BootstrapFromInpe>(); });
-             .ConfigureServices(services => { services.AddHostedService<ImportFireSpots>(); });
+          // .ConfigureServices(services => { services.AddHostedService<BootstrapFromInpe>(); });
+            .ConfigureServices(services => { services.AddHostedService<ImportFireSpots>(); });
     }
   }
 }

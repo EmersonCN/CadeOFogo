@@ -521,7 +521,7 @@ namespace CadeOFogo.Migrations
             migrationBuilder.InsertData(
                 table: "Batalhoes",
                 columns: new[] { "BatalhaoId", "NomeBatalhao" },
-                values: new object[] { 1, "4º Batalhão de Polícia Ambiental" });
+                values: new object[] { 1, "4º Batalhão da Polícia Ambiental" });
 
             migrationBuilder.InsertData(
                 table: "CausadoresProvaveis",
@@ -603,17 +603,17 @@ namespace CadeOFogo.Migrations
             migrationBuilder.InsertData(
                 table: "Companhias",
                 columns: new[] { "CompanhiaId", "BatalhaoId", "CompanhiaNome" },
-                values: new object[] { 1, 1, "1º Companhia de São José do Rio Preto" });
+                values: new object[] { 1, 1, "1º Companhia da Polícia Ambiental" });
 
             migrationBuilder.InsertData(
                 table: "Pelotoes",
                 columns: new[] { "PelotaoId", "BatalhaoId", "CompanhiaId", "PelotaoNome" },
-                values: new object[] { 1, 1, 1, "1º Pelotão de São José do Rio Preto" });
+                values: new object[] { 1, 1, 1, "1º Pelotão da Polícia Ambiental" });
 
             migrationBuilder.InsertData(
                 table: "Equipes",
                 columns: new[] { "EquipeId", "ApplicationUserId", "Ativa", "BatalhaoId", "CompanhiaId", "EquipeNome", "PelotaoId" },
-                values: new object[] { 1, null, false, 1, 1, "Norte ", 1 });
+                values: new object[] { 1, null, true, 1, 1, "Sem Equipe", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

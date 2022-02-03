@@ -9,7 +9,7 @@
 <h1>Relatorios</h1>
 <form asp-action="Relatorio">
     <div class="row align-items-center">
-        <div class="col-4">
+        <div class="col-3">
             <label class="sr-only" for="dataInicio">Data inicial</label>
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -22,7 +22,7 @@
                        class="form-control mb-2" id="dataInicio">
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-3">
             <label class="sr-only" for="dataFinal">Data final</label>
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -35,15 +35,24 @@
                        class="form-control mb-2" id="dataFinal">
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-3">
             <label class="sr-only" for="equipe">Filtro por equipe</label>
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
                     <div class="input-group-text">Equipe</div>
                 </div>
                 <select name="equipe" id="equipe" class="form-control mb-2" asp-items="@ViewBag.equipeInputSelect">
-                    <option value= "" >-- Todos --</option>
+                    <option value="">-- Todos --</option>
                 </select>
+            </div>
+        </div>
+        <div class="col-3">
+            <label class="sr-only" for="atendido">Filtro por Atendido</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Foco Atendido</div>
+                </div>
+                <input type="checkbox" name="atendido" id="atendido" value="@ViewBag.atendido"/>
             </div>
         </div>
     </div>
@@ -54,19 +63,6 @@
     </div>
     <hr size="10" />
     <h2>Selecione o Foco e os Parametros necessarios</h2><br />
-    <div class="row align-items-center">
-        <div class="col-4">
-            <label class="sr-only" for="foco">Escolha o Foco</label>
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">Foco</div>
-                </div>
-                <select name="foco" id="foco" class="form-control mb-2" asp-items="@ViewBag.focoInputSelect" >
-                    <option value="">-- Selecione o Foco --</option>
-                </select>
-            </div>
-        </div>
-    </div>
     <div class="row align-items-center">
         <label class="sr-only" for="ocorrencia">Data inicial</label>
         <div class="col-3">

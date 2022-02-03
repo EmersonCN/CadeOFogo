@@ -85,7 +85,7 @@ namespace CadeOFogo.Controllers
       return Json(resposta);
     }
         
-        public async Task<IActionResult> Relatorio(string dataInicio, string dataFinal, 
+        public async Task<IActionResult> Relatorio(string dataInicio, string dataFinal, bool atendido,
           int? equipe, int? page)
         {
             var provider = CultureInfo.InvariantCulture;
@@ -96,8 +96,7 @@ namespace CadeOFogo.Controllers
               .Include(x => x.Equipe)
                .Include(s => s.Satelite)
               .OrderByDescending(f => f.FocoDataUtc)
-              .ThenBy(f => f.Municipio.MunicipioNome)
-               .Where(x => x.FocoAtendido == true);
+              .ThenBy(f => f.Municipio.MunicipioNome);
 
             var inicio = DateTime.UtcNow.AddDays(-2);
             var final = DateTime.UtcNow;
@@ -112,6 +111,17 @@ namespace CadeOFogo.Controllers
             else
             {
                 ViewBag.equipe = "";
+            }
+
+            if (atendido == true && // nao eh zero
+                await _context.Focos.AnyAsync(e => e.FocoAtendido == atendido)) // existe na base de estados
+            {
+                dataset = dataset.Where(e => e.FocoAtendido == atendido); // aplica o filtro
+                ViewBag.atendido = atendido;
+            }
+            else
+            {
+                ViewBag.atendido = false;
             }
 
             if (!string.IsNullOrEmpty(dataInicio))
@@ -145,32 +155,13 @@ namespace CadeOFogo.Controllers
 
             ViewBag.dataInicio = inicio.ToString("s");
             ViewBag.dataFinal = final.ToString("s");
+            ViewBag.atendido = ViewBag.atendido;
             ViewBag.equipeInputSelect = new SelectList(await _context.Equipes
                 .OrderBy(s => s.EquipeNome)
                 .ToListAsync(),
               dataValueField: "EquipeId",
               dataTextField: "EquipeNome",
               selectedValue: ViewBag.equipeInputSelect);
-            if(equipe == null)
-            {
-                ViewBag.focoInputSelect = new SelectList(await _context.Focos
-               .OrderBy(s => s.FocoId)
-               .Where(x => x.FocoAtendido == true)
-               .ToListAsync(),
-             dataValueField: "FocoId",
-             dataTextField: "Coordenadas",
-             selectedValue: ViewBag.focoInputSelect);
-            }
-            else {
-                ViewBag.focoInputSelect = new SelectList(await _context.Focos
-               .OrderBy(s => s.FocoId)
-               .Where(x => x.FocoAtendido == true)
-               .Where(x => x.EquipeId == equipe)
-               .ToListAsync(),
-             dataValueField: "FocoId",
-             dataTextField: "Coordenadas",
-             selectedValue: ViewBag.focoInputSelect);
-            }
            
 
             return View(data);
