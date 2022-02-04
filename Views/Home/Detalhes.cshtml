@@ -57,6 +57,8 @@
                         <dd class="col-6">@Model.CausadorProvavelDescricacao</dd>
                         <dt class="col-6"><label asp-for="ResponsavelPropriedadeDescricao" class="control-label"></label></dt>
                         <dd class="col-6">@Model.ResponsavelPropriedadeDescricao</dd>
+                        <dt class="col-6"><label asp-for="TipoVegetacaoDescricao" class="control-label"></label></dt>
+                        <dd class="col-6">@Model.TipoVegetacaoDescricao</dd>
                         @if (Model.PioneiroAPPAreaEmHectares != null)
                         {
                             <dt class="col-6"><label asp-for="PioneiroAPPAreaEmHectares" class="control-label"></label></dt>
@@ -184,13 +186,15 @@
                 {
                     <p class="small text-dark">@Model.Attribution</p>
                 }
-                 <dl class="row">
-                       
-                  </dl>
-                    <div>
-                        <a class="btn btn-primary"
-                           asp-action="AdicionarDetalhes" asp-route-id="@Model.FocoId">Adicionar Detalhes</a>
+                <div class="row">
+                    <div class="col-6">
+                       <a class="btn btn-primary"
+                       asp-action="AdicionarDetalhes" asp-route-id="@Model.FocoId">Adicionar Detalhes</a>
                     </div>
+                    <div class="col-6">
+                       <a class="btn btn-danger" asp-action="GerarRelatorio" asp-route-id="@Model.FocoId">Gerar Relatorio</a>
+                    </div>
+                 </div><br />                
             </div>
         </aside>
     </div>

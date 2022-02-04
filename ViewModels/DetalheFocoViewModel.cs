@@ -49,7 +49,7 @@ namespace CadeOFogo.ViewModels
         [Display(Name = "Municipe :")]
         public string Municipi { get; set; }
 
-        [Display(Name = "Policial Responsavel Pelo Atendimento :")]
+        [Display(Name = "Policial R. Pelo Atendimento:")]
         public string PolicialResponsavel { get; set; }
 
         [Display(Name = "Ocorrência SIOPM :")]
@@ -92,6 +92,10 @@ namespace CadeOFogo.ViewModels
         public int ResponsavelPropriedadeId { get; set; }
         [Display(Name = "Responsavel Pela Propriedade :")]
         public string ResponsavelPropriedadeDescricao { get; set; }
+
+        public int TipoVegetacaoId { get; set; }
+        [Display(Name = "Tipo de Vegetação :")]
+        public string TipoVegetacaoDescricao { get; set; }
 
         [Display(Name = "Pioneiro (APP) - ÁREA EM HECTARES :")]
         public string PioneiroAPPAreaEmHectares { get; set; }

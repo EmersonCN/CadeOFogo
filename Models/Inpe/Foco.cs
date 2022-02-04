@@ -79,7 +79,7 @@ namespace CadeOFogo.Models.Inpe
         [Display(Name = "Bioma")]
         public string Bioma { get; set; }
 
-        [Display(Name = "Municipi")]
+        [Display(Name = "Munícipe")]
         public string Municipi { get; set; }
 
         [Display(Name = "Policial Responsavel Pelo Atendimento")]
@@ -120,6 +120,9 @@ namespace CadeOFogo.Models.Inpe
 
         public int ResponsavelPropriedadeId { get; set; }
         public ResponsavelPropriedade ResponsavelPropriedade { get; set; }
+
+        public int TipoVegetacaoId { get; set; }
+        public TipoVegetacao TipoVegetacao { get; set; }
 
         [Display(Name = "Pioneiro (APP) - ÁREA EM HECTARES")]
         public string PioneiroAPPAreaEmHectares { get; set; }
@@ -354,6 +357,10 @@ namespace CadeOFogo.Models.Inpe
                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(b => b.Equipe)
+                .WithMany(b => b.FocoCollection)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne(b => b.TipoVegetacao)
                 .WithMany(b => b.FocoCollection)
                 .OnDelete(DeleteBehavior.NoAction);
         }

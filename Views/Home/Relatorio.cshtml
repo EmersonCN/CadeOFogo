@@ -46,15 +46,6 @@
                 </select>
             </div>
         </div>
-        <div class="col-3">
-            <label class="sr-only" for="atendido">Filtro por Atendido</label>
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">Foco Atendido</div>
-                </div>
-                <input type="checkbox" name="atendido" id="atendido" value="@ViewBag.atendido"/>
-            </div>
-        </div>
     </div>
     <div class="form-row align-items-start">
         <div class="col-auto">
@@ -69,7 +60,7 @@
             <div class="input-group mb-1">
                 <div class="input-group-text">
                     Inf. Ocorrência  -
-                    <Input type="checkbox" name="ocorrencia" id="ocorrencia" @ViewBag.ocorrencia />
+                    <Input type="checkbox" name="ocorrencia" id="ocorrencia" value="@ViewBag.ocorrencia" />
                 </div>
             </div>
         </div>
@@ -136,44 +127,45 @@
         <div class="col-3">
             <div class="form-row align-items-start">
                 <div class="col-auto">
-                    <button asp-action="GerarRelatorio" type="submit" class="btn btn-danger mb-2">Gerar Relatorio</button>
+                    <a asp-action="GerarmultiplosRelatorios" type="submit" class="btn btn-danger mb-2">Gerar Relatorio</a>
                 </div>
             </div>
         </div>
     </div>
-        <hr size="10" />
+    <hr size="10" />
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model[0].FocoDataUtc)</th>
+                <th>@Html.DisplayNameFor(model => model[0].Satelite.SateliteNome)</th>
+                <th>@Html.DisplayNameFor(model => model[0].Coordenadas)</th>
+                <th>@Html.DisplayNameFor(model => model[0].Municipio.MunicipioNome)</th>
+                <th>@Html.DisplayNameFor(model => model[0].Estado.EstadoNome)</th>
+                <th>@Html.DisplayNameFor(model => model[0].Equipe.EquipeNome)</th>
+                <th class="text-center">@Html.DisplayNameFor(model => model[0].FocoAtendido)</th>
+                <th class="text-center">@Html.DisplayNameFor(model => model[0].FocoConfirmado)</th>
+                <th class="text-center">Detalhes</th>
+            </tr>
+        </thead>
+        <tbody >
+            @foreach (var item in Model)
+            {
+                <tr asp-items="@ViewBag.focoId">
+                    <td>@Html.DisplayFor(modelItem => item.FocoDataUtc)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Satelite.SateliteNome)</td>
+                    <td><span class="small">@Html.DisplayFor(modelItem => item.Coordenadas)</span></td>
+                    <td>@Html.DisplayFor(modelItem => item.Municipio.MunicipioNome)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Estado.EstadoNome)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Equipe.EquipeNome)</td>
+                    <td class="text-center">@Html.DisplayFor(modelItem => item.FocoAtendido)</td>
+                    <td class="text-center">@Html.DisplayFor(modelItem => item.FocoConfirmado)</td>
+                    <td class="text-center"><a asp-action="Detalhes" asp-route-id="@item.FocoId" target="_blank"><i class="far fa-map"></i></a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </form>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model[0].FocoDataUtc)</th>
-            <th>@Html.DisplayNameFor(model => model[0].Satelite.SateliteNome)</th>
-            <th>@Html.DisplayNameFor(model => model[0].Coordenadas)</th>
-            <th>@Html.DisplayNameFor(model => model[0].Municipio.MunicipioNome)</th>
-            <th>@Html.DisplayNameFor(model => model[0].Estado.EstadoNome)</th>
-            <th>@Html.DisplayNameFor(model => model[0].Equipe.EquipeNome)</th>
-            <th class="text-center">@Html.DisplayNameFor(model => model[0].FocoAtendido)</th>
-            <th class="text-center">@Html.DisplayNameFor(model => model[0].FocoConfirmado)</th>
-            <th class="text-center">Detalhes</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.FocoDataUtc)</td>
-            <td>@Html.DisplayFor(modelItem => item.Satelite.SateliteNome)</td>
-            <td><span class="small">@Html.DisplayFor(modelItem => item.Coordenadas)</span></td>
-            <td>@Html.DisplayFor(modelItem => item.Municipio.MunicipioNome)</td>
-            <td>@Html.DisplayFor(modelItem => item.Estado.EstadoNome)</td>
-            <td>@Html.DisplayFor(modelItem => item.Equipe.EquipeNome)</td>
-            <td class="text-center">@Html.DisplayFor(modelItem => item.FocoAtendido)</td>
-            <td class="text-center">@Html.DisplayFor(modelItem => item.FocoConfirmado)</td>
-            <td class="text-center"><a asp-action="Detalhes" asp-route-id="@item.FocoId" target="_blank"><i class="far fa-map"></i></a></td>
-        </tr>
-        }
-    </tbody>
-</table>
+
 <p class="small">Mostrando registros de @ViewBag.primeiro até @ViewBag.ultimo de um total de @ViewBag.total</p>
 @Html.PagedListPager((IPagedList)Model,
     page => Url.Action("Relatorio", new

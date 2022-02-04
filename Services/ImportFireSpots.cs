@@ -153,6 +153,7 @@ namespace CadeOFogo.Services
               CausadorProvavelId = 1,
               CausaFogoId= 1,
               IndicioInicioFocoId = 1,
+              TipoVegetacaoId = 1,
               EquipeId = 1
             };
             

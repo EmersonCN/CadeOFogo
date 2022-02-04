@@ -112,18 +112,17 @@ namespace CadeOFogo.Controllers
             {
                 ViewBag.equipe = "";
             }
-
-            if (atendido == true && // nao eh zero
-                await _context.Focos.AnyAsync(e => e.FocoAtendido == atendido)) // existe na base de estados
+            /*
+            if (atendido == true)
             {
-                dataset = dataset.Where(e => e.FocoAtendido == atendido); // aplica o filtro
+                dataset = dataset.Where(e => e.FocoAtendido == true); // aplica o filtro
                 ViewBag.atendido = atendido;
             }
             else
             {
-                ViewBag.atendido = false;
+                ViewBag.atendido = atendido;
             }
-
+            */
             if (!string.IsNullOrEmpty(dataInicio))
                 try
                 {
@@ -155,7 +154,7 @@ namespace CadeOFogo.Controllers
 
             ViewBag.dataInicio = inicio.ToString("s");
             ViewBag.dataFinal = final.ToString("s");
-            ViewBag.atendido = ViewBag.atendido;
+            ViewBag.atendido = atendido;
             ViewBag.equipeInputSelect = new SelectList(await _context.Equipes
                 .OrderBy(s => s.EquipeNome)
                 .ToListAsync(),
@@ -265,8 +264,8 @@ namespace CadeOFogo.Controllers
       return View(data);
     }
 
-       
-        public async Task<IActionResult> GerarRelatorio(int? id , bool ocorrencia)
+
+        public async Task<IActionResult> GerarRelatorio(int? id)
         {
             if (id == null) return NotFound();
 
@@ -282,8 +281,6 @@ namespace CadeOFogo.Controllers
               .Include(f => f.Equipe)
               .FirstOrDefaultAsync(f => f.FocoId == id);
             if (foco == null) return NotFound();
-
-            ViewBag.ocorrencia = ocorrencia;
 
             var detalheFocoViewModel = new DetalheFocoViewModel
             {
@@ -373,6 +370,110 @@ namespace CadeOFogo.Controllers
             return View(detalheFocoViewModel);
         }
 
+        public async Task<IActionResult> GerarMultiplosRelatorios(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var foco = await _context.Focos
+              .Include(f => f.Estado)
+              .Include(f => f.Municipio)
+              .Include(f => f.Satelite)
+              .Include(f => f.StatusDoFoco)
+              .Include(f => f.CausadorProvavel)
+              .Include(f => f.IndicioInicioFoco)
+              .Include(f => f.CausaFogo)
+              .Include(f => f.ResponsavelPropriedade)
+              .Include(f => f.Equipe)
+              .FirstOrDefaultAsync();
+            if (foco == null) return NotFound();
+
+            var detalheFocoViewModel = new DetalheFocoViewModel
+            {
+                FocoId = foco.FocoId,
+                FocoDataUtc = foco.FocoDataUtc,
+                Coordenadas = foco.Coordenadas,
+                FocoAtendido = foco.FocoAtendido,
+                FocoConfirmado = foco.FocoConfirmado,
+                FocoIdInpe = foco.InpeFocoId,
+                //SnapshotSatelite = foco.SnapshotSatelite,
+                Satelite = foco.Satelite.SateliteNome,
+                Localidade = $"{foco.Municipio.MunicipioNome}, {foco.Estado.EstadoNome}",
+                Bioma = foco.Bioma,
+                Municipi = foco.Municipi,
+                PolicialResponsavel = foco.PolicialResponsavel,
+                OcorrênciaSIOPM = foco.OcorrênciaSIOPM,
+                NºBOPAmb = foco.NºBOPAmb,
+                NºTVA = foco.NºTVA,
+                RSO = foco.RSO,
+                DataAtendimento = foco.DataAtendimento,
+                EquipeNome = foco.Equipe.EquipeNome,
+                StatusFocoDescricao = foco.StatusDoFoco.StatusFocoDescricao,
+                IndicioInicioFocoDescricao = foco.IndicioInicioFoco.IndicioInicioFocoDescricao,
+                CausaFogoDescricao = foco.CausaFogo.CausaFogoDescricao,
+                CausadorProvavelDescricacao = foco.CausadorProvavel.CausadorProvavelDescricacao,
+                ResponsavelPropriedadeDescricao = foco.ResponsavelPropriedade.ResponsavelPropriedadeDescricao,
+                PioneiroAPPAreaEmHectares = foco.PioneiroAPPAreaEmHectares,
+                InicialAPPAreaEmHectares = foco.InicialAPPAreaEmHectares,
+                MedioAPPAreaEmHectares = foco.MedioAPPAreaEmHectares,
+                AvancadoAPPAreaEmHectares = foco.AvancadoAPPAreaEmHectares,
+                AutoDeInflacaoAmbientalAPP = foco.AutoDeInflacaoAmbientalAPP,
+                MultaAPP = foco.MultaAPP,
+                Pioneiro = foco.Pioneiro,
+                Inicial = foco.Inicial,
+                Medio = foco.Medio,
+                Avancado = foco.Avancado,
+                AutoDeInflacaoAmbiental = foco.AutoDeInflacaoAmbiental,
+                MultaR = foco.MultaR,
+                Pasto = foco.Pasto,
+                Citrus = foco.Citrus,
+                Outras = foco.Outras,
+                AutoDeInflacaoAmbientalV = foco.AutoDeInflacaoAmbientalV,
+                MultaV = foco.MultaV,
+                ArvoresIsoladas = foco.ArvoresIsoladas,
+                AutoDeInflacaoAmbientalA = foco.AutoDeInflacaoAmbientalA,
+                MultaA = foco.MultaA,
+                PalhaDeCana = foco.PalhaDeCana,
+                CanaDeAcucar = foco.CanaDeAcucar,
+                Autorizado = foco.Autorizado,
+                AutoDeInflacaoAmbientalL = foco.AutoDeInflacaoAmbientalL,
+                MultaL = foco.MultaL,
+                PioneiroUC = foco.PioneiroUC,
+                InicialUC = foco.InicialUC,
+                MedioUC = foco.MedioUC,
+                AvancadoUC = foco.AvancadoUC,
+                OutrasUC = foco.OutrasUC,
+                AutoDeInflacaoAmbientalUC = foco.AutoDeInflacaoAmbientalUC,
+                MultaUC = foco.MultaUC,
+                PioneiroRL = foco.PioneiroRL,
+                InicialRL = foco.InicialRL,
+                MedioRL = foco.MedioRL,
+                AvancadoRL = foco.AvancadoRL,
+                OutrasRL = foco.OutrasRL,
+                AutoDeInflacaoAmbientalRL = foco.AutoDeInflacaoAmbientalRL,
+                MultaRL = foco.MultaRL,
+                Refiscalizacao = foco.Refiscalizacao
+
+            };
+
+            ViewBag.TemReverseGeocode = false;
+            var reverseGeocode = _mapProvider.ReverseGeocode(foco.FocoLatitude, foco.FocoLongitude);
+            if (reverseGeocode.Status == ReverseGeocodeStatus.OK)
+            {
+                detalheFocoViewModel.Attribution = reverseGeocode.Attribution;
+                detalheFocoViewModel.ReverseGeocode = reverseGeocode.Endereco;
+                ViewBag.TemReverseGeocode = true;
+            }
+            else
+            {
+                var msg = $"Erro no reverse geocode / latlong: {foco.FocoLatitude.ToString(_nfi)}, {foco.FocoLongitude.ToString(_nfi)} / ";
+                msg += $"resposta: {reverseGeocode.Status} / {_mapProvider.providerName()}";
+                _logger.LogWarning(msg);
+            }
+
+            ViewBag.mapa = _mapProvider.DynamicSingleSpotMap(foco.FocoLatitude, foco.FocoLongitude, "map");
+
+            return View(detalheFocoViewModel);
+        }
 
         public async Task<IActionResult> Detalhes(int? id)
     {
@@ -387,6 +488,7 @@ namespace CadeOFogo.Controllers
         .Include(f => f.IndicioInicioFoco)
         .Include(f => f.CausaFogo)
         .Include(f => f.ResponsavelPropriedade)
+        .Include(f => f.TipoVegetacao)
         .Include(f => f.Equipe)
         .FirstOrDefaultAsync(f => f.FocoId == id);
       if (foco == null) return NotFound();
@@ -416,6 +518,7 @@ namespace CadeOFogo.Controllers
                 CausaFogoDescricao = foco.CausaFogo.CausaFogoDescricao,
                 CausadorProvavelDescricacao = foco.CausadorProvavel.CausadorProvavelDescricacao,
                 ResponsavelPropriedadeDescricao = foco.ResponsavelPropriedade.ResponsavelPropriedadeDescricao,
+                TipoVegetacaoDescricao = foco.TipoVegetacao.TipoVegetacaoDescricao,
                 PioneiroAPPAreaEmHectares = foco.PioneiroAPPAreaEmHectares,
                 InicialAPPAreaEmHectares = foco.InicialAPPAreaEmHectares,
                 MedioAPPAreaEmHectares = foco.MedioAPPAreaEmHectares,
@@ -492,6 +595,7 @@ namespace CadeOFogo.Controllers
               .Include(f => f.IndicioInicioFoco)
               .Include(f => f.CausaFogo)
               .Include(f => f.ResponsavelPropriedade)
+              .Include(f => f.TipoVegetacao)
               .Include(f => f.Equipe)
               .FirstOrDefaultAsync(f => f.FocoId == id);
             if (foco == null) return NotFound();
@@ -509,30 +613,41 @@ namespace CadeOFogo.Controllers
                 NºTVA = foco.NºTVA,
                 RSO = foco.RSO,
                 DataAtendimento = foco.DataAtendimento,
+                EquipeId = foco.EquipeId,
                 Equipe = new SelectList(await _context.Equipes
                   .OrderBy(c => c.EquipeNome).ToListAsync(),
                       dataValueField: "EquipeId",
                      dataTextField: "EquipeNome"),
+                StatusFocoId = foco.StatusFocoId,
                 StatusDoFoco = new SelectList(await _context.StatusFocos
                   .OrderBy(c => c.StatusFocoDescricao).ToListAsync(),
                       dataValueField: "StatusFocoId",
                      dataTextField: "StatusFocoDescricao"),
+                IndicioInicioFocoId = foco.IndicioInicioFocoId,
                 IndicioDeInicioDoFoco = new SelectList(await _context.IndiciosInicioFoco
                     .OrderBy(c => c.IndicioInicioFocoDescricao).ToListAsync(),
                       dataValueField: "IndicioInicioFocoId",
                      dataTextField: "IndicioInicioFocoDescricao"),
+                CausaFogoId = foco.CausaFogoId,
                 CausaFogo = new SelectList(await _context.CausasFogo
                     .OrderBy(c => c.CausaFogoDescricao).ToListAsync(),
                       dataValueField: "CausaFogoId",
                      dataTextField: "CausaFogoDescricao"),
+                CausadorProvavelId = foco.CausadorProvavelId,
                 CausadorProvavel = new SelectList(await _context.CausadoresProvaveis
                     .OrderBy(c => c.CausadorProvavelDescricacao).ToListAsync(),
                       dataValueField: "CausadorProvavelId",
                      dataTextField: "CausadorProvavelDescricacao"),
+                ResponsavelPropriedadeId = foco.ResponsavelPropriedadeId,
                 ResponsavelPelaPropriedade = new SelectList(await _context.ResponsaveisPropriedade
                     .OrderBy(c => c.ResponsavelPropriedadeDescricao).ToListAsync(),
                       dataValueField: "ResponsavelPropriedadeId",
                      dataTextField: "ResponsavelPropriedadeDescricao"),
+                TipoVegetacaoId =foco.TipoVegetacaoId,
+                TipoVegetacao = new SelectList(await _context.TiposVegetacao
+                    .OrderBy(c => c.TipoVegetacaoDescricao).ToListAsync(),
+                      dataValueField: "TipoVegetacaoId",
+                     dataTextField: "TipoVegetacaoDescricao"),
                 PioneiroAPPAreaEmHectares = foco.PioneiroAPPAreaEmHectares,
                 InicialAPPAreaEmHectares = foco.InicialAPPAreaEmHectares,
                 MedioAPPAreaEmHectares = foco.MedioAPPAreaEmHectares,
@@ -616,30 +731,34 @@ namespace CadeOFogo.Controllers
                     NºTVA = foco.NºTVA,
                     RSO = foco.RSO,
                     DataAtendimento = foco.DataAtendimento,
-                    Equipe = new SelectList(await _context.Equipes
-                    .OrderBy(c => c.EquipeNome).ToListAsync(),
+                    EquipeId = foco.EquipeId,
+                    Equipe = new SelectList(await _context.Equipes.ToListAsync(),
                       dataValueField: "EquipeId",
                      dataTextField: "EquipeNome"),
-                    StatusDoFoco = new SelectList(await _context.StatusFocos
-                    .OrderBy(c => c.StatusFocoDescricao).ToListAsync(),
+                    StatusFocoId = foco.StatusFocoId,
+                    StatusDoFoco = new SelectList(await _context.StatusFocos.ToListAsync(),
                       dataValueField: "StatusFocoId",
                      dataTextField: "StatusFocoDescricao"),
-                    IndicioDeInicioDoFoco = new SelectList(await _context.IndiciosInicioFoco
-                    .OrderBy(c => c.IndicioInicioFocoDescricao).ToListAsync(),
+                    IndicioInicioFocoId = foco.IndicioInicioFocoId,
+                    IndicioDeInicioDoFoco = new SelectList(await _context.IndiciosInicioFoco.ToListAsync(),
                       dataValueField: "IndicioInicioFocoId",
                      dataTextField: "IndicioInicioFocoDescricao"),
-                    CausaFogo = new SelectList(await _context.CausasFogo
-                    .OrderBy(c => c.CausaFogoDescricao).ToListAsync(),
+                    CausaFogoId = foco.CausaFogoId,
+                    CausaFogo = new SelectList(await _context.CausasFogo.ToListAsync(),
                       dataValueField: "CausaFogoId",
                      dataTextField: "CausaFogoDescricao"),
-                    CausadorProvavel = new SelectList(await _context.CausadoresProvaveis
-                    .OrderBy(c => c.CausadorProvavelDescricacao).ToListAsync(),
+                    CausadorProvavelId = foco.CausadorProvavelId,
+                    CausadorProvavel = new SelectList(await _context.CausadoresProvaveis.ToListAsync(),
                       dataValueField: "CausadorProvavelId",
                      dataTextField: "CausadorProvavelDescricacao"),
-                    ResponsavelPelaPropriedade = new SelectList(await _context.ResponsaveisPropriedade
-                    .OrderBy(c => c.ResponsavelPropriedadeDescricao).ToListAsync(),
+                    ResponsavelPropriedadeId = foco.ResponsavelPropriedadeId,
+                    ResponsavelPelaPropriedade = new SelectList(await _context.ResponsaveisPropriedade.ToListAsync(),
                       dataValueField: "ResponsavelPropriedadeId",
                      dataTextField: "ResponsavelPropriedadeDescricao"),
+                    TipoVegetacaoId = foco.TipoVegetacaoId,
+                    TipoVegetacao = new SelectList(await _context.TiposVegetacao.ToListAsync(),
+                      dataValueField: "TipoVegetacaoId",
+                     dataTextField: "TipoVegetacaoDescricao"),
                     PioneiroAPPAreaEmHectares = foco.PioneiroAPPAreaEmHectares,
                     InicialAPPAreaEmHectares = foco.InicialAPPAreaEmHectares,
                     MedioAPPAreaEmHectares = foco.MedioAPPAreaEmHectares,
@@ -693,6 +812,7 @@ namespace CadeOFogo.Controllers
               .Include(f => f.IndicioInicioFoco)
               .Include(f => f.CausaFogo)
               .Include(f => f.ResponsavelPropriedade)
+              .Include(f => f.TipoVegetacao)
               .Include(f => f.Equipe)
               .FirstOrDefaultAsync(p => p.FocoId == foco.FocoId);
 
@@ -778,6 +898,16 @@ namespace CadeOFogo.Controllers
                     return NotFound();
 
                 focoOriginal.ResponsavelPropriedade = responsavel;
+            }
+
+            if (focoOriginal.TipoVegetacaoId != foco.TipoVegetacaoId)
+            {
+                var vegetacao = await _context.TiposVegetacao.FindAsync(foco.TipoVegetacaoId);
+
+                if (vegetacao == null)
+                    return NotFound();
+
+                focoOriginal.TipoVegetacao = vegetacao;
             }
 
             if (focoOriginal.PioneiroAPPAreaEmHectares != foco.PioneiroAPPAreaEmHectares)

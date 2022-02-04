@@ -70,6 +70,10 @@ namespace CadeOFogo.ViewModels
         [Display(Name = "Responsavel Pela Propriedade :")]
         public SelectList ResponsavelPelaPropriedade { get; set; }
 
+        public int TipoVegetacaoId { get; set; }
+        [Display(Name = "Tipo de Vegatação :")]
+        public SelectList TipoVegetacao { get; set; }
+
         [Display(Name = "Pioneiro (APP) - ÁREA EM HECTARES :")]
         public string PioneiroAPPAreaEmHectares { get; set; }
 

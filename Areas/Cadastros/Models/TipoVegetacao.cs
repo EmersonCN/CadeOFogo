@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -18,7 +19,9 @@ namespace CadeOFogo.Models.Inpe
       ShortName = "Tipo veg.",
       Prompt = "Tipo de vegetação...")]
     public string TipoVegetacaoDescricao { get; set; }
-  }
+
+        public ICollection<Foco> FocoCollection { get; set; }
+    }
   
   public class TipoVegetacaoConfiguration : IEntityTypeConfiguration<TipoVegetacao>
   {
@@ -30,7 +33,11 @@ namespace CadeOFogo.Models.Inpe
         .IsRequired()
         .HasMaxLength(80);
 
-      builder.HasData(
+            builder.HasMany(p => p.FocoCollection)
+                       .WithOne(p => p.TipoVegetacao)
+                       .HasForeignKey(p => p.TipoVegetacaoId);
+
+            builder.HasData(
         new TipoVegetacao {TipoVegetacaoId = 1, TipoVegetacaoDescricao = "Vegetação pioneira ou demais formas de vegetação natural"},
         new TipoVegetacao {TipoVegetacaoId = 2, TipoVegetacaoDescricao = "Vegetação nativa secundária em estágio inicial de regeneração"},
         new TipoVegetacao {TipoVegetacaoId = 3, TipoVegetacaoDescricao = "Vegetação nativa secundária em estágio médio de regeneração"},
