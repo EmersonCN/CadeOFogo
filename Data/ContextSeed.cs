@@ -15,7 +15,7 @@ namespace CadeOFogo.Data
             await roleManeger.CreateAsync(new IdentityRole(Enums.Roles.AdminBatalhao.ToString()));
             await roleManeger.CreateAsync(new IdentityRole(Enums.Roles.AdminCompanhia.ToString()));
             await roleManeger.CreateAsync(new IdentityRole(Enums.Roles.AdminPelotao.ToString()));
-            await roleManeger.CreateAsync(new IdentityRole(Enums.Roles.AdminEquipe.ToString()));
+            await roleManeger.CreateAsync(new IdentityRole(Enums.Roles.Usuario.ToString()));
         }
 
         public static async Task SeedUberAdminAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)

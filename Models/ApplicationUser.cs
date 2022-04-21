@@ -18,7 +18,7 @@ namespace CadeOFogo.Models.Inpe
 
     public int PelotaoId { get; set; }
 
-        public ICollection<Equipe> EquipeCollection { get; set; }
+    public ICollection<Equipe> EquipeCollection { get; set; }
 
 
     }
