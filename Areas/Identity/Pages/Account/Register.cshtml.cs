@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 
@@ -70,8 +71,9 @@ namespace CadeOFogo.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            [Display(Name = "Pelotão Id:")]
+            [Display(Name = "Pelotão Id")]
             public int PelotaoId { get; set; }
+
 
         }
 
@@ -88,7 +90,8 @@ namespace CadeOFogo.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
-                { UserName = Input.UserName,
+                { 
+                  UserName = Input.UserName,
                   Email = Input.Email,
                   NomeCompleto = Input.Nome,
                   PelotaoId = Input.PelotaoId

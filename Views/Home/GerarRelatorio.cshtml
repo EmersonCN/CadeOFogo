@@ -4,11 +4,13 @@
     ViewData["Title"] = "GerarRelatorio";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<script src="/js/jquery/jquery.min.js" ></script>
 <div class="container">
     <div class="row">
         <div class="col">
             <aside class="detalhe-foco">
-                <div class="container">
+                <div class="container" id="pdf">
                     <h2>Foco @Model.FocoId</h2>
                     <h3><label asp-for="FocoIdInpe" class="control-label"></label><br />@Model.FocoIdInpe</h3>
                     <dl class="row">
@@ -184,6 +186,17 @@
                     }
                 </div>
             </aside>
+            <button class="btn btn-primary" id="btnGenerate" >Gerar Pdf</button>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $("#btnGenerate").click(function () {
+        var html = $("#pdf").html();
+        html = html.replace(/</g, "start").replace(/>/g, "end");
+
+        window.open("/Home/GeneratePdf?html="+html,"_bank");
+    })
+
+</script>
