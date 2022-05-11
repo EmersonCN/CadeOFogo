@@ -5,7 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script src="/js/jquery/jquery.min.js" ></script>
+<script src="/js/jquery/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 <div class="container">
     <div class="row">
         <div class="col">
@@ -186,17 +189,33 @@
                     }
                 </div>
             </aside>
-            <button class="btn btn-primary" id="btnGenerate" >Gerar Pdf</button>
+            <button class="btn btn-primary" id="btnGenerate">Gerar Pdf</button>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
-    $("#btnGenerate").click(function () {
-        var html = $("#pdf").html();
-        html = html.replace(/</g, "start").replace(/>/g, "end");
 
-        window.open("/Home/GeneratePdf?html="+html,"_bank");
-    })
+    $(document).ready(function () {
+        $('#btnGenerate').click(function () {
+            savePDF(document.querySelector('#pdf'));
+        });
+    });
 
+    function savePDF(codigoHTML) {
+        var doc = new jsPDF('portrait', 'pt', 'a4'),
+            data = new Date();
+        margins = {
+            top: 40,
+            bottom: 60,
+            left: 40,
+            width: 1000
+        };
+        doc.fromHTML(codigoHTML,
+            margins.left, // x coord
+            margins.top, { pagesplit: true },
+            function (dispose) {
+                doc.save("Relatorio - " + data.getDate() + "/" + data.getMonth() + "/" + data.getFullYear() + ".pdf");
+            });
+    }
 </script>
