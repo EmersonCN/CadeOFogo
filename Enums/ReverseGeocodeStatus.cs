@@ -14,7 +14,6 @@
         AdminBatalhao,
         AdminCompanhia,
         AdminPelotao,
-        AdminEquipe,
         Usuario
     }
 }
