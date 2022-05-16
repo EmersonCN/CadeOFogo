@@ -30,21 +30,25 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CompanhiaId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CompanhiaNome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NomeBatalhao)
-                    </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanhiaId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanhiaNome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeBatalhao)
+                </td>
+                @if (User.IsInRole("AdminBatalhao") || User.IsInRole("AdminCompanhia"))
+                {
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.CompanhiaId"><i class="far fa-edit"></i></a> |
                         <a asp-action="Delete" asp-route-id="@item.CompanhiaId"><span style="color: #ff253a"><i class="fas fa-trash-alt"></i></span></a>
                     </td>
-                </tr>
+
+                }
+            </tr>
             }
         </tbody>
     </table>

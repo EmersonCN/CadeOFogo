@@ -186,15 +186,19 @@
                 {
                     <p class="small text-dark">@Model.Attribution</p>
                 }
-                <div class="row">
-                    <div class="col-6">
-                       <a class="btn btn-primary"
-                       asp-action="AdicionarDetalhes" asp-route-id="@Model.FocoId">Adicionar Detalhes</a>
-                    </div>
-                    <div class="col-6">
-                       <a class="btn btn-danger" asp-action="GerarRelatorio" asp-route-id="@Model.FocoId">Gerar Relatorio</a>
-                    </div>
-                 </div><br />                
+                @if (User.IsInRole("AdminBatalhao") || User.IsInRole("AdminCompanhia") || User.IsInRole("AdminPelotao"))
+                {
+                    <div class="row">
+                        <div class="col-6">
+                            <a class="btn btn-primary"
+                               asp-action="AdicionarDetalhes" asp-route-id="@Model.FocoId">Adicionar Detalhes</a>
+                        </div>
+                        <div class="col-6">
+                            <a class="btn btn-danger" asp-action="GerarRelatorio" asp-route-id="@Model.FocoId">Gerar Relatorio</a>
+                        </div>
+                    </div><br />
+
+                }
             </div>
         </aside>
     </div>

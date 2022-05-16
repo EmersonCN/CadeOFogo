@@ -20,35 +20,39 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownCadastros" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Cadastros
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownCadastros">
-                                <li><a class="dropdown-item" asp-area="Cadastros" asp-controller="Batalhoes" asp-action="Index">Batalhões</a></li>
-                                <li><a class="dropdown-item" asp-area="Cadastros" asp-controller="Companhias" asp-action="Index">Companhias</a></li>
-                                <li><a class="dropdown-item" asp-area="Cadastros" asp-controller="Pelotoes" asp-action="Index">Pelotões</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="UsuariosPapeis" asp-action="Index">Papeis</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" asp-area="Cadastros" asp-controller="CausasFogo" asp-action="Index">Causas prováveis de foco</a></li>
-                                <li><a class="dropdown-item" asp-area="Cadastros" asp-controller="IndiciosInicioFogo" asp-action="Index">Indícios de início de foco</a></li>
-                                <li><a class="dropdown-item" asp-area="Cadastros" asp-controller="StatusFocos" asp-action="Index">Situação de foco</a></li>
-                                <li><a class="dropdown-item" asp-area="Cadastros" asp-controller="ResponsaveisPropriedade" asp-action="Index">Responsáveis pela propriedade</a></li>
-                                <li><a class="dropdown-item" asp-area="Cadastros" asp-controller="TiposVegetacao" asp-action="Index">Tipos de vegetação</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownRelatorios" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Relatórios
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownRelatorios">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Relatorio">Relatório</a></li>
-                                <li><a class="dropdown-item" href="#">Realtório 2</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" asp-area="Cadastros" asp-controller="Equipes" asp-action="Index">Equipes</a>
-                        </li>
+                        @if (User.IsInRole("AdminBatalhao") || User.IsInRole("AdminCompanhia") || User.IsInRole("AdminPelotao") || User.IsInRole("AdminEquipe") || User.IsInRole("Usuario"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownCadastros" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Cadastros
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownCadastros">
+                                    <li><a class="dropdown-item" asp-area="Cadastros" asp-controller="Batalhoes" asp-action="Index">Batalhões</a></li>
+                                    <li><a class="dropdown-item" asp-area="Cadastros" asp-controller="Companhias" asp-action="Index">Companhias</a></li>
+                                    <li><a class="dropdown-item" asp-area="Cadastros" asp-controller="Pelotoes" asp-action="Index">Pelotões</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="UsuariosPapeis" asp-action="Index">Papeis</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" asp-area="Cadastros" asp-controller="CausasFogo" asp-action="Index">Causas prováveis de foco</a></li>
+                                    <li><a class="dropdown-item" asp-area="Cadastros" asp-controller="IndiciosInicioFogo" asp-action="Index">Indícios de início de foco</a></li>
+                                    <li><a class="dropdown-item" asp-area="Cadastros" asp-controller="StatusFocos" asp-action="Index">Situação de foco</a></li>
+                                    <li><a class="dropdown-item" asp-area="Cadastros" asp-controller="ResponsaveisPropriedade" asp-action="Index">Responsáveis pela propriedade</a></li>
+                                    <li><a class="dropdown-item" asp-area="Cadastros" asp-controller="TiposVegetacao" asp-action="Index">Tipos de vegetação</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownRelatorios" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Relatórios
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownRelatorios">
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Relatorio">Relatório</a></li>
+                                    <li><a class="dropdown-item" href="#">Realtório 2</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" asp-area="Cadastros" asp-controller="Equipes" asp-action="Index">Equipes</a>
+                            </li>
+                        }
+
                         <li class="nav-item">
                             <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Sobre">Sobre</a>
                         </li>

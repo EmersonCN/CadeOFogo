@@ -33,10 +33,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CausaFogoDescricao)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CausaFogoId"><i class="far fa-edit"></i></a> |
-                <a asp-action="Delete" asp-route-id="@item.CausaFogoId"><span style="color: #ff253a"><i class="fas fa-trash-alt"></i></span></a>
-            </td>
+            @if (User.IsInRole("AdminBatalhao"))
+            {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CausaFogoId"><i class="far fa-edit"></i></a> |
+                    <a asp-action="Delete" asp-route-id="@item.CausaFogoId"><span style="color: #ff253a"><i class="fas fa-trash-alt"></i></span></a>
+                </td>
+
+            }
         </tr>
 }
     </tbody>

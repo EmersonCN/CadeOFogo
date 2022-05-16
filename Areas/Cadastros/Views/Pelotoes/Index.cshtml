@@ -46,10 +46,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.NomeBatalhao)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PelotaoId"><i class="far fa-edit"></i></a> |
-                <a asp-action="Detalhes" asp-route-id="@item.PelotaoId">Detalhes</a> |
-            </td>
+            @if (User.IsInRole("AdminBatalhao") || User.IsInRole("AdminCompanhia") || User.IsInRole("AdminPelotao"))
+            {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PelotaoId"><i class="far fa-edit"></i></a> |
+                    <a asp-action="Detalhes" asp-route-id="@item.PelotaoId">Detalhes</a> |
+                </td>
+
+            }
         </tr>
         }
     </tbody>
