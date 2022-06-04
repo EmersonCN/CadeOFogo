@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CadeOFogo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220204180507_inicial2")]
-    partial class inicial2
+    [Migration("20220604013549_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -423,7 +423,7 @@ namespace CadeOFogo.Migrations
                     b.Property<bool>("FocoConfirmado")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasDefaultValue(false);
 
                     b.Property<DateTime>("FocoDataUtc")
                         .HasPrecision(0)

@@ -403,7 +403,7 @@ namespace CadeOFogo.Migrations
                     FocoLatitude = table.Column<decimal>(type: "decimal(13,8)", precision: 13, scale: 8, nullable: false),
                     FocoDataUtc = table.Column<DateTime>(type: "datetime2(0)", precision: 0, nullable: false),
                     FocoAtendido = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    FocoConfirmado = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
+                    FocoConfirmado = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     SateliteId = table.Column<int>(type: "int", nullable: false),
                     MunicipioId = table.Column<int>(type: "int", nullable: false),
                     EstadoId = table.Column<int>(type: "int", nullable: false),
@@ -425,6 +425,7 @@ namespace CadeOFogo.Migrations
                     CausaFogoId = table.Column<int>(type: "int", nullable: false),
                     CausadorProvavelId = table.Column<int>(type: "int", nullable: false),
                     ResponsavelPropriedadeId = table.Column<int>(type: "int", nullable: false),
+                    TipoVegetacaoId = table.Column<int>(type: "int", nullable: false),
                     PioneiroAPPAreaEmHectares = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     InicialAPPAreaEmHectares = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MedioAPPAreaEmHectares = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -516,6 +517,11 @@ namespace CadeOFogo.Migrations
                         column: x => x.StatusFocoId,
                         principalTable: "StatusFocos",
                         principalColumn: "StatusFocoId");
+                    table.ForeignKey(
+                        name: "FK_Focos_TiposVegetacao_TipoVegetacaoId",
+                        column: x => x.TipoVegetacaoId,
+                        principalTable: "TiposVegetacao",
+                        principalColumn: "TipoVegetacaoId");
                 });
 
             migrationBuilder.InsertData(
@@ -730,6 +736,11 @@ namespace CadeOFogo.Migrations
                 column: "StatusFocoId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Focos_TipoVegetacaoId",
+                table: "Focos",
+                column: "TipoVegetacaoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Municipios_EstadoId",
                 table: "Municipios",
                 column: "EstadoId");
@@ -771,9 +782,6 @@ namespace CadeOFogo.Migrations
                 name: "Focos");
 
             migrationBuilder.DropTable(
-                name: "TiposVegetacao");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -799,6 +807,9 @@ namespace CadeOFogo.Migrations
 
             migrationBuilder.DropTable(
                 name: "StatusFocos");
+
+            migrationBuilder.DropTable(
+                name: "TiposVegetacao");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

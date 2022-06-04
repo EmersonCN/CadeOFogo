@@ -320,7 +320,7 @@ namespace CadeOFogo.Models.Inpe
 
       builder.Property(f => f.FocoConfirmado)
         .IsRequired()
-        .HasDefaultValue(true);
+        .HasDefaultValue(false);
 
 
       builder.HasOne(f => f.Satelite)

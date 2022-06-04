@@ -90,7 +90,7 @@ namespace CadeOFogo.Services
         {
           Console.WriteLine(e);
           _logger.LogCritical("Erro no mapeamento do Json dos focos do INPE para a classe ApiInpeFocos");
-          throw;
+          continue;
         }
 
         msg = $"Importando {focosFromInpe.Count} foco para {estado.EstadoNome}";
@@ -135,8 +135,17 @@ namespace CadeOFogo.Services
               continue;
             }
 
+           if (dbContext.Focos.Any(x => x.FocoLatitude == Convert.ToDecimal(foco.Properties.Latitude) && x.FocoLongitude == Convert.ToDecimal(foco.Properties.Longitude)))
+            {
+              msg = $"Foco ja cadastrado na base local";
+              _logger.LogCritical(msg);
+             continue;
+            }
+           
+
             var novoFoco = new Foco
             {
+              FocoConfirmado = false,
               FocoAtendido = false,
               FocoDataUtc = foco.Properties.DataHoraGmt,
               InpeFocoId = foco.Id,
@@ -167,7 +176,6 @@ namespace CadeOFogo.Services
               novoFoco.DataSnapshot = DateTime.UtcNow;
               novoFoco.SnapshotProvider = _mapProvider.providerName();
             }
-
             dbContext.Focos.Add(novoFoco);
             dbContext.SaveChanges();
 

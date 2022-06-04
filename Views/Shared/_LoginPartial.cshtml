@@ -5,6 +5,16 @@
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
+       if (User.IsInRole("AdminBatalhao") || User.IsInRole("AdminCompanhia") || User.IsInRole("AdminPelotao"))
+       {
+          <li class="nav-item text-center active" id="signup-btn">
+            <a asp-area="Identity" asp-page="/Account/Register" class="nav-link active">
+              <span class="fas fa-user"></span>
+              <span class="d-none d-sm-inline d-xl-block px-1">Registrar</span>
+            </a>
+          </li>
+       }
+        
         <li class="nav-item" style="align-self: center;">
             @if (UserManager.GetUserAsync(User).Result.FotoPerfil != null)
             {
@@ -28,12 +38,6 @@
     }
     else
     {
-        <li class="nav-item text-center active" id="signup-btn">
-            <a asp-area="Identity" asp-page="/Account/Register" class="nav-link active">
-                <span class="fas fa-user"></span>
-                <span class="d-none d-sm-inline d-xl-block px-1">Registrar</span>
-            </a>
-        </li>
         <li class="nav-item text-center active" id="login-btn">
             <a asp-area="Identity" asp-page="/Account/Login" class="nav-link active">
                 <span class="fas fa-sign-in-alt"></span>

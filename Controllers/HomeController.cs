@@ -605,6 +605,7 @@ namespace CadeOFogo.Controllers
             {
                 FocoId = foco.FocoId,
                 FocoAtendido = foco.FocoAtendido,
+                FocoConfirmado = foco.FocoConfirmado,
                 FocoIdInpe = foco.InpeFocoId,
                 Bioma = foco.Bioma,
                 Municipi = foco.Municipi,

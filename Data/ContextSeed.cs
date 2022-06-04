@@ -41,7 +41,6 @@ namespace CadeOFogo.Data
                     await userManager.AddToRoleAsync(primeiroUsuario, Enums.Roles.AdminBatalhao.ToString());
                     await userManager.AddToRoleAsync(primeiroUsuario, Enums.Roles.AdminCompanhia.ToString());
                     await userManager.AddToRoleAsync(primeiroUsuario, Enums.Roles.AdminPelotao.ToString());
-                    await userManager.AddToRoleAsync(primeiroUsuario, Enums.Roles.AdminEquipe.ToString());
                     await userManager.AddToRoleAsync(primeiroUsuario, Enums.Roles.Usuario.ToString());
                 }
             }

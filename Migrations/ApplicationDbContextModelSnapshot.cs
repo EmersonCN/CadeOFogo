@@ -421,7 +421,7 @@ namespace CadeOFogo.Migrations
                     b.Property<bool>("FocoConfirmado")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasDefaultValue(false);
 
                     b.Property<DateTime>("FocoDataUtc")
                         .HasPrecision(0)

@@ -358,7 +358,7 @@ namespace CadeOFogo.Areas.Cadastros.Controllers
                 else
                 {
                     var p = await _context.ApplicationUsers.FindAsync(policial.UserId);
-                    p.Pelotao = pelotao;
+                    p.Pelotao = null;
                 }
 
                 _context.SaveChanges();

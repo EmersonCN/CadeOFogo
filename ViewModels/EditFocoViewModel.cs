@@ -11,6 +11,9 @@ namespace CadeOFogo.ViewModels
         [Display(Name = "Foco já atendido")]
         public bool FocoAtendido { get; set; }
 
+        [Display(Name = "Foco confirmado")]
+        public bool FocoConfirmado { get; set; }
+
         [Display(Name = "Identificação do foco no INPE")]
         public string FocoIdInpe { get; set; }
 
