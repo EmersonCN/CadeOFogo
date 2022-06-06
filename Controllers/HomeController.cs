@@ -725,6 +725,7 @@ namespace CadeOFogo.Controllers
                 {
                     FocoId = foco.FocoId,
                     FocoAtendido = foco.FocoAtendido,
+                    FocoConfirmado = foco.FocoConfirmado,
                     Bioma = foco.Bioma,
                     Municipi = foco.Municipi,
                     PolicialResponsavel = foco.PolicialResponsavel,
@@ -1035,6 +1036,9 @@ namespace CadeOFogo.Controllers
             if (focoOriginal.FocoAtendido != foco.FocoAtendido)
                 focoOriginal.FocoAtendido = foco.FocoAtendido;
 
+            if (focoOriginal.FocoConfirmado != foco.FocoConfirmado)
+                focoOriginal.FocoConfirmado = foco.FocoConfirmado;
+
             if (_context.Entry(focoOriginal).State == EntityState.Modified)
             {
                 try
@@ -1090,6 +1094,6 @@ namespace CadeOFogo.Controllers
             return File(pdffile,"application/pdf");
         }
 
-
+        
     }
 }

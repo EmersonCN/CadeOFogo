@@ -17,6 +17,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
+using Microsoft.IdentityModel.Logging;
 
 namespace CadeOFogo
 {
@@ -39,7 +41,9 @@ namespace CadeOFogo
         );
       services.AddDatabaseDeveloperPageExceptionFilter();
 
-      services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "CadeOFogo", Version = "v1" }); });
+
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
         {
           options.SignIn.RequireConfirmedAccount = true;
           options.Password.RequiredLength = 6;
@@ -68,8 +72,11 @@ namespace CadeOFogo
     {
       if (env.IsDevelopment())
       {
-        app.UseDeveloperExceptionPage();
-        app.UseMigrationsEndPoint();
+                IdentityModelEventSource.ShowPII = true; // for localhost issuer
+
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CadeOFogo v1"));
       }
       else
       {

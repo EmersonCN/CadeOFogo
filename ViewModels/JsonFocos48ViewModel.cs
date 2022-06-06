@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using CadeOFogo.Models.Inpe;
 using Newtonsoft.Json;
 
@@ -22,4 +24,20 @@ namespace CadeOFogo.ViewModels
   {
     [JsonProperty("resumo")] public string Resumo { get; set; }
   }
+
+    public class JsonFocosInpeViewModel
+    {
+        [JsonProperty("focos")] public List<JsonFocosInpeVerificadosViewModel> Focos { get; set; }
+    }
+
+    public class JsonFocosInpeVerificadosViewModel
+   {
+        [JsonProperty("focoId")] public string FocoId { get; set; }
+        [JsonProperty("data")] public string FocoDataUtc { get; set; }
+        [JsonProperty("satelite")] public string Satelite { get; set; }
+        [JsonProperty("coordenadas")] public List<decimal> Coordenadas { get; set; }
+        [JsonProperty("municipio")]public string MunicipioNome { get; set; }
+        [JsonProperty("estado")] public string EstadoNome { get; set; }
+        [JsonProperty("confirmado")] public bool FocoConfirmado { get; set; }
+    }
 }
