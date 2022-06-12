@@ -22,13 +22,12 @@ namespace CadeOFogo.Data
         {
             var primeiroUsuario = new ApplicationUser
             {
-                Id = "1",
+                Id = "40c5b2c7-7f33-42b7-9d91-9b188edf3cfb",
                 UserName = "EmersonCN",
                 Email = "emersoncn2015@gmail.com",
                 NomeCompleto = "Emerson Carlos Nogueira",
                 EmailConfirmed = true,
-                PhoneNumberConfirmed = true,
-                PelotaoId = 1
+                PhoneNumberConfirmed = true
             };
 
             if (userManager.Users.All(u => u.Id != primeiroUsuario.Id))

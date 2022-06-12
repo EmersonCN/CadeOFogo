@@ -93,8 +93,7 @@ namespace CadeOFogo.Areas.Identity.Pages.Account
                 { 
                   UserName = Input.UserName,
                   Email = Input.Email,
-                  NomeCompleto = Input.Nome,
-                  PelotaoId = 1
+                  NomeCompleto = Input.Nome
                 };
 
                 var result = await _userManager.CreateAsync(user, Input.Password);

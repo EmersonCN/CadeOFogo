@@ -14,9 +14,7 @@ namespace CadeOFogo.Models.Inpe
    
     public byte[] FotoPerfil { get; set; }
 
-    public Pelotao Pelotao { get; set; }
-
-    public int PelotaoId { get; set; }
+    public ICollection<UsuarioPelotao> UsuariosPelotao { get; set; }
 
     public ICollection<Equipe> EquipeCollection { get; set; }
 
@@ -28,8 +26,8 @@ public class ApplicationUserConfiguration : IEntityTypeConfiguration<Application
 {
     public void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
-        builder.HasOne(b => b.Pelotao)
-                .WithMany(b => b.Usuarios)
-                .HasForeignKey(b => b.PelotaoId);
+        builder.HasMany(b => b.UsuariosPelotao)
+                .WithOne(b => b.User)
+                .HasForeignKey(b => b.User_Id);
     }
 }

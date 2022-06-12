@@ -32,6 +32,7 @@ namespace CadeOFogo.Data
     public DbSet<Pelotao> Pelotoes { get; set; }
     public DbSet<Equipe> Equipes { get; set; }
     public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+    public DbSet<UsuarioPelotao> UsuarioPelotao { get; set; }
 
         //public DbSet<AreaComum> AreaComums { get; set; }
         //public DbSet<AreaPreservacaoPermanente> AreasPreservacaoPermanente { get; set; }
@@ -64,7 +65,8 @@ namespace CadeOFogo.Data
       builder.ApplyConfiguration(new CompanhiaConfiguration());
       builder.ApplyConfiguration(new PelotaoConfiguration());
       builder.ApplyConfiguration(new EquipeConfiguration());
-      builder.ApplyConfiguration(new ApplicationUserConfiguration());
+            builder.ApplyConfiguration(new UsuarioPelotaoConfiguration());
+            builder.ApplyConfiguration(new ApplicationUserConfiguration());
             builder.Entity<Batalhao>().HasData(
                   new Batalhao
                   {

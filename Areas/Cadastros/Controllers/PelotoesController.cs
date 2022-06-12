@@ -1,4 +1,5 @@
-﻿using CadeOFogo.Areas.Cadastros.ViewsModels.Pelotao;
+﻿using CadeOFogo.Areas.Cadastros.Models;
+using CadeOFogo.Areas.Cadastros.ViewsModels.Pelotao;
 using CadeOFogo.Data;
 using CadeOFogo.Models.Inpe;
 using Microsoft.AspNetCore.Identity;
@@ -34,8 +35,14 @@ namespace CadeOFogo.Areas.Cadastros.Controllers
 
         private async Task<List<ApplicationUser>> GetUser(Pelotao pelotao)
         {
-
-            return await _userManager.Users.ToListAsync();
+            var users = new List<ApplicationUser>();
+            var usuarios = _context.UsuarioPelotao.Where(x => x.Pelotao_Id == pelotao.PelotaoId).ToList();
+            foreach(var usuario in usuarios)
+            {
+                var user = await _userManager.Users.Where(x => x.Id == usuario.User_Id).FirstOrDefaultAsync();
+                users.Add(user);
+            }
+            return users;
         }
 
         public async Task<IActionResult> Index(string keyword, int? pagina)
@@ -326,14 +333,30 @@ namespace CadeOFogo.Areas.Cadastros.Controllers
             var usuarios = _userManager.Users.ToList();
             foreach (var user in usuarios)
             {
-                var upVM = new GerenciarUsuariosViewModel
+                var usuarioPelotao = _context.UsuarioPelotao.Where(x => x.Pelotao_Id == pelotaoId && x.User_Id == user.Id).FirstOrDefault();
+                if (user.UsuariosPelotao == usuarioPelotao)
                 {
-                    UserId = user.Id,
-                    NomeCompleto = user.NomeCompleto,
-                    Selecionado = false
-                };
+                    var upVM2 = new GerenciarUsuariosViewModel
+                    {
+                        UserId = user.Id,
+                        NomeCompleto = user.NomeCompleto,
+                        Selecionado = false
+                    };
 
-                model.Add(upVM);
+                    model.Add(upVM2);
+                }
+                else
+                {
+                    var upVM = new GerenciarUsuariosViewModel
+                    {
+                        UserId = user.Id,
+                        NomeCompleto = user.NomeCompleto,
+                        Selecionado = true
+                    };
+
+                    model.Add(upVM);
+                }
+                
             }
             return View(model);
         }
@@ -353,12 +376,33 @@ namespace CadeOFogo.Areas.Cadastros.Controllers
                 if (policial.Selecionado)
                 {
                     var p = await _context.ApplicationUsers.FindAsync(policial.UserId);
-                    p.Pelotao = pelotao;
+                    var up = _context.UsuarioPelotao.Where(x => x.Pelotao_Id == pelotao.PelotaoId && x.User_Id == p.Id).FirstOrDefault();
+                    if (up != null)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        var usuarioPelotao = new UsuarioPelotao()
+                        {
+                            User_Id = p.Id,
+                            Pelotao_Id = pelotao.PelotaoId
+                        };
+                        _context.UsuarioPelotao.Add(usuarioPelotao);
+                    }                    
                 }
                 else
                 {
                     var p = await _context.ApplicationUsers.FindAsync(policial.UserId);
-                    p.Pelotao = null;
+                    var up = _context.UsuarioPelotao.Where(x => x.Pelotao_Id == pelotao.PelotaoId && x.User_Id == p.Id).FirstOrDefault();
+                    if (up == null)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        _context.UsuarioPelotao.Remove(up);
+                    }
                 }
 
                 _context.SaveChanges();

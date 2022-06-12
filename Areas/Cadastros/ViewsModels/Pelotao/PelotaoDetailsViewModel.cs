@@ -1,4 +1,5 @@
-﻿using CadeOFogo.Models.Inpe;
+﻿using CadeOFogo.Areas.Cadastros.Models;
+using CadeOFogo.Models.Inpe;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -21,7 +22,7 @@ namespace CadeOFogo.Areas.Cadastros.ViewsModels.Pelotao
         public string CompanhiaNome { get; set; }
         [Display(Name = "Batalhão")]
         public string NomeBatalhao { get; set; }
-        [Display(Name = "Membros")]
+        [Display(Name = "Policiais")]
         public List<ApplicationUser> Usuarios { get; set; }
 
     }

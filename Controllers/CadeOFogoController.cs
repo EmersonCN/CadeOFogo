@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace CadeOFogo.Controllers
 {
-    [Route("Controllers/[controller]")]
+    [Route("Controllers/[controller]/")]
     public class CadeOFogoController : Controller
     {
         private readonly IConfiguration _configuration;
@@ -31,18 +31,25 @@ namespace CadeOFogo.Controllers
             _mapProvider = mapProvider;
         }
 
-        [HttpGet("{datainicio},{dataFinal}")]
+        [HttpGet]
         public JsonResult GetFoco(string dataInicio, string dataFinal)
         {
             var provider = CultureInfo.InvariantCulture;
+
+            var dataset = _context.Focos
+                .Include(f => f.Municipio)
+                .Include(f => f.Estado)
+                .Include(f => f.Satelite)
+                .Where(x => x.FocoConfirmado == true);
 
             var inicio = DateTime.UtcNow.AddDays(-2);
             var final = DateTime.UtcNow;
 
             if (!string.IsNullOrEmpty(dataInicio))
+                Console.WriteLine(dataInicio);
                 try
                 {
-                    inicio = DateTime.ParseExact(dataInicio, "yyyy-MM-ddTHH:mm:ss", provider);
+                    inicio = DateTime.Parse(dataInicio);
                 }
                 catch (FormatException)
                 {
@@ -59,12 +66,7 @@ namespace CadeOFogo.Controllers
                     final = DateTime.UtcNow;
                 }
 
-            var dataset = _context.Focos
-                .Include(f => f.Municipio)
-                .Include(f => f.Estado)
-                .Include(f => f.Satelite)
-                .Where(x => x.FocoConfirmado == true)
-                .Where(x => x.FocoDataUtc >= inicio & x.FocoDataUtc <= final);
+               dataset = dataset.Where(x => x.FocoDataUtc >= inicio & x.FocoDataUtc <= final);
 
             if (dataset == null)
                 return null;

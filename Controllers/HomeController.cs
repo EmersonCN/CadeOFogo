@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Rotativa;
 using SelectPdf;
 using X.PagedList;
 
@@ -57,7 +58,7 @@ namespace CadeOFogo.Controllers
               .Include(f => f.Municipio)
               .Include(f => f.Estado)
               .Include(f => f.Satelite)
-              .Where(f => f.FocoDataUtc >= DateTime.UtcNow.AddDays(-2)).ToListAsync();
+              .Where(f => f.FocoDataUtc >= DateTime.UtcNow.AddDays(-2) && f.MunicipioId != 3802).ToListAsync();
 
             var resposta = new JsonFocos48ViewModel
             {
@@ -369,6 +370,20 @@ namespace CadeOFogo.Controllers
             ViewBag.mapa = _mapProvider.DynamicSingleSpotMap(foco.FocoLatitude, foco.FocoLongitude, "map");
 
             return View(detalheFocoViewModel);
+        }
+
+        /*public ViewAsPdf VisualizarComoPDF()
+        {
+            return new ViewAsPdf("GerarRelatorio");
+            
+        }*/
+
+        public ViewAsPdf VisualizarComoPDF()
+        {
+            return new ViewAsPdf("GerarRelatorio")
+            {
+                PageSize = Rotativa.Options.Size.A4,
+            };
         }
 
         public async Task<IActionResult> GerarMultiplosRelatorios(int? id)

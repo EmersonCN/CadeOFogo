@@ -68,6 +68,29 @@ namespace CadeOFogo.Migrations
                         });
                 });
 
+            modelBuilder.Entity("CadeOFogo.Areas.Cadastros.Models.UsuarioPelotao", b =>
+                {
+                    b.Property<int>("UsuarioPeltao_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Pelotao_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("User_Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UsuarioPeltao_Id");
+
+                    b.HasAlternateKey("Pelotao_Id", "User_Id");
+
+                    b.HasIndex("User_Id");
+
+                    b.ToTable("UsuarioPelotao");
+                });
+
             modelBuilder.Entity("CadeOFogo.Models.Inpe.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -110,9 +133,6 @@ namespace CadeOFogo.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PelotaoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -138,8 +158,6 @@ namespace CadeOFogo.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("PelotaoId");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -1030,15 +1048,23 @@ namespace CadeOFogo.Migrations
                     b.Navigation("Pelotao");
                 });
 
-            modelBuilder.Entity("CadeOFogo.Models.Inpe.ApplicationUser", b =>
+            modelBuilder.Entity("CadeOFogo.Areas.Cadastros.Models.UsuarioPelotao", b =>
                 {
                     b.HasOne("CadeOFogo.Models.Inpe.Pelotao", "Pelotao")
-                        .WithMany("Usuarios")
-                        .HasForeignKey("PelotaoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithMany("UsuariosPelotao")
+                        .HasForeignKey("Pelotao_Id")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("CadeOFogo.Models.Inpe.ApplicationUser", "User")
+                        .WithMany("UsuariosPelotao")
+                        .HasForeignKey("User_Id")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Pelotao");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CadeOFogo.Models.Inpe.Companhia", b =>
@@ -1224,6 +1250,8 @@ namespace CadeOFogo.Migrations
             modelBuilder.Entity("CadeOFogo.Models.Inpe.ApplicationUser", b =>
                 {
                     b.Navigation("EquipeCollection");
+
+                    b.Navigation("UsuariosPelotao");
                 });
 
             modelBuilder.Entity("CadeOFogo.Models.Inpe.Batalhao", b =>
@@ -1273,7 +1301,7 @@ namespace CadeOFogo.Migrations
                 {
                     b.Navigation("EquipeCollection");
 
-                    b.Navigation("Usuarios");
+                    b.Navigation("UsuariosPelotao");
                 });
 
             modelBuilder.Entity("CadeOFogo.Models.Inpe.ResponsavelPropriedade", b =>

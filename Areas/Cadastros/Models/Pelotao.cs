@@ -21,7 +21,7 @@ namespace CadeOFogo.Models.Inpe
         public virtual Batalhao Batalhao { get; set; }
         public int BatalhaoId { get; set; }
         public ICollection<Equipe> EquipeCollection { get; set; }
-        public ICollection<ApplicationUser> Usuarios { get; set; }
+        public ICollection<UsuarioPelotao> UsuariosPelotao { get; set; }
 
 
     }
@@ -45,8 +45,9 @@ namespace CadeOFogo.Models.Inpe
                 .WithOne(b => b.Pelotao)
                 .HasForeignKey(b => b.PelotaoId);
 
-            builder.HasMany(b => b.Usuarios)
-                .WithOne(b => b.Pelotao);
+            builder.HasMany(b => b.UsuariosPelotao)
+                .WithOne(b => b.Pelotao)
+                .HasForeignKey(b => b.Pelotao_Id);
 
         }
     }
